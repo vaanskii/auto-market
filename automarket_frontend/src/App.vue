@@ -1,13 +1,15 @@
 <template>
   <Navigation/>
-  <div class="pt-16"></div>
+  <Main/>
 </template>
 
 <script>
 import Navigation from './components/Navigation.vue'
+import Main from './components/Main.vue'
 export default{
 components:{
-  Navigation
+  Navigation,
+  Main
 }
 }
 </script>
