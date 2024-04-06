@@ -9,7 +9,7 @@ import Main from './components/Main.vue'
 export default{
 components:{
   Navigation,
-  Main
+  Main,
 }
 }
 </script>
