@@ -2,10 +2,10 @@
   <vue-horizontal responsive class="md:w-full overflow-hidden">
     <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%]">
       <div class="relative">
-        <img class="md:w-full w-[100%] max-w-full md:h-60 h-52 transition-transform transform hover:scale-105 rounded-md" :src="card.image" alt="">
+        <img class="md:w-full w-[100%] cursor-pointer max-w-full md:h-60 h-52 transition-transform transform hover:scale-105 rounded-md" :src="card.image" alt="">
       </div>
-      <h3>{{ card.title }}</h3>
-      <p>{{ card.price }}</p>
+      <h3 class="cursor-pointer">{{ card.title }}</h3>
+      <p class="cursor-pointer">{{ card.price }}</p>
     </section>
   </vue-horizontal>
 </template>
