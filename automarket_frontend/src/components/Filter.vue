@@ -1,7 +1,7 @@
 <template>
-    <div class="m-10 w-screen max-w-screen-md md:mt-24 mt-56">
+    <div class="m-10 w-full max-w-[85%] md:mt-40 mt-56">
       <div class="flex flex-col">
-        <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
+        <div class="rounded-xl border h-[890px] md:h-[450px] lg:h-[360px] xl:h-[270px] border-gray-200 bg-white p-6 shadow-2xl">
           <form id="opa" @submit.prevent="handleSubmit">
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <!-- Manufacturer -->
@@ -58,9 +58,11 @@
               </div>
             </div>
             
-            <div class="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
-              <button type="button" @click="resetFields" class="rounded-lg bg-gray-200 px-8 py-2 font-medium text-gray-700 outline-none hover:opacity-80 focus:ring">Reset</button>
-              <button type="submit" class="rounded-lg bg-blue-600 px-8 py-2 font-medium text-white outline-none hover:opacity-80 focus:ring">Search</button>
+            <div class="mt-6 grid w-full items-center grid-cols-1 justify-end md:flex">
+              <div class="sm:w-full sm:space-y-4 space-y-4 md:w-full md:space-x-4 md:space-y-0 lg:w-[65.8%] xl:w-[49%] md:flex md:flex-row flex-col">
+                <button type="button" @click="resetFields" class="rounded-lg  w-full bg-gray-200 px-8 py-2 font-medium text-gray-700 outline-none hover:opacity-80 focus:ring">Reset</button>
+              <button type="submit" class="rounded-lg bg-[#222] px-8 py-2  w-full font-medium text-white outline-none hover:opacity-80 focus:ring">Search</button>
+              </div>
             </div>
           </form>
         </div>
@@ -93,7 +95,6 @@ computed: {
 },
 methods: {
     resetFields() {
-    // Reset all fields
     this.selectedBrand = '',
     this.selectedCar = '',
     this.selectedFuel = '',

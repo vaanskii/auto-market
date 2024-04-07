@@ -1,29 +1,34 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <section class="grid h-screen w-full grid-cols-1  bg-slate-200 md:grid-cols-1 bg-gradient-to-r from-zinc-900 to-gray-900">
-    <div class="flex flex-col justify-between bg-car bg-no-repeat bg-fixed bg-cover bg-right md:bg-center">
+  <section class="grid h-[1550px] md:h-[1140px] lg:h-[990px] xl:h-screen w-full grid-cols-1 bg-transparent md:grid-cols-1 bg-gradient-to-r ">
+    <div class="flex flex-col justify-between bg-no-repeat bg-fixed bg-cover bg-right md:bg-center">
       <div class="-mt-44 py-4 text-center text-6xl font-bold text-yellow-300">
+      </div>
+      <div class="flex items-center justify-center">
+        <h1 class="absolute top-40 text-center uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Explore a Wide Selection of Used and New Cars</h1>
+        <p class="absolute top-72 text-center uppercase text-md sm:text-lg md:text-xl lg:text-2xl xl:text-4xl">Find Your Perfect Ride Today!</p>
       </div>
       <div class="text-white flex items-center justify-center">
         <Filter/>
       </div>
       <div class="flex items-center md:w-6/12 md:self-center">
-        <div class="flex w-1/3 justify-center border-r py-4 px-4 gap-5 text-white">
+        <div class="flex w-1/3 justify-center items-center py-4 px-4 gap-5 text-black">
           <span class="uppercase">Sell car</span>
           <span class="material-icons">sell</span>
 
         </div>
-        <div class="flex w-1/3 justify-center py-4 px-4 gap-5 text-white">
+        <div class="flex w-1/3 justify-center items-center py-4 px-4 gap-5 text-black">
           <span class="uppercase">Rent car</span>
           <span class="material-icons">directions_car</span>
         </div>
-        <div class="flex w-1/3 justify-center border-l py-4 px-4 gap-5 text-white">
+        <div class="flex w-1/3 justify-center items-center py-4 px-4 gap-5 text-black">
           <span class="uppercase">Buy car</span>
           <span class="material-icons">credit_card</span>
         </div>
       </div>
     </div>
   </section>
+  <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
   <div class="flex items-center justify-center mt-20">
     <h1 class="md:text-6xl text-2xl uppercase text-[#222]">Most viewed cars</h1>
   </div>
@@ -61,10 +66,6 @@ export default {
 
 <!-- STYLES -->
 <style>
-.bg-car {
-  background-image: url('/wavy-black-white-background.jpg');
-}
-
 .bg-lights {
   background-image: url('peakpx.jpg');
 }

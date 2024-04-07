@@ -2,10 +2,7 @@
   <vue-horizontal responsive class="md:w-full overflow-hidden">
     <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%]">
       <div class="relative">
-        <img class="md:w-full w-[100%] max-w-full md:h-60 h-52 transition-transform transform hover:scale-110" :src="card.image" alt="">
-        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 opacity-0 hover:opacity-100 transition-opacity">
-          <button class="text-white uppercase font-semibold py-2 px-4 rounded bg-gray-900 hover:bg-black">View Details</button>
-        </div>
+        <img class="md:w-full w-[100%] max-w-full md:h-60 h-52 transition-transform transform hover:scale-105 rounded-md" :src="card.image" alt="">
       </div>
       <h3>{{ card.title }}</h3>
       <p>{{ card.price }}</p>
@@ -38,7 +35,7 @@ export default {
 <style scoped>
 section {
   padding:5px;
-  background: #f5f5f5;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
