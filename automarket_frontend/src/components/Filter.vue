@@ -1,5 +1,5 @@
 <template>
-    <div class="m-10 w-full max-w-[85%] md:mt-40 mt-56">
+    <div class="m-10 w-full max-w-[85%] -mt-[320px] sm:-mt-80 md:mt-44 lg:mt-60 xl:mt-80">
       <div class="flex flex-col">
         <div class="rounded-xl border h-[890px] md:h-[450px] lg:h-[360px] xl:h-[270px] border-gray-200 bg-[#E6E6E6] p-6 shadow-4xl">
           <form id="opa" @submit.prevent="handleSubmit">

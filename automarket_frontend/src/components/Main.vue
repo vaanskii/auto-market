@@ -5,10 +5,14 @@
       <div class="-mt-44 py-4 text-center text-6xl font-bold text-yellow-300">
       </div>
       <div>
-        <div class="flex items-center justify-center md:-mt-0 -mt-[600px]">
-        <h1 class="absolute top-40 text-center uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Explore a Wide Selection of Used and New Cars</h1>
-        <p class="absolute top-72 text-center uppercase text-md sm:text-lg md:text-xl lg:text-2xl xl:text-4xl">Find Your Perfect Ride Today!</p>
-      </div>
+        <div class="flex items-center justify-center">
+          <h1 class="typed-text absolute top-40 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
+            <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ word }}</span>
+          </h1>
+          <h1 class="typed-text absolute top-72 text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
+            <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ word }}</span>
+          </h1>
+        </div>
       </div>
       <div class="text-white flex items-center justify-center">
         <Filter/>
@@ -52,7 +56,6 @@
 </template>
 
 
-
 <script>
 import Filter from './Filter.vue'
 import Cards from './Cards.vue'
@@ -62,6 +65,45 @@ export default {
     Filter,
     Cards
   },
+  data() {
+    return {
+      words: [
+        'Explore',
+        'a',
+        'Wide',
+        'selection',
+        'of',
+        'used',
+        'and',
+        'new',
+        'cars',
+      ],
+      words2: [
+        'Find',
+        ' ',
+        'Your',
+        ' ',
+        'Perfect',
+        ' ',
+        'Ride',
+        ' ',
+        'Today!',
+      ]
+    };
+  },
+  mounted() {
+    this.animateText();
+  },
+  methods: {
+    animateText() {
+      const spans = document.querySelectorAll('.typed-text span');
+      spans.forEach((span, index) => {
+        setTimeout(() => {
+          span.classList.add('fade-in');
+        }, index * 200); // Adjust the timing here to make it slower
+      });
+    }
+  }
 }
 </script>
 
@@ -74,6 +116,38 @@ export default {
 .parallax {
   background-image: url('https://images.unsplash.com/photo-1616790151040-47661836dd26?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   height: 385px;
+}
+
+
+.typed-text {
+  font-family: "Montserrat Medium";
+  text-align: center;
+  transform: scale(0.94);
+  animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+@keyframes scale {
+  100% {
+    transform: scale(1);
+  }
+}
+
+.typed-text span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(4px);
+  padding: 3px;
+}
+
+.typed-text span.fade-in {
+  animation: fade-in 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 @media only screen and (max-device-width: 1366px) {
