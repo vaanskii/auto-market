@@ -1,17 +1,17 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <section class="grid h-[1550px] md:h-[1140px] lg:h-[990px] xl:h-screen w-full grid-cols-1 bg-transparent md:grid-cols-1 bg-gradient-to-r ">
+  <section class="grid h-[1500px] md:h-[1140px] lg:h-[990px] xl:h-screen w-full grid-cols-1 bg-transparent md:grid-cols-1 bg-gradient-to-r ">
     <div class="flex flex-col justify-between bg-no-repeat bg-fixed bg-cover bg-right md:bg-center">
       <div class="-mt-44 py-4 text-center text-6xl font-bold text-yellow-300">
       </div>
-      <div class="flex items-center justify-center">
+      <div class="flex items-center justify-center md:-mt-0 -mt-[600px]">
         <h1 class="absolute top-40 text-center uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Explore a Wide Selection of Used and New Cars</h1>
         <p class="absolute top-72 text-center uppercase text-md sm:text-lg md:text-xl lg:text-2xl xl:text-4xl">Find Your Perfect Ride Today!</p>
       </div>
       <div class="text-white flex items-center justify-center">
         <Filter/>
       </div>
-      <div class="flex items-center md:w-6/12 md:self-center">
+      <div class="flex items-center md:w-6/12 md:self-center md:-mt-0 -mt-80">
         <div class="flex w-1/3 justify-center items-center py-4 px-4 gap-5 text-black">
           <span class="uppercase">Sell car</span>
           <span class="material-icons">sell</span>
