@@ -9,8 +9,8 @@
             <img src="/car.png" alt="car" class="w-12 h-12">
           </a>
         <!-- Search input -->
-        <div class="flex justify-center items-center">
-          <form class="md:mx-auto md:mt-[2px] md:ml-14 w-full">   
+        <div class="flex justify-center items-center lg:w-[500px] w-[350px]">
+          <form class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
               <div class="relative">
                   <input type="search" id="default-search" class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" placeholder="Search" required />
                   <button type="submit" class="absolute bottom-2 text-black right-3">
@@ -52,7 +52,7 @@
       </div>
       </div>
       <!-- Pages -->
-      <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu">
+      <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '9999' : 'auto' }">
         <button type="button" class="bg-black md:flex hidden text-white items-center justify-center mr-6 rounded-lg w-28">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -97,7 +97,7 @@
           </div>
         </transition>
         </div>
-        <div v-if="!dropdownOpen" class="flex-col text-center md:hidden block">
+        <div v-if="!dropdownOpen" class="flex-col text-center md:hidden block sm:text-lg text-[15px]">
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Maintenance Services</a>
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Wash and Detailing</a>
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Roadside Assistance</a>
@@ -115,7 +115,7 @@
     </div>
   </nav>
       <!-- Bottom Navigation -->
-  <nav class="bg-white text-black fixed bottom-0 w-full z-10">
+  <nav class="bg-white text-black fixed bottom-0 w-full">
     <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full">
       <a href="/" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">

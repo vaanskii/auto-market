@@ -45,17 +45,20 @@
   <section class="w-full bg-lights md:py-52 mt-36 py-28 md:bg-cover md:bg-center bg-cover bg-center my-20 border bg-fixed bg-no-repeat"></section>
   <section class="w-5/6 m-auto mt-10 grid grid-col-1 gap-x-3 gap-y-10 md:grid-cols-2 max-w-6xl items-center mb-20">
   </section>
+  <Recently/>
 </template>
 
 
 <script>
-import Filter from './Filter.vue'
-import Cards from './Cards.vue'
+import Filter from './main_components/Filter.vue'
+import Cards from './main_components/Cards.vue'
+import Recently from './main_components/Recently.vue'
 
 export default {
   components: {
     Filter,
-    Cards
+    Cards,
+    Recently
   },
   data() {
     return {
