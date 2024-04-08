@@ -1,5 +1,5 @@
 <template>
-    <div :class="[ 'g-cursor', { 'g-cursor_hover': hover.value }, {'g-cursor_hide': hideCursor.value} ]">
+    <div :class="[ 'g-cursor', { 'g-cursor_hover': hover.value }, {'g-cursor_hide': hideCursor.value} ]" class="md:block hidden">
       <div :style="cursorCircle" class="g-cursor__circle"></div>
       <div class="g-cursor__point" :style="cursorPoint"></div>
     </div>
@@ -42,6 +42,9 @@ document.addEventListener('mouseenter', () => {
 </script>
 
 <style>
+html {
+    cursor: none;
+}
 
 .g-cursor_hide {
   opacity: 0;
