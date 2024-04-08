@@ -46,7 +46,7 @@
           <a href="#" class="py-2 px-3 block uppercase">add</a>
         </button>
         <!--Dropdown toggle-->
-        <div class="relative">
+        <div class="relative md:block hidden">
           <button type="button" @click="toggleDropdown" class="dropdown-toggle py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
             <span class="pointer-events-none select-none uppercase">Services</span>
             <div class="pointer-events-none select-none flex items-center">
@@ -69,7 +69,7 @@
               leave-class="translate-y-0 scale-y-100 opacity-100"
               leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
           >
-          <div v-if="dropdownOpen" class="dropdown-menu flex flex-col md:absolute translate-transform ease-in-out duration-300 md:bg-[#222] md:mt-6 md:-ml-20 text-sm md:text-white text-[#222] rounded-lg md:py-2 w-80">
+          <div v-if="dropdownOpen" class="dropdown-menu flex flex-col md:absolute translate-transform ease-in-out duration-300 md:bg-[#222] md:mt-6 md:-ml-28 text-sm md:text-white text-[#222] rounded-lg md:py-2 w-80">
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Maintenance Services</a>
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Wash and Detailing</a>
             <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Roadside Assistance</a>
@@ -83,7 +83,20 @@
           </div>
         </transition>
         </div>
-        <a href="#" class="py-2 px-3 block uppercase">Login</a>
+        <div v-if="!dropdownOpen" class="flex-col text-center md:hidden block">
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Maintenance Services</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Wash and Detailing</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Roadside Assistance</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Extended Warranty Plans</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Insurance Services</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Vehicle Customization</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Transportation Services</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Lease-to-Own Options</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Concierge Services</a>
+            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Rental Subscription Services</a>
+            <hr class="h-[1.5px] my-8 bg-[#222] border-0">
+          </div>
+        <a href="#" class="py-2 px-3 md:block hidden uppercase">Login</a>
       </div>
     </div>
   </nav>

@@ -22,11 +22,10 @@
               </div>
               <!-- Gasoline -->
               <div class="flex flex-col">
-                <label for="fuel" class="text-sm font-medium text-stone-600 uppercase">Fuel</label>
-                <select v-model="selectedFuel" id="fuel" class="mt-2 text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
-                    <option>Diesel</option>
-                    <option>Gasoline</option>
-                    <option>Gas</option>
+                <label for="type" class="text-sm font-medium text-stone-600 uppercase">Types</label>
+                <select v-model="selectedType" id="type" class="mt-2 text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
+                    <option>FOR SELL</option>
+                    <option>FOR RENT</option>
                 </select>
                 </div>
               <!-- Location -->
@@ -76,7 +75,7 @@ data() {
     return {
     selectedBrand: '',
     selectedCar: '',
-    selectedFuel: '',
+    selectedType: '',
     startYear: '',
     endYear: '',
     startPrice: '',
@@ -97,7 +96,7 @@ methods: {
     resetFields() {
     this.selectedBrand = '',
     this.selectedCar = '',
-    this.selectedFuel = '',
+    this.selectedType = '',
     this.startYear = '',
     this.endYear = '',
     this.startPrice= '',

@@ -6,10 +6,10 @@
       </div>
       <div>
         <div class="flex items-center justify-center">
-          <h1 class="typed-text absolute top-40 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
+          <h1 class="typed-text absolute md:top-40 font-[500] top-32 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
             <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ word }}</span>
           </h1>
-          <h1 class="typed-text absolute top-72 text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
+          <h1 class="typed-text absolute top-72 font-[500] text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
             <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ word }}</span>
           </h1>
         </div>
@@ -43,15 +43,7 @@
   </div>
 
   <section class="w-full bg-lights md:py-52 mt-36 py-28 md:bg-cover md:bg-center bg-cover bg-center my-20 border bg-fixed bg-no-repeat"></section>
-  <section class="w-5/6 m-auto mt-10 grid grid-col-1 gap-x-3 gap-y-10 md:grid-cols-2 max-w-6xl items-center mb-20  ">
- 
-  <div class="py-3 px-2">
-    <div class="parallax flex rounded-sm bg-no-repeat bg-center bg-cover md:bg-center"></div>
-  </div>
-  <div class="py-3 px-2 ">
-   <h1 class="text-5xl mb-8">New interior</h1>
-   <p class="text-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in turpis at libero euismod luctus vel sit amet lorem.<br/>  Maecenas lorem metus, semper in lobortis imperdiet, pulvinar sed felis. Maecenas aliquam velit in ligula tincidunt imperdiet. Integer interdum enim ut placerat dignissim. Maecenas turpis orci, facilisis vitae ligula non, luctus convallis risus. </p>
-  </div>
+  <section class="w-5/6 m-auto mt-10 grid grid-col-1 gap-x-3 gap-y-10 md:grid-cols-2 max-w-6xl items-center mb-20">
   </section>
 </template>
 
@@ -69,13 +61,21 @@ export default {
     return {
       words: [
         'Explore',
+        ' ',
         'a',
+        ' ',
         'Wide',
+        ' ',
         'selection',
+        ' ',
         'of',
+        ' ',
         'used',
+        ' ',
         'and',
+        ' ',
         'new',
+        ' ',
         'cars',
       ],
       words2: [
