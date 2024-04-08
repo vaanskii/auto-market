@@ -7,7 +7,7 @@
               <!-- Manufacturer -->
               <div class="flex flex-col">
                 <label for="manufacturer" class="text-sm font-medium text-stone-600 uppercase">Manufacturer</label>
-                <select v-model="selectedBrand" id="manufacturer" class="mt-2 text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
+                <select v-model="selectedBrand" id="manufacturer" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
                   <option>BMW</option>
                   <option>MERCEDES</option>
                   <option>AUDI</option>
@@ -23,7 +23,7 @@
               <!-- Gasoline -->
               <div class="flex flex-col">
                 <label for="type" class="text-sm font-medium text-stone-600 uppercase">Types</label>
-                <select v-model="selectedType" id="type" class="mt-2 text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
+                <select v-model="selectedType" id="type" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
                     <option>FOR SELL</option>
                     <option>FOR RENT</option>
                 </select>

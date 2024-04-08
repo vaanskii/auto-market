@@ -13,3 +13,7 @@
 body{
     background-color: #2222;
 }
+
+html {
+    cursor: none;
+  }

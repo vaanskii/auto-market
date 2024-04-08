@@ -6,10 +6,10 @@
       </div>
       <div>
         <div class="flex items-center justify-center">
-          <h1 class="typed-text absolute md:top-40 font-[500] top-32 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
+          <h1 class="typed-text absolute md:top-40 font-[700] top-32 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
             <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ word }}</span>
           </h1>
-          <h1 class="typed-text absolute top-72 font-[500] text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
+          <h1 class="typed-text absolute top-72 font-[600] text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
             <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ word }}</span>
           </h1>
         </div>
