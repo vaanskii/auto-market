@@ -63,7 +63,7 @@ html {
   position: fixed;
   width: 30px;
   height: 30px;
-  border: 2px solid black;
+  border: 2px solid gray;
   border-radius: 100%;
   z-index: 5555;
   backface-visibility: hidden;
@@ -79,7 +79,7 @@ html {
   pointer-events: none;
   user-select: none;
   border-radius: 100%;
-  background: black;
+  background: gray;
   z-index: 55555555;
   backface-visibility: hidden;
   will-change: transform;

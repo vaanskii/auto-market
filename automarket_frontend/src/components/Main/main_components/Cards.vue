@@ -1,6 +1,6 @@
 <template>
   <vue-horizontal responsive class="md:w-full overflow-hidden">
-    <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%]">
+    <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%] reveal-card">
       <div class="relative">
         <img class="md:w-full w-[100%] cursor-pointer max-w-full md:h-60 h-52 transition-transform transform hover:scale-105 rounded-t-md" :src="card.image" alt="">
       </div>
@@ -30,6 +30,28 @@ export default {
         { title: 'Card 6',  image: '/mercedes.jpg', owner: 'Zura', price: 5000+ '$'},
       ],
     }
+  },
+  mounted() {
+    this.revealCardsOnScroll();
+  },
+  methods: {
+    revealCardsOnScroll() {
+      window.addEventListener('scroll', () => {
+        const cards = document.querySelectorAll('.reveal-card');
+        const windowHeight = window.innerHeight;
+        
+        cards.forEach(card => {
+          const cardTop = card.getBoundingClientRect().top;
+          const revealPoint = 150;
+          
+          if (cardTop < windowHeight - revealPoint) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      });
+    }
   }
 }
 </script>
@@ -41,5 +63,16 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.reveal-card {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.5s ease, transform 2s ease;
+}
+
+.reveal-card.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

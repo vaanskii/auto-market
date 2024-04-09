@@ -35,8 +35,8 @@
     </div>
   </section>
   <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
-  <div class="flex items-center justify-center mt-20">
-    <h1 class="md:text-6xl text-2xl uppercase text-[#222]">Most viewed cars</h1>
+  <div class="flex items-center justify-center mt-20 reveal-heading">
+    <h1 class="md:text-6xl text-3xl uppercase smaller text-[#222]">Most viewed cars</h1>
   </div>
   <div class="my-20 flex justify-center items-center">
     <Cards/>
@@ -96,8 +96,23 @@ export default {
   },
   mounted() {
     this.animateText();
+    this.revealHeadingOnScroll();
   },
   methods: {
+    revealHeadingOnScroll() {
+      window.addEventListener('scroll', () => {
+        const heading = document.querySelector('.reveal-heading');
+        const windowHeight = window.innerHeight;
+        const revealTop = heading.getBoundingClientRect().top;
+        const revealPoint = 150;
+
+        if (revealTop < windowHeight - revealPoint) {
+          heading.classList.add('active');
+        } else {
+          heading.classList.remove('active');
+        }
+      });
+    },
     animateText() {
       const spans = document.querySelectorAll('.typed-text span');
       spans.forEach((span, index) => {
@@ -119,6 +134,17 @@ export default {
 .parallax {
   background-image: url('https://images.unsplash.com/photo-1616790151040-47661836dd26?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   height: 385px;
+}
+
+.reveal-heading {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, transform 3s ease;
+}
+
+.reveal-heading.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -156,6 +182,13 @@ export default {
 @media only screen and (max-device-width: 1366px) {
   .parallax {
     background-attachment: scroll;
+  }
+}
+
+@media (max-width:300px) {
+  .smaller{
+    font-size: 1.4rem;
+    line-height: 2rem;
   }
 }
 </style>

@@ -115,7 +115,7 @@
     </div>
   </nav>
       <!-- Bottom Navigation -->
-  <nav class="bg-white text-black fixed bottom-0 w-full">
+  <nav class="bg-white text-black fixed bottom-0 w-full z-10">
     <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full">
       <a href="/" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
