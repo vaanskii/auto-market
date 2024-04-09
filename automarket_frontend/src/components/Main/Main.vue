@@ -1,15 +1,15 @@
 <template>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <section class="grid h-[1500px] md:h-[1140px] lg:h-[990px] xl:h-screen w-full grid-cols-1 bg-transparent md:grid-cols-1 bg-gradient-to-r ">
+  <section class="grid h-[1600px] md:h-[1140px] lg:h-[990px] xl:h-screen w-full grid-cols-1 bg-transparent md:grid-cols-1 bg-gradient-to-r ">
     <div class="flex flex-col justify-between bg-no-repeat bg-fixed bg-cover bg-right md:bg-center">
       <div class="-mt-44 py-4 text-center text-6xl font-bold text-yellow-300">
       </div>
       <div>
-        <div class="flex items-center justify-center">
-          <h1 class="typed-text absolute md:top-40 font-[700] top-32 text-center uppercase text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
+        <div class="flex items-center justify-center w-full">
+          <h1 class="typed-text absolute md:top-40 font-[700] w-[90%] top-32 text-center uppercase text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
             <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ word }}</span>
           </h1>
-          <h1 class="typed-text absolute top-72 font-[600] text-center uppercase text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
+          <h1 class="typed-text absolute top-[21rem] font-[600] w-[90%] text-center uppercase text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
             <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ word }}</span>
           </h1>
         </div>
@@ -36,15 +36,13 @@
   </section>
   <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
   <div class="flex items-center justify-center mt-20 reveal-heading">
-    <h1 class="md:text-6xl text-3xl uppercase smaller text-[#222]">Most viewed cars</h1>
+    <h1 class="md:text-6xl text-3xl font-[500] uppercase smaller text-[#222]">vip cars</h1>
   </div>
   <div class="my-20 flex justify-center items-center">
     <Cards/>
   </div>
 
-  <section class="w-full bg-lights md:py-52 mt-36 py-28 md:bg-cover md:bg-center bg-cover bg-center my-20 border bg-fixed bg-no-repeat"></section>
-  <section class="w-5/6 m-auto mt-10 grid grid-col-1 gap-x-3 gap-y-10 md:grid-cols-2 max-w-6xl items-center mb-20">
-  </section>
+  <section class="w-full h-[550px] bg-lights mt-36 py-52 bg-start bg-cover my-20 border bg-no-repeat mb-52"></section>
   <Recently/>
 </template>
 
@@ -118,7 +116,7 @@ export default {
       spans.forEach((span, index) => {
         setTimeout(() => {
           span.classList.add('fade-in');
-        }, index * 200); // Adjust the timing here to make it slower
+        }, index * 50);
       });
     }
   }
@@ -126,19 +124,24 @@ export default {
 </script>
 
 
-<!-- STYLES -->
 <style>
 .bg-lights {
-  background-image: url('peakpx.jpg');
+  background-image: url('1.jpg');
 }
-.parallax {
-  background-image: url('https://images.unsplash.com/photo-1616790151040-47661836dd26?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  height: 385px;
+
+@media (max-width: 1024px){
+  .bg-lights {
+  background-image: url('2.jpg');
+  background-position: center;
+  height: 400px;
+  margin-top: 0;
+  margin-bottom: 120px;
+}
 }
 
 .reveal-heading {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(100px);
   transition: opacity 0.5s ease, transform 2s ease;
 }
 
@@ -151,8 +154,8 @@ export default {
 .typed-text {
   font-family: "Montserrat Medium";
   text-align: center;
-  transform: scale(0.94);
-  animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+  transform: scale(2);
+  animation: scale 0.2s forwards cubic-bezier(0.5, 1, 0.89, 1);
 }
 
 @keyframes scale {
@@ -176,12 +179,6 @@ export default {
   100% {
     opacity: 1;
     filter: blur(0);
-  }
-}
-
-@media only screen and (max-device-width: 1366px) {
-  .parallax {
-    background-attachment: scroll;
   }
 }
 

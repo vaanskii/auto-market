@@ -1,6 +1,6 @@
 <template>
   <vue-horizontal responsive class="md:w-full overflow-hidden">
-    <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%] reveal-card">
+    <section v-for="(card, index) in cards" :key="card.title" class="group sm:w-1/2 md:w-1/3 lg:w-1/4 w-[90%] reveal-card max-w-[370px]">
       <div class="relative">
         <img class="md:w-full w-[100%] cursor-pointer max-w-full md:h-60 h-52 transition-transform transform hover:scale-105 rounded-t-md" :src="card.image" alt="">
       </div>
@@ -67,7 +67,7 @@ section {
 
 .reveal-card {
   opacity: 0;
-  transform: translateX(-100px); /* Change from translateY to translateX */
+  transform: translateX(-300px);
   transition: opacity 0.5s ease, transform 2s ease;
 }
 

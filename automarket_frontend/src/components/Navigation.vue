@@ -52,7 +52,7 @@
       </div>
       </div>
       <!-- Pages -->
-      <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '9999' : 'auto' }">
+      <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '10000' : 'auto' }">
         <button type="button" class="bg-black md:flex hidden text-white items-center justify-center mr-6 rounded-lg w-28">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -116,7 +116,7 @@
   </nav>
       <!-- Bottom Navigation -->
   <nav class="bg-white text-black fixed bottom-0 w-full z-10">
-    <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full">
+    <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full p-2">
       <a href="/" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
