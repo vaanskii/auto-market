@@ -67,12 +67,12 @@ section {
 
 .reveal-card {
   opacity: 0;
-  transform: translateY(80px);
+  transform: translateX(-100px); /* Change from translateY to translateX */
   transition: opacity 0.5s ease, transform 2s ease;
 }
 
 .reveal-card.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 </style>

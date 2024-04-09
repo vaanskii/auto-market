@@ -139,7 +139,7 @@ export default {
 .reveal-heading {
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 0.5s ease, transform 3s ease;
+  transition: opacity 0.5s ease, transform 2s ease;
 }
 
 .reveal-heading.active {
