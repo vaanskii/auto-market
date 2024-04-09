@@ -10,9 +10,10 @@
           </span>
         </h1>
         </p>
-        <p class="mt-[18px] text-[15px] font-normal text-white/[80%]">Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Eos, fugit non. Incidunt dolorum adipisci, tempore asperiores nemo odio facere officiis enim animi
-          placeat eaque nesciunt alias beatae id, at dicta.</p>
+        <p class="mt-[18px] text-[15px] font-normal text-white/[80%]">Welcome to our auto marketplace, where you can explore a wide range 
+            of vehicles available for purchase, sale, or rental. Whether you're looking for a sleek sedan, 
+            a rugged SUV, or a high-performance sports car, we've got you covered. Our platform connects buyers and sellers, 
+            providing a seamless experience for both parties.</p>
         <div class="mt-[18px] flex gap-4">
           <a class="hover:scale-110" target="_blank"
             href="#"><img alt="facebook icon" loading="lazy" width="36" height="36" decoding="async" data-nimg="1" style="color:transparent" src="/socials/facebook.png" /></a><a
