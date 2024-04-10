@@ -6,7 +6,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-16 py-8">
         <!-- Blogs -->
         <div class="flex flex-col justify-center items-center bg-[#E6E6E6] shadow-4xl rounded-xl py-8 mb-14 reveal-item">
-          <h1 class="uppercase text-6xl font-bold mb-10">Blogs</h1>
+          <h1 class="uppercase text-5xl font-bold mb-10">Blogs</h1>
           <img src="/mechanic.png" alt="" class="max-w-full lg:max-w-md rounded-lg">
           <div class="p-6 rounded-lg mt-4">
             <h2 class="text-2xl font-semibold text-center">What are some common signs that indicate a car needs maintenance?</h2>
@@ -29,7 +29,7 @@
             <!-- INPUT FIELD -->
             <form class="flex justify-around">
               <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
-                <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" placeholder="TYPE VIN">
+                <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" placeholder="TYPE VIN CODE">
                 <button class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%]">search</button>
               </div>
             </form>
