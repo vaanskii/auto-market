@@ -15,6 +15,7 @@
         </div>
       </div>
       <div class="text-white flex items-center justify-center">
+        <!-- Filter vue -->
         <Filter/>
       </div>
       <div class="flex items-center md:w-6/12 md:self-center md:-mt-0 -mt-80">
@@ -36,14 +37,17 @@
   </section>
   <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
   <div class="flex items-center justify-center mt-20 reveal-heading">
-    <h1 class="md:text-6xl text-3xl font-[500] uppercase smaller text-[#222]">vip cars</h1>
+    <h1 class="md:text-6xl text-3xl font-[700] uppercase smaller text-[#222]">vip cars</h1>
   </div>
   <div class="my-20 flex justify-center items-center">
     <Cards/>
   </div>
 
   <section class="w-full h-[550px] bg-lights mt-36 py-52 bg-start bg-cover my-20 border bg-no-repeat mb-52"></section>
+  <!-- Recently vue -->
   <Recently/>
+  <!-- Blogs vue -->
+  <Blogs/>
 </template>
 
 
@@ -51,12 +55,14 @@
 import Filter from './main_components/Filter.vue'
 import Cards from './main_components/Cards.vue'
 import Recently from './main_components/Recently.vue'
+import Blogs from './main_components/Blogs.vue'
 
 export default {
   components: {
     Filter,
     Cards,
-    Recently
+    Recently,
+    Blogs
   },
   data() {
     return {
