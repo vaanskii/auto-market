@@ -64,8 +64,7 @@
             </svg>
           </div>
           <div class="ml-[18px]">
-            <a href="#" class="font-Inter text-[14px] font-medium text-[#fff]">Sub Nerul, Mumbia,
-              Georgia, 123456</a>
+            <a href="#" class="font-Inter text-[14px] font-medium text-[#fff]">Batumi, Georgia, 123456</a>
             <p class="font-Inter text-[12px] font-medium text-white">Address</p>
           </div>
         </div>
