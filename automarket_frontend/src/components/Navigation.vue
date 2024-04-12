@@ -5,7 +5,7 @@
       <div class="flex justify-between w-full">
       <!-- logo-mobile-menu | navigation bar -->
         <div class="flex items-center justify-evenly md:w-auto md:h-6 w-full">
-          <a href="/" class="py-5 px-2 text-black hidden  lg:block font-bold uppercase">
+          <a href="/" class="py-5 px-2 text-black hidden  md:block font-bold uppercase">
             <img src="/car.png" alt="car" class="w-12 h-12">
           </a>
         <!-- Search input -->
