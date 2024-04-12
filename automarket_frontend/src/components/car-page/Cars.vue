@@ -17,7 +17,7 @@
         </div>
       </div>
       <div v-if="imageViewerOpen" class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center p-4 z-50">
-        <button @click="closeImageViewer" class="absolute top-0 right-0 m-6 text-white text-4xl">×</button>
+        <button @click="closeImageViewer" class="absolute top-0 right-0 m-6 px-12 text-white text-4xl">×</button>
         <button @click="previousImage" class="absolute inset-y-0 left-0 z-10 m-6 text-white text-4xl">‹</button>
         <button @click="nextImage" class="absolute inset-y-0 right-0 z-10 m-6 text-white text-4xl">›</button>
         <img :src="images[currentImageIndex]" class="max-w-full max-h-full" />
