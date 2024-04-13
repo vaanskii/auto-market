@@ -11,8 +11,8 @@
     </div>
     <dl class="flex flex-col items-center justify-center py-10 w-full">
       <div v-for="(spec, key) in specifications" :key="key" class="flex flex-row justify-between md:w-[80%] w-[90%] hover:px-3 hover:rounded-lg cursor-pointer">
-        <dt class="uppercase text-start grid gap-y-4 md:text-[16px] sm:text-[16px] mb-2 text-[10px]">{{ key }}:</dt>
-        <dd class="uppercase text-start grid gap-y-4 md:text-[16px] sm:text-[16px] mb-2 text-[10px]">{{ spec }}</dd>
+        <dt class="uppercase text-start grid gap-y-4 md:text-[16px] sm:text-[16px] mb-4 text-[10px]">{{ key }}:</dt>
+        <dd class="uppercase text-start grid gap-y-4 md:text-[16px] sm:text-[16px] mb-4 text-[10px]">{{ spec }}</dd>
       </div>
     </dl>
   </div>
@@ -28,18 +28,18 @@ export default {
         Model: 'GLE 400',
         Year: '2018',
         Category: 'Jeep',
+        'Engine Volume': '3.0',
         Mileage: '63000 km',
         'Fuel type': 'Petrol',
-        'Engine Volume': '3.0',
-        Cylinders: '6',
         'Gear box type': 'Tiptronic',
-        'Drive wheels': '4x4',
+        Cylinders: '6',
         Doors: '4/5',
-        Airbags: '6',
+        'Drive wheels': '4x4',
         Wheel: 'Left',
+        Airbags: '6',
         Color: 'Black',
-        'Interior color': 'Black',
         'Interior material': 'Leather',
+        'Interior color': 'Black',
         Exchange: 'No',
         'Technical inspection': 'Yes',
         Catalyst: 'Yes'
