@@ -53,12 +53,13 @@
       </div>
       <!-- Pages -->
       <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '10000' : 'auto' }">
-        <button type="button" class="bg-black md:flex hidden text-white items-center justify-center mr-6 rounded-lg w-28">
+        <button @click="handleAddClick" type="button" class="bg-black md:flex hidden text-white items-center justify-center mr-6 rounded-lg w-28">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
           <a href="#" class="py-2 px-3 block uppercase">add</a>
         </button>
+        <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userIsActivated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
           <button type="button" @click="toggleDropdown" class="dropdown-toggle py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
@@ -153,7 +154,7 @@
 </template>
 
 <script>
-// importing heroicons
+import Auth from './Auth.vue'
 import { ChevronDownIcon, ChevronUpIcon, Bars3BottomRightIcon, XMarkIcon, DocumentMagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { RouterLink } from 'vue-router'
 import Mouse from './Mouse.vue'
@@ -163,8 +164,9 @@ export default {
     return {
       dropdownOpen: false,
       menudropdownOpen: false,
-      userIsActivated: true,
-      showCustomCursor: true
+      userIsActivated: false,
+      showCustomCursor: true,
+      modalOpen: false,
     };
   },
   watch: {
@@ -179,9 +181,23 @@ export default {
     BurgerIcon: Bars3BottomRightIcon,
     xIcon: XMarkIcon,
     searchIcon: DocumentMagnifyingGlassIcon,
-    Mouse
+    Mouse,
+    Auth
   },
   methods: {
+    openModal() {
+      this.modalOpen = true
+    },
+    closeModal() {
+      this.modalOpen = false
+    },
+    handleAddClick() {
+      if(!this.userIsActivated) {
+        this.openModal()
+      }else {
+        this.$router.push('/add')
+      }
+    },
     toggleMenuDropdown() {
       this.menudropdownOpen = !this.menudropdownOpen
     },
