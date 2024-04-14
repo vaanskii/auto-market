@@ -1,76 +1,78 @@
 <template>
-    <div class="bg-[#E6E6E6] shadow-4xl w-full mt-20">
-      <div class="flex justify-center bg-[#E6E6E6] text-center items-center py-10">
-        <!-- You can add content here if needed -->
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-16 py-8">
-        <!-- Blogs -->
-        <div class="flex flex-col justify-center items-center bg-[#E6E6E6] shadow-4xl rounded-xl py-8 mb-14 reveal-item">
-          <h1 class="uppercase text-5xl font-bold mb-10">Blogs</h1>
-          <img src="/mechanic.png" alt="" class="max-w-full lg:max-w-md rounded-lg">
-          <div class="p-6 rounded-lg mt-4">
-            <h2 class="text-2xl font-semibold text-center">What are some common signs that indicate a car needs maintenance?</h2>
-            <p class="mt-4 text-gray-700">Some common signs that indicate a car needs maintenance include strange noises 
-                (such as grinding or squealing), dashboard warning lights, 
-                decreased fuel efficiency, difficulty starting the engine, vibrations while driving, and unusual smells 
-                (like burning rubber or oil). Additionally, visible signs of wear and tear on tires, belts, 
-                or hoses, as well as fluid leaks under the vehicle, can also signal the need for maintenance. Regularly scheduled maintenance checks, as outlined in the owner's manual, 
-                can help catch issues early and prevent more serious problems down the road.
-            </p>
-          </div>
-          <a href="#">
-            <button class="bg-black text-white px-4 py-3 rounded-xl uppercase">see more blogs</button>
-          </a>
+  <div class="bg-[#E6E6E6] shadow-4xl w-full mt-20">
+    <div class="flex justify-center bg-[#E6E6E6] text-center items-center py-10">
+      <!-- You can add content here if needed -->
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 lg:px-16 py-8">
+      <!-- Blogs -->
+      <div class="flex flex-col justify-center items-center bg-[#E6E6E6] shadow-4xl rounded-xl py-8 mb-14 reveal-item">
+        <h1 class="uppercase text-5xl font-bold mb-10">Blogs</h1>
+        <img src="/mechanic.png" alt="" class="max-w-full lg:max-w-md rounded-lg">
+        <div class="p-6 rounded-lg mt-4">
+          <h2 class="text-2xl font-semibold text-center">What are some common signs that indicate a car needs maintenance?</h2>
+          <p class="mt-4 text-gray-700">Some common signs that indicate a car needs maintenance include strange noises 
+              (such as grinding or squealing), dashboard warning lights, 
+              decreased fuel efficiency, difficulty starting the engine, vibrations while driving, and unusual smells 
+              (like burning rubber or oil). Additionally, visible signs of wear and tear on tires, belts, 
+              or hoses, as well as fluid leaks under the vehicle, can also signal the need for maintenance. Regularly scheduled maintenance checks, as outlined in the owner's manual, 
+              can help catch issues early and prevent more serious problems down the road.
+          </p>
         </div>
-        <!-- Vin decode -->
-        <div class="flex flex-col justify-center items-center bg-[#E6E6E6] shadow-4xl rounded-xl py-8 mb-14 reveal-item">
-          <h1 class="uppercase text-3xl font-bold mb-10 text-center">Search with vin decode</h1>
-          <div class="w-[90%] max-h-[400px] bg-[#222] rounded-xl">
-            <!-- INPUT FIELD -->
-            <form class="flex justify-around">
-              <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
-                <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" placeholder="TYPE VIN CODE">
-                <button class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%]">search</button>
-              </div>
-            </form>
-          </div>
-          <div class="p-6 rounded-lg mt-4">
-            <h2 class="text-2xl font-semibold text-center">Understanding VIN Decoding</h2>
-            <p class="mt-4 text-gray-700">VIN decoding is the process of analyzing the Vehicle Identification Number (VIN) to retrieve
-                 information about a vehicle's make, model, year, and more. It's useful for understanding a 
-                 vehicle's history, features, and specifications before making a purchase.</p>
-          </div>
+        <router-link to="#">
+          <button class="bg-black text-white px-4 py-3 rounded-xl uppercase">see more blogs</button>
+        </router-link>
+      </div>
+      <!-- Vin decode -->
+      <div class="flex flex-col justify-center items-center bg-[#E6E6E6] shadow-4xl rounded-xl py-8 mb-14 reveal-item">
+        <h1 class="uppercase text-3xl font-bold mb-10 text-center">Search with vin decode</h1>
+        <div class="w-[90%] max-h-[400px] bg-[#222] rounded-xl">
+          <!-- INPUT FIELD -->
+          <form class="flex justify-around">
+            <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
+              <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" placeholder="TYPE VIN CODE">
+              <button class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%]">search</button>
+            </div>
+          </form>
+        </div>
+        <div class="p-6 rounded-lg mt-4">
+          <h2 class="text-2xl font-semibold text-center">Understanding VIN Decoding</h2>
+          <p class="mt-4 text-gray-700">VIN decoding is the process of analyzing the Vehicle Identification Number (VIN) to retrieve
+              information about a vehicle's make, model, year, and more. It's useful for understanding a 
+              vehicle's history, features, and specifications before making a purchase.
+          </p>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  export default {
-    mounted() {
-      this.revealItemsOnScroll();
-    },
-    methods: {
-      revealItemsOnScroll() {
-        window.addEventListener('scroll', () => {
-          const revealItems = document.querySelectorAll('.reveal-item');
-          const windowHeight = window.innerHeight;
+<script>
+import { RouterLink } from 'vue-router'
+export default {
+  mounted() {
+    this.revealItemsOnScroll();
+  },
+  methods: {
+    revealItemsOnScroll() {
+      window.addEventListener('scroll', () => {
+        const revealItems = document.querySelectorAll('.reveal-item');
+        const windowHeight = window.innerHeight;
+        
+        revealItems.forEach(item => {
+          const itemTop = item.getBoundingClientRect().top;
+          const revealPoint = 150;
           
-          revealItems.forEach(item => {
-            const itemTop = item.getBoundingClientRect().top;
-            const revealPoint = 150;
-            
-            if (itemTop < windowHeight - revealPoint) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
+          if (itemTop < windowHeight - revealPoint) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
         });
-      }
+      });
     }
   }
-  </script>
+}
+</script>
   
   <style scoped>
   .shadow-4xl {

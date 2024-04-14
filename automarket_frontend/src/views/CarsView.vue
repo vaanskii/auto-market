@@ -56,12 +56,12 @@
     },
     setup() {
       const images = ref([
-        'peakpx.jpg',
-        '2.jpg',
-        'mercedes.jpg',
-        'mechanic.jpeg',
-        'car.png',
-        'background.jpg'
+        '/peakpx.jpg',
+        '/2.jpg',
+        '/mercedes.jpg',
+        '/mechanic.jpeg',
+        '/car.png',
+        '/background.jpg'
       ]);
       const imageViewerOpen = ref(false);
       const currentImageIndex = ref(0);

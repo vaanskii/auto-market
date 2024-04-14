@@ -1,0 +1,26 @@
+{
+  "locale": {
+    "en": "English",
+    "ka": "Georgian"
+  },
+  "main-header": {
+    "words": {
+      "explore": "Explore",
+      "a": "a",
+      "wide": "Wide",
+      "selection": "selection",
+      "of": "of",
+      "used": "used",
+      "and": "and",
+      "new": "new",
+      "cars": "cars"
+    },
+    "words2": {
+      "find": "Find",
+      "your": "Your",
+      "perfect": "Perfect",
+      "ride": "Ride",
+      "today": "Today!"
+    } 
+  }
+}

@@ -5,9 +5,9 @@
       <div class="flex justify-between w-full">
       <!-- logo-mobile-menu | navigation bar -->
         <div class="flex items-center justify-evenly md:w-auto md:h-6 w-full">
-          <a href="/" class="py-5 px-2 text-black hidden  md:block font-bold uppercase">
+          <router-link :to="Trans.i18nRoute({ name: 'home' })" class="py-5 px-2 text-black hidden  md:block font-bold uppercase">
             <img src="/car.png" alt="car" class="w-12 h-12">
-          </a>
+          </router-link>
         <!-- Search input -->
         <div class="flex justify-center items-center lg:w-[500px] w-[350px]">
           <form class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
@@ -57,13 +57,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-          <a href="#" class="py-2 px-3 block uppercase">add</a>
+          <router-link to="#" class="py-2 px-3 block uppercase">add</router-link>
         </button>
         <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userIsActivated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
           <button type="button" @click="toggleDropdown" class="dropdown-toggle py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
-            <span class="pointer-events-none select-none uppercase">Services</span>
+            <span class="pointer-events-none select-none uppercase">Languages</span>
             <div class="pointer-events-none select-none flex items-center">
               <ChevronDownIcon
                 class="w-4 h-4 pointer-events-none transition-transform ease-in duration-300 absolute"
@@ -75,6 +75,7 @@
               />
             </div>
           </button>
+          
           <!-- Dropdown menu -->
           <transition
               enter-active-class="transform transition duration-500 ease-custom"
@@ -85,70 +86,53 @@
               leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
           >
           <div v-if="dropdownOpen" class="dropdown-menu flex flex-col md:absolute translate-transform ease-in-out duration-300 md:bg-[#222] md:mt-6 md:-ml-28 text-sm md:text-white text-[#222] rounded-lg md:py-2 w-80">
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Car Maintenance Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Car Wash and Detailing</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Roadside Assistance</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Extended Warranty Plans</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Insurance Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Vehicle Customization</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Transportation Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Lease-to-Own Options</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Concierge Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-black uppercase">Car Rental Subscription Services</a>
+            <LanguageSwitcher @click="dropdownOpen = false"/>
           </div>
         </transition>
         </div>
         <div v-if="!dropdownOpen" class="flex-col text-center md:hidden block sm:text-lg text-[15px]">
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Maintenance Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Wash and Detailing</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Roadside Assistance</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Extended Warranty Plans</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Insurance Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Vehicle Customization</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Transportation Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Lease-to-Own Options</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Concierge Services</a>
-            <a href="#" class="block px-6 py-2 rounded md:hover:bg-gray-300 uppercase">Car Rental Subscription Services</a>
+            <h1 class="uppercase mb-5">languages</h1>
+            <LanguageSwitcher/>
             <hr class="h-[1.5px] my-8 bg-[#222] border-0">
           </div>
-        <a href="#" class="py-2 px-3 md:block hidden uppercase">Login</a>
+        <router-link to="#" class="py-2 px-3 md:block hidden uppercase">Login</router-link>
       </div>
     </div>
   </nav>
       <!-- Bottom Navigation -->
   <nav class="bg-white text-black fixed bottom-0 w-full z-10">
     <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full p-2">
-      <a href="/" class="flex flex-col items-center">
+      <router-link to="/" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
         </svg>
         <p class="uppercase text-[10px]">home</p>
-      </a>
-      <a href="#" v-if="userIsActivated" class="flex flex-col items-center">
+      </router-link>
+      <router-link to="#" v-if="userIsActivated" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
         <p class="uppercase text-[10px]">saved</p>
-      </a>
+      </router-link>
       <div class="relative">
-        <a href="#" class="absolute -top-10 left-1/2 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
+        <router-link to="#" class="absolute -top-10 left-1/2 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-        </a>
+        </router-link>
       </div>
-      <a href="#" v-if="userIsActivated" class="flex flex-col items-center">
+      <router-link to="#" v-if="userIsActivated" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
         </svg>
         <p class="uppercase text-[10px]">settings</p>
-      </a>
-      <a href="#" class="flex flex-col items-center">
+      </router-link>
+      <router-link to="#" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
         <p class="text-[10px] uppercase">login</p>
-      </a>
+      </router-link>
     </div>
   </nav>
 </template>
@@ -158,8 +142,15 @@ import Auth from './Auth.vue'
 import { ChevronDownIcon, ChevronUpIcon, Bars3BottomRightIcon, XMarkIcon, DocumentMagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { RouterLink } from 'vue-router'
 import Mouse from './Mouse.vue'
+import LanguageSwitcher from './LanguageSwitcher.vue'
+import Trans from '@/i18n/translation'
 
 export default {
+  setup() {
+    return {
+      Trans
+    }
+  },
   data() {
     return {
       dropdownOpen: false,
@@ -182,7 +173,8 @@ export default {
     xIcon: XMarkIcon,
     searchIcon: DocumentMagnifyingGlassIcon,
     Mouse,
-    Auth
+    Auth,
+    LanguageSwitcher
   },
   methods: {
     openModal() {

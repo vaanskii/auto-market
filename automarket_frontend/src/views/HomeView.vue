@@ -7,10 +7,10 @@
       <div>
         <div class="flex items-center justify-center w-full">
           <h1 class="typed-text absolute md:top-40 font-[700] w-[90%] top-32 text-center uppercase text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
-            <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ word }}</span>
+            <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ $t(`main-header.words.${word}`) }}</span>
           </h1>
           <h1 class="typed-text absolute top-[21rem] font-[600] w-[90%] text-center uppercase text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
-            <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ word }}</span>
+            <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ $t(`main-header.words2.${word}`) }}</span>
           </h1>
         </div>
       </div>
@@ -56,6 +56,7 @@ import Filter from '../components/main/Filter.vue'
 import Cards from '../components/main/Cards.vue'
 import Recently from '../components/main/Recently.vue'
 import Blogs from '../components/main/Blogs.vue'
+import { useI18n } from 'vue-i18n'
 
 export default {
   components: {
@@ -64,39 +65,30 @@ export default {
     Recently,
     Blogs
   },
-  data() {
-    return {
-      words: [
-        'Explore',
-        ' ',
-        'a',
-        ' ',
-        'Wide',
-        ' ',
-        'selection',
-        ' ',
-        'of',
-        ' ',
-        'used',
-        ' ',
-        'and',
-        ' ',
-        'new',
-        ' ',
-        'cars',
-      ],
-      words2: [
-        'Find',
-        ' ',
-        'Your',
-        ' ',
-        'Perfect',
-        ' ',
-        'Ride',
-        ' ',
-        'Today!',
-      ]
-    };
+  setup() {
+    const { t } = useI18n()
+
+    const words = [
+      'explore',
+      'a',
+      'wide',
+      'selection',
+      'of',
+      'used',
+      'and',
+      'new',
+      'cars',
+    ]
+
+    const words2 = [
+      'find',
+      'your',
+      'perfect',
+      'ride',
+      'today',
+    ]
+
+    return { t, words, words2 }
   },
   mounted() {
     this.animateText();
