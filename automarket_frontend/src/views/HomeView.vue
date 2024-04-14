@@ -37,7 +37,7 @@
   </section>
   <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
   <div class="flex items-center justify-center mt-20 reveal-heading">
-    <h1 class="md:text-6xl text-3xl font-[700] uppercase smaller text-[#222]">vip cars</h1>
+    <h1 class="md:text-6xl text-3xl font-[700] uppercase smaller text-[#222]">{{ $t('vipcars') }}</h1>
   </div>
   <div class="my-20 flex justify-center items-center">
     <Cards/>
@@ -69,7 +69,7 @@ export default {
     const { t } = useI18n()
 
     const words = [
-      'explore',
+      'discover',
       'a',
       'wide',
       'selection',

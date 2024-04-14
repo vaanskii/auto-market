@@ -39,7 +39,7 @@
       <Descriptions/>
     </div>
     <div class="mt-20">
-      <h1 class="uppercase text-center text-3xl mb-8">Similar cars</h1>
+      <h1 class="uppercase text-center text-3xl mb-8">{{ $t('similar') }}</h1>
       <Similar/>
     </div>
   </template>

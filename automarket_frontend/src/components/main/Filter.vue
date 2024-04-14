@@ -6,7 +6,7 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <!-- Manufacturer -->
               <div class="flex flex-col">
-                <label for="manufacturer" class="text-sm font-medium text-stone-600 uppercase">Manufacturer</label>
+                <label for="manufacturer" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.manufacturer') }}</label>
                 <select v-model="selectedBrand" id="manufacturer" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
                   <option>BMW</option>
                   <option>MERCEDES</option>
@@ -15,14 +15,14 @@
               </div>
               <!-- Car -->
               <div class="flex flex-col">
-                <label for="car" class="text-sm font-medium text-stone-600 uppercase">Car</label>
+                <label for="car" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.car') }}</label>
                 <select v-model="selectedCar" id="car" class="mt-2 block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
                   <option v-for="(car, index) in filteredCars" :key="index">{{ car }}</option>
                 </select>
               </div>
               <!-- Gasoline -->
               <div class="flex flex-col">
-                <label for="type" class="text-sm font-medium text-stone-600 uppercase">Types</label>
+                <label for="type" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.types') }}</label>
                 <select v-model="selectedType" id="type" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
                     <option>FOR SELL</option>
                     <option>FOR RENT</option>
@@ -30,7 +30,7 @@
                 </div>
               <!-- Location -->
               <div class="flex flex-col">
-                <label for="location" class="text-sm font-medium text-stone-600 uppercase">Location</label>
+                <label for="location" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.location') }}</label>
                 <select id="location" class="mt-2 block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
                   <option value="">TBILISI</option>
                   <option value="">BATUMI</option>
@@ -39,21 +39,21 @@
               </div>
               <!-- Year Range -->
               <div class="flex flex-col">
-                <label for="startYear" class="text-sm font-medium text-stone-600 uppercase">Start Year</label>
-                <input placeholder="FROM" type="number" id="startYear" v-model="startYear" class="placeholder-black mt-2 block w-full cursor-pointer text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
+                <label for="startYear" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.startyear') }}</label>
+                <input :placeholder="$t('filter.pl-from-year')" type="number" id="startYear" v-model="startYear" class="placeholder-black mt-2 block w-full cursor-pointer text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
               </div>
               <div class="flex flex-col">
-                <label for="endYear" class="text-sm font-medium text-stone-600 uppercase">End Year</label>
-                <input type="number" id="endYear" v-model="endYear" placeholder="TO" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
+                <label for="endYear" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.endyear') }}</label>
+                <input type="number" id="endYear" v-model="endYear" :placeholder="$t('filter.pl-to-year')" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
               </div>
 
               <div class="flex flex-col">
-                <label for="startPrice" class="text-sm font-medium text-stone-600 uppercase">start price</label>
-                <input placeholder="FROM" type="number" id="startPrice" v-model="startPrice" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
+                <label for="startPrice" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.startprice') }}</label>
+                <input :placeholder="$t('filter.pl-from-price')" type="number" id="startPrice" v-model="startPrice" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
               </div>
               <div class="flex flex-col">
-                <label for="endPrice" class="text-sm font-medium text-stone-600 uppercase">End price</label>
-                <input type="number" id="endPrice" v-model="endPrice" placeholder="TO" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
+                <label for="endPrice" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.endprice') }}</label>
+                <input type="number" id="endPrice" v-model="endPrice" :placeholder="$t('filter.pl-to-price')" class="mt-2 block w-full cursor-pointer placeholder-black text-black rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none" />
               </div>
             </div>
             

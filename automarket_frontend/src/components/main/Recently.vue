@@ -1,6 +1,6 @@
 <template>
-  <div :class="['w-full bg-[#131313]', { 'overflow-hidden': !isExtended }]" :style="{ height: isExtended ? 'auto' : currentHeight }">
-    <h1 class="uppercase text-white text-center font-[600] text-2xl w-full md:text-4xl lg:text-5xl xl:text-6xl pt-28 pb-10 reveal-h1">recently added cars</h1>
+  <div :class="['w-full bg-[#131313]', { 'overflow-hidden': !isExtended }]" :style="{ height: currentHeight }" ref="containerRef">
+    <h1 class="uppercase text-white text-center font-[600] text-2xl w-full md:text-4xl lg:text-5xl xl:text-6xl pt-28 pb-10 reveal-h1">{{ $t('recently') }}</h1>
     <div class="py-20 flex justify-evenly w-full">
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20">
         <div v-for="(car, index) in cars" :key="index" class="max-w-[280px] h-[350px] z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
@@ -19,7 +19,7 @@
   </div>
   <div class="flex justify-center w-full">
     <button v-if="showButton" @click="toggleHeight" class="mb-20 mt-2 py-3 px-5 flex justify-center items-center rounded-xl bg-black text-white">
-      <span>{{ isExtended ? 'SEE LESS' : 'SEE MORE' }}</span>
+      <span>{{ buttonText }}</span>
       <div class="pointer-events-none ml-2 select-none flex items-center">
           <ChevronDownIcon
             class="w-4 h-4 pointer-events-none transition-transform ease-in duration-300 absolute"
@@ -36,7 +36,32 @@
 
 <script>
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid'
+import { useI18n } from 'vue-i18n';
+import { ref, computed } from 'vue';
+
 export default {
+  setup() {
+    const { t } = useI18n();
+    const isExtended = ref(false); // Define isExtended as a reactive variable
+    const containerRef = ref(null); // Define a ref for the container element
+
+    const buttonText = computed(() => {
+      return isExtended.value ? t('seeless') : t('seemore');
+    });
+
+    const toggleHeight = () => {
+      isExtended.value = !isExtended.value;
+      // Adjust height based on the toggle
+      if (!isExtended.value && containerRef.value) {
+        window.scrollTo({
+          top: containerRef.value.offsetTop, // Use the ref's value to access offsetTop
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    return { buttonText, isExtended, toggleHeight, containerRef };
+  },
   data() {
     return {
       cars: [
@@ -50,8 +75,6 @@ export default {
         { title: 'Card 6', year: 2000, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Zura', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
         { title: 'Card 6', year: 2000, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Zura', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
       ],
-      isExtended: false,
-      currentHeight: '1200px',
       windowWidth: window.innerWidth
     };
   },
@@ -71,6 +94,14 @@ export default {
       if (width < 1024 && width >= 768 && this.cars.length > 4) return true;
       if (width < 768 && this.cars.length > 2) return true;
       return false;
+    },
+    currentHeight() {
+      // Calculate the height based on the number of cars displayed
+      if (this.isExtended || this.cars.length <= 4) {
+        return 'auto';
+      } else {
+        return '1200px';
+      }
     }
   },
   methods: {
@@ -91,16 +122,6 @@ export default {
         });
       });
     },
-    toggleHeight() {
-      this.isExtended = !this.isExtended;
-      this.currentHeight = this.isExtended ? 'auto' : '1200px';
-      if (!this.isExtended) {
-        window.scrollTo({
-          top: this.$el.offsetTop,
-          behavior: 'smooth'
-        });
-      }
-    },
     updateButtonVisibility() {
       this.windowWidth = window.innerWidth;
     }
@@ -115,8 +136,8 @@ export default {
 <style scoped>
 .reveal-h1, .reveal-car {
   opacity: 0;
-  transform: translateY(180px);
-  transition: opacity 0.5s ease, transform 2s ease;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
 }
 
 .reveal-h1.active, .reveal-car.active {

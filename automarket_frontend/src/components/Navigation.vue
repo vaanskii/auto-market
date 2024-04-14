@@ -12,7 +12,7 @@
         <div class="flex justify-center items-center lg:w-[500px] w-[350px]">
           <form class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
               <div class="relative">
-                  <input type="search" id="default-search" class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" placeholder="Search" required />
+                  <input type="search" id="default-search" class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" :placeholder="$t('nav.search')" required />
                   <button type="submit" class="absolute bottom-2 text-black right-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -53,17 +53,17 @@
       </div>
       <!-- Pages -->
       <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '10000' : 'auto' }">
-        <button @click="handleAddClick" type="button" class="bg-black md:flex hidden text-white items-center justify-center mr-6 rounded-lg w-28">
+        <button @click="handleAddClick" type="button" class="bg-black md:flex hidden text-white items-center justify-evenly mr-6 rounded-lg w-[150px]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
-          <router-link to="#" class="py-2 px-3 block uppercase">add</router-link>
+          <router-link to="#" class="py-2 px-3 block uppercase">{{ $t('nav.add') }}</router-link>
         </button>
         <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userIsActivated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
           <button type="button" @click="toggleDropdown" class="dropdown-toggle py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
-            <span class="pointer-events-none select-none uppercase">Languages</span>
+            <span class="pointer-events-none select-none uppercase w-[100px]">{{ $t('nav.language') }}</span>
             <div class="pointer-events-none select-none flex items-center">
               <ChevronDownIcon
                 class="w-4 h-4 pointer-events-none transition-transform ease-in duration-300 absolute"
@@ -85,17 +85,17 @@
               leave-class="translate-y-0 scale-y-100 opacity-100"
               leave-to-class="-translate-y-1/2 scale-y-0 opacity-0"
           >
-          <div v-if="dropdownOpen" class="dropdown-menu flex flex-col md:absolute translate-transform ease-in-out duration-300 md:bg-[#222] md:mt-6 md:-ml-28 text-sm md:text-white text-[#222] rounded-lg md:py-2 w-80">
+          <div v-if="dropdownOpen" class="dropdown-menu flex flex-col md:absolute translate-transform ease-in-out duration-300 md:bg-black md:mt-6 md:-ml-28 text-sm md:text-white text-[#222] rounded-lg md:py-2 w-80">
             <LanguageSwitcher @click="dropdownOpen = false"/>
           </div>
         </transition>
         </div>
         <div v-if="!dropdownOpen" class="flex-col text-center md:hidden block sm:text-lg text-[15px]">
             <h1 class="uppercase mb-5">languages</h1>
-            <LanguageSwitcher/>
+            <LanguageSwitcher @click="menudropdownOpen = false"/>
             <hr class="h-[1.5px] my-8 bg-[#222] border-0">
           </div>
-        <router-link to="#" class="py-2 px-3 md:block hidden uppercase">Login</router-link>
+        <router-link to="#" class="py-2 px-3 md:block ml-8 hidden uppercase w-[85px]">{{ $t('nav.login') }}</router-link>
       </div>
     </div>
   </nav>

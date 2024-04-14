@@ -3,9 +3,17 @@
     "en": "English",
     "ka": "Georgian"
   },
+
+  "nav": {
+    "language": "languages",
+    "add": "add",
+    "login": "login",
+    "search": "Search"
+  },
+
   "main-header": {
     "words": {
-      "explore": "Explore",
+      "discover": "EXPLORE",
       "a": "a",
       "wide": "Wide",
       "selection": "selection",
@@ -22,5 +30,64 @@
       "ride": "Ride",
       "today": "Today!"
     } 
-  }
+  },
+
+  "filter": {
+    "manufacturer": "manufacturer",
+    "car": "car",
+    "types": "types",
+    "location": "location",
+    "startyear": "start year",
+    "endyear": "end year",
+    "startprice": "start price",
+    "endprice": "end price",
+    "pl-from-year": "FROM",
+    "pl-to-year": "TO",
+    "pl-from-price": "FROM",
+    "pl-to-price": "TO"
+  },
+
+  "recently": "recently added cars",
+  "seemore": "SEE MORE",
+  "seeless": "SEE LESS",
+  "vipcars": "VIP CARS",
+
+  "blogs": {
+    "header": "blogs",
+    "question": "What are some common signs that indicate a car needs maintenance?",
+    "answer": "Some common signs that indicate a car needs maintenance include strange noises (such as grinding or squealing), dashboard warning lights, decreased fuel efficiency, difficulty starting the engine, vibrations while driving, and unusual smells (like burning rubber or oil). Additionally, visible signs of wear and tear on tires, belts, or hoses, as well as fluid leaks under the vehicle, can also signal the need for maintenance. Regularly scheduled maintenance checks, as outlined in the owner's manual, can help catch issues early and prevent more serious problems down the road.",
+    "seemore": "SEE MORE BLOGS"
+  },
+  "vin": {
+    "search": "SEARCH WITH VIN DECODE",
+    "placeholder": "TYPE VIN CODE",
+    "understanding": "UNDERSTANDING VIN DECODING",
+    "explanation": "VIN decoding is the process of analyzing the Vehicle Identification Number (VIN) to retrieve information about a vehicle's make, model, year, and more. It's useful for understanding a vehicle's history, features, and specifications before making a purchase."
+  },
+
+  "description": {
+    "header": "description",
+    "specifications": "main specifications",
+    "manufacturer": "manufacturer",
+    "model": "model",
+    "year": "year",
+    "category": "category",
+    "enginevolume": "engine volume",
+    "mileage": "mileage",
+    "fueltype": "fuel type",
+    "gearbox": "gear box type",
+    "cylinders": "cylinders",
+    "doors": "doors",
+    "drivewheels": "drive wheels",
+    "wheel": "wheel",
+    "airbags": "airbags",
+    "color": "color",
+    "interiormaterial": "interior material",
+    "interiorcolor": "interior color",
+    "exchange": "exchange",
+    "technicalinspection": "technical inspection",
+    "catalyst": "catalyst"
+  },
+
+  "similar": "similar cars"
 }
