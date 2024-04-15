@@ -9,7 +9,7 @@
             <img src="/car.png" alt="car" class="w-12 h-12">
           </router-link>
         <!-- Search input -->
-        <div class="flex justify-center items-center lg:w-[500px] w-[350px]">
+        <div class="flex justify-center items-center lg:w-[500px] w-[300px]">
           <form class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
               <div class="relative">
                   <input type="search" id="default-search" class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" :placeholder="$t('nav.search')" required />
@@ -20,18 +20,6 @@
                   </button>
               </div>
           </form>
-          <!-- Mouse checkbox -->
-          <div class="flex-col justify-center ml-5 md:mt-0 mt-2 lg:block hidden">
-            <label for="foobar3" class="flex flex-col flex-wrap items-center uppercase text-[10px] cursor-pointer mb-4 md:mb-0">
-              mouse
-                <div class="relative">
-                  <input id="foobar3" type="checkbox" v-model="showCustomCursor" class="hidden">
-                  <div class="toggle__line w-12 h-6 bg-gray-200 rounded-full shadow-inner"></div>
-                  <div class="toggle__dot absolute w-5 h-5 bg-white rounded-full shadow inset-y-0 left-0"></div>
-                </div>
-            </label>
-            <Mouse v-if="showCustomCursor"/>
-          </div>
 
         </div>
         <!--Mobile menu-->
@@ -62,7 +50,7 @@
         <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userIsActivated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
-          <button type="button" @click="toggleDropdown" class="dropdown-toggle py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
+          <button type="button" @click="toggleDropdown" class="dropdown-toggle mr-4 ml-2 py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
             <span class="pointer-events-none select-none uppercase w-[100px]">{{ $t('nav.language') }}</span>
             <div class="pointer-events-none select-none flex items-center">
               <ChevronDownIcon
@@ -95,7 +83,7 @@
             <LanguageSwitcher @click="menudropdownOpen = false"/>
             <hr class="h-[1.5px] my-8 bg-[#222] border-0">
           </div>
-        <router-link to="#" class="py-2 px-3 md:block ml-8 hidden uppercase w-[85px]">{{ $t('nav.login') }}</router-link>
+        <router-link :to="Trans.i18nRoute({ name: 'login' })" class="py-2 px-3 md:block hidden uppercase w-[85px] hover:bg-gray-100 hover:text-black">{{ $t('nav.login') }}</router-link>
       </div>
     </div>
   </nav>
@@ -141,7 +129,6 @@
 import Auth from './Auth.vue'
 import { ChevronDownIcon, ChevronUpIcon, Bars3BottomRightIcon, XMarkIcon, DocumentMagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { RouterLink } from 'vue-router'
-import Mouse from './Mouse.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Trans from '@/i18n/translation'
 
@@ -156,15 +143,8 @@ export default {
       dropdownOpen: false,
       menudropdownOpen: false,
       userIsActivated: false,
-      showCustomCursor: true,
       modalOpen: false,
     };
-  },
-  watch: {
-    showCustomCursor(value) {
-      localStorage.setItem('showCustomCursor', value)
-      document.documentElement.style.cursor = value ? 'none' : 'auto'
-    }
   },
   components:{
     ChevronDownIcon,
@@ -172,7 +152,6 @@ export default {
     BurgerIcon: Bars3BottomRightIcon,
     xIcon: XMarkIcon,
     searchIcon: DocumentMagnifyingGlassIcon,
-    Mouse,
     Auth,
     LanguageSwitcher
   },
@@ -212,26 +191,15 @@ export default {
         })
       }
     },
-    handleResize() {
-      const screenWidth = window.innerWidth
-      if (screenWidth < 1024) {
-        this.showCustomCursor = false
-      } else {
-        this.showCustomCursor = localStorage.getItem('showCustomCursor') === 'true'
-      }
-    }
   },
   mounted() {
     if (localStorage.getItem('showCustomCursor') !== null) {
       this.showCustomCursor = localStorage.getItem('showCustomCursor') === 'true'
     }
     window.addEventListener('click', this.closeDropdowns)
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
   },
   beforeDestroy() {
     window.removeEventListener('click', this.closeDropdowns)
-    window.removeEventListener('resize', this.handleResize)
   }
 }
 </script>
@@ -239,16 +207,5 @@ export default {
 <style scoped>
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
-}
-.toggle__dot {
-  top: 2px;
-  left: 3.5px;
-  transition: all 0.3s ease-in-out;
-}
-
-input:checked ~ .toggle__dot {
-  transform: translateX(100%);
-  left: 5px;
-  background-color:black;
 }
 </style>
