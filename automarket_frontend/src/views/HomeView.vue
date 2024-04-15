@@ -88,20 +88,19 @@ export default {
       'today',
     ]
 
-    return { t, words, words2 }
-  },
-  mounted() {
-    this.animateText();
-    this.revealHeadingOnScroll();
-    this.setPageTitle('Explore New And Used Cars');
-  },
-  methods: {
-    setPageTitle(title){
-      document.title = title
-    },
-    revealHeadingOnScroll() {
-      window.addEventListener('scroll', () => {
+    const animateText = () => {
+      const spans = document.querySelectorAll('.typed-text span');
+      spans.forEach((span, index) => {
+        setTimeout(() => {
+          span.classList.add('fade-in');
+        }, index * 50);
+      });
+    };
+
+    const revealHeadingOnScroll = () => {
+      const handleScroll = () => {
         const heading = document.querySelector('.reveal-heading');
+        if (!heading) return;
         const windowHeight = window.innerHeight;
         const revealTop = heading.getBoundingClientRect().top;
         const revealPoint = 150;
@@ -111,19 +110,34 @@ export default {
         } else {
           heading.classList.remove('active');
         }
-      });
-    },
-    animateText() {
-      const spans = document.querySelectorAll('.typed-text span');
-      spans.forEach((span, index) => {
-        setTimeout(() => {
-          span.classList.add('fade-in');
-        }, index * 50);
-      });
+      };
+
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    };
+
+    return { t, words, words2, animateText, revealHeadingOnScroll };
+  },
+  mounted() {
+    this.animateText();
+    this.revealHeadingOnScroll();
+    this.setPageTitle('Explore New And Used Cars');
+  },
+  beforeUnmount() {
+    // Cleanup scroll event listener
+    window.removeEventListener('scroll', this.revealHeadingOnScroll);
+  },
+  methods: {
+    setPageTitle(title) {
+      document.title = title
     }
   }
 }
 </script>
+
 
 
 <style>

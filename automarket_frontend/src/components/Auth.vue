@@ -15,7 +15,7 @@
             <router-link :to="Trans.i18nRoute({ name: 'login' })" @click="onCloseModal()">
               <button class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">login</button>
             </router-link>
-            <router-link :to="Trans.i18nRoute({ name: 'login' })" @click="onCloseModal()">
+            <router-link :to="Trans.i18nRoute({ name: 'signup' })" @click="onCloseModal()">
               <button class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">Signup</button>
             </router-link>
           </div>
