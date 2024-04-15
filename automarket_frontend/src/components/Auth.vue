@@ -12,8 +12,12 @@
         <div class="flex flex-col justify-center items-center">
           <p class="text-center text-xl uppercase">Create or use an account to add items on our website</p>
           <div class="flex flex-row gap-4">
-            <button @click="redirectToLogin" class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">login</button>
-            <button @click="redirectToSignup" class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">Signup</button>
+            <router-link :to="Trans.i18nRoute({ name: 'login' })" @click="onCloseModal()">
+              <button class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">login</button>
+            </router-link>
+            <router-link :to="Trans.i18nRoute({ name: 'login' })" @click="onCloseModal()">
+              <button class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">Signup</button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -22,21 +26,20 @@
 </template>
 
 <script>
+import Trans from '@/i18n/translation'
+import { RouterLink } from 'vue-router';
 export default {
+    setup() {
+    return {
+      Trans
+    }
+  },
   props: {
     isOpen: Boolean,
     onCloseModal: Function,
   },
   methods: {
     closeModal() {
-        this.onCloseModal()
-    },
-    redirectToLogin() {
-        this.$router.push('/login')
-        this.onCloseModal()
-    },
-    redirectToSignup() {
-        this.$router.push('/signup')
         this.onCloseModal()
     }
   }
