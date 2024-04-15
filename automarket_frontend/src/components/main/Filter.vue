@@ -15,7 +15,7 @@
               </div>
               <!-- Car -->
               <div class="flex flex-col">
-                <label for="car" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.car') }}</label>
+                <label for="car" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.model') }}</label>
                 <select v-model="selectedCar" id="car" class="mt-2 block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
                   <option v-for="(car, index) in filteredCars" :key="index">{{ car }}</option>
                 </select>

@@ -34,7 +34,7 @@
 
   "filter": {
     "manufacturer": "manufacturer",
-    "car": "car",
+    "model": "model",
     "types": "types",
     "location": "location",
     "startyear": "start year",
@@ -75,7 +75,7 @@
     "enginevolume": "engine volume",
     "mileage": "mileage",
     "fueltype": "fuel type",
-    "gearbox": "gear box type",
+    "gearbox": "transmission",
     "cylinders": "cylinders",
     "doors": "doors",
     "drivewheels": "drive wheels",
@@ -89,5 +89,16 @@
     "catalyst": "catalyst"
   },
 
-  "similar": "similar cars"
+    "similar": "similar cars",
+
+    "login": {
+      "paragraph": "At AUTOHUB, we connect you to a world of automotive possibilities. Whether you're buying, selling, or renting a car, AUTOHUB simplifies the process for you.",
+      "log-in": "log in",
+      "account": "Don't have an account?"
+    },
+
+    "signup": {
+      "sign-up": "Create new account",
+      "account": "Already have an account?"
+    }
 }

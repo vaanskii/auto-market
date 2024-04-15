@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-14">
+    <div class="md:pt-0 pt-14">
         <div class="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center md:mt-0 mt-20">
       <div
         class="flex flex-col overflow-hidden bg-white rounded-md shadow-4xl max md:flex-row md:flex-1 lg:max-w-screen-md"
@@ -8,21 +8,21 @@
           class="p-4 py-6 text-white bg-[#222] md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly"
         >
           <div class="my-3 text-4xl font-bold tracking-wider text-center">
-            <router-link :to="Trans.i18nRoute({ name: 'home' })" class="uppercase">autohub</router-link>
+            <p class="uppercase">autohub</p>
           </div>
           <p class="mt-6 font-normal text-center text-gray-300 md:mt-0">
-            at autohub, we connect you to a world of automotive possibilities. Whether you're buying, selling, or renting a car, AutoHub simplifies the process for you.
+            {{ $t('login.paragraph') }}
           </p>
           <p class="flex flex-col items-center justify-center mt-10 text-center">
-            <span>Don't have an account?</span>
-            <router-link :to="Trans.i18nRoute({ name: 'signup' })" class="underline">Get Started!</router-link>
+            <span>{{ $t('login.account') }}</span>
+            <router-link :to="Trans.i18nRoute({ name: 'signup' })" class="underline mt-px">Get Started!</router-link>
           </p>
           <p class="mt-6 text-sm text-center text-gray-300">
             Read our <a href="#" class="underline">terms</a> and <a href="#" class="underline">conditions</a>
           </p>
         </div>
         <div class="p-5 bg-white md:flex-1">
-          <h3 class="my-4 text-2xl font-semibold text-gray-700">Account Login</h3>
+          <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Account Login</h3>
           <form action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
               <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
@@ -30,6 +30,7 @@
                 type="email"
                 id="email"
                 autofocus
+                placeholder="Enter your mail"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="email"
               />
@@ -42,6 +43,7 @@
               <input
                 type="password"
                 id="password"
+                placeholder="*********"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="current-password"
               />
@@ -52,20 +54,21 @@
                 id="remember"
                 class="w-4 h-4 transition duration-300 rounded  appearance-none border-[1px] border-black checked:bg-black"
               />
-              <label for="remember" class="text-sm font-semibold text-gray-500">Remember me</label>
+              <label for="remember" class="text-sm font-semibold text-gray-500 cursor-pointer">Remember me</label>
             </div>
             <div>
-              <button
-                type="submit"
-                class="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-[#222] rounded-md shadow hover:black focus:outline-none focus:ring-blue-200 focus:ring-4"
-              >
-                Log in
-              </button>
+                <button 
+                    class="btn2 w-full px-10 py-5 text-lg relative transition-colors border border-black rounded-md uppercase font-semibold tracking-wider leading-none overflow-hidden hover:text-white" 
+                    type="submit"
+                    >
+                    <span class="absolute inset-0 bg-[#222]"></span>
+                    <span class="absolute inset-0 flex justify-center items-center font-bold">{{ $t('login.log-in') }}</span>
+                </button>
             </div>
             <div class="flex flex-col space-y-5">
               <span class="flex items-center justify-center space-x-2">
                 <span class="h-px bg-gray-400 w-14"></span>
-                <span class="font-normal text-gray-500">or login with</span>
+                <span class="font-normal text-gray-500">or connect with</span>
                 <span class="h-px bg-gray-400 w-14"></span>
               </span>
               <div class="flex flex-col space-y-4">
@@ -106,5 +109,12 @@ export default {
     --tw-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.4);
     --tw-shadow-colored: 0 50px 100px -20px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.btn2 span:first-child{
+  transform: translateX(-101%);
+  transition: transform .3s ease-in
+}
+.btn2:hover span{
+  transform: translateX(0)
 }
 </style>
