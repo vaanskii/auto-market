@@ -142,7 +142,7 @@ export default {
     return {
       dropdownOpen: false,
       menudropdownOpen: false,
-      userIsActivated: false,
+      userIsActivated: true,
       modalOpen: false,
     };
   },
@@ -166,7 +166,7 @@ export default {
       if(!this.userIsActivated) {
         this.openModal()
       }else {
-        this.$router.push('/add')
+        this.$router.push(this.Trans.i18nRoute({ name: 'add' }));
       }
     },
     toggleMenuDropdown() {

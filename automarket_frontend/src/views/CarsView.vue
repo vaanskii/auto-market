@@ -7,7 +7,9 @@
           <!-- Large image container with navigation buttons -->
           <div class="relative w-[90%] flex justify-center">
             <img :src="images[currentImageIndex]" @click="openImageViewer(currentImageIndex)" class="md:w-[80%] md:h-[550px] h-[270px] cursor-pointer rounded-xl reveal-card" />
-            <span class="absolute inset-y-0 left-4 sm:left-2 md:left-12 lg:left-28 p-5 text-white text-lg">{{ currentImageIndex + 1 }}/{{ images.length }}</span>
+              <div class="absolute inset-y-0 left-4 sm:left-20 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
+                <span>{{ currentImageIndex + 1 }}/{{ images.length }}</span>
+              </div>
             <button @click="previousImage" class="absolute inset-y-0 -left-4 sm:left-2 md:left-12 lg:left-28 m-6 text-4xl">
               <span class="px-4 pb-1 flex justify-center items-center bg-white rounded-full text-black">
                 ‹
@@ -57,7 +59,7 @@
     setup() {
       const images = ref([
         '/peakpx.jpg',
-        '/2.jpg',
+        '/sales-desktop.jpg',
         '/mercedes.jpg',
         '/mechanic.jpeg',
         '/car.png',

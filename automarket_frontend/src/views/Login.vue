@@ -1,6 +1,6 @@
 <template>
     <div class="md:pt-0 pt-14">
-        <div class="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center md:mt-0 mt-20">
+        <div class="flex items-center min-h-screen p-4 lg:justify-center md:mt-0 mt-20">
       <div
         class="flex flex-col overflow-hidden bg-white rounded-md shadow-4xl max md:flex-row md:flex-1 lg:max-w-screen-md"
       >
@@ -21,7 +21,7 @@
             Read our <a href="#" class="underline">terms</a> and <a href="#" class="underline">conditions</a>
           </p>
         </div>
-        <div class="p-5 bg-white md:flex-1">
+        <div class="p-5 bg-[#E6E6E6] md:flex-1">
           <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Account Login</h3>
           <form action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
