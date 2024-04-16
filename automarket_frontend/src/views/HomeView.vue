@@ -142,12 +142,12 @@ export default {
 
 <style>
 .bg-lights {
-  background-image: url('1.jpg');
+  background-image: url('sales-desktop.jpg');
 }
 
 @media (max-width: 1024px){
   .bg-lights {
-  background-image: url('2.jpg');
+  background-image: url('sales-mobile.jpg');
   background-position: center;
   height: 400px;
   margin-top: 0;
