@@ -125,7 +125,7 @@
                     <div class="flex bg-[#E6E6E6] rounded-md shadow-4xl md:flex-row">
                         <div class="p-5 w-full">
                             <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase text-center">Image selector</h3>
-                            <div class="grid md:grid-cols-3 gird-cols-1 gap-4">
+                            <div class="">
                                 <div class="font-[sans-serif] mt-2 mb-12">
                                     <input 
                                         type="file" 
@@ -135,14 +135,15 @@
                                         class="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" />
                                 </div>
                             </div>
-                            <div id="preview" v-if="url && url.length > 0" class="w-full grid md:grid-cols-3 grid-cols-2 lg:grid-cols-5 gap-x-6">
-                                <img v-for="(imageUrl, index) in url" :key="index" :src="imageUrl" class="w-full h-[80%] border-2 border-black" @click="handleImageClick(imageUrl)">
+                            <div id="preview" v-if="url && url.length > 0" class="w-full h-auto grid md:grid-cols-3 grid-cols-2 lg:grid-cols-5 gap-x-6">
+                                <img v-for="(imageUrl, index) in url" :key="index" :src="imageUrl" class="w-full md:h-auto h-[80%] border-2 border-black" @click="handleImageClick(imageUrl)">
+                            
                             </div>
 
                             <div v-if="mainImage" class="flex flex-col justify-center items-center">
                                 <h1 class="mt-10 uppercase text-2xl">Main image</h1>
-                                <div class="w-full max-w-[800px] mt-10">
-                                    <img :src="mainImage" class="w-full rounded-lg shadow-lg" alt="Main Image">
+                                <div class="w-full mt-10 flex justify-center items-center">
+                                    <img :src="mainImage" class="w-[80%] rounded-lg shadow-lg" alt="Main Image">
                                 </div>
                             </div>
                         </div>

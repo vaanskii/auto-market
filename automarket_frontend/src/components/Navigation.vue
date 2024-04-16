@@ -103,7 +103,7 @@
         <p class="uppercase text-[10px]">saved</p>
       </router-link>
       <div class="relative">
-        <router-link to="#" class="absolute -top-10 left-1/2 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
+        <router-link :to="Trans.i18nRoute({ name: 'add' })" class="absolute -top-10 left-1/2 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
