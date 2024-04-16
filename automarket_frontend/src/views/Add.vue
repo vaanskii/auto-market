@@ -1,6 +1,6 @@
 <template>
     <div class="md:pt-40 pt-14">
-        <h1 class="text-center mb-10">add car</h1>
+        <h1 class="text-center mb-12 text-4xl uppercase">add car</h1>
         <form action="#" class="flex md:flex-col flex-col space-y-5">
             <!-- Main specifications -->
             <div class="flex items-center justify-center">
