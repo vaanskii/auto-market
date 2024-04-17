@@ -10,9 +10,17 @@
           </router-link>
         <!-- Search input -->
         <div class="flex justify-center items-center lg:w-[500px] w-[300px]">
-          <form class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
+          <form v-on:submit.prevent="submitSearch" class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
               <div class="relative">
-                  <input type="search" id="default-search" class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" :placeholder="$t('nav.search')" required />
+                  <input 
+                    type="search" 
+                    id="default-search" 
+                    class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" 
+                    :placeholder="$t('nav.search')" 
+                    required 
+                    v-model="searchQuery"
+                    @keydown.enter.prevent="searchOnEnter"
+                    />
                   <button type="submit" class="absolute bottom-2 text-black right-3">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -135,7 +143,8 @@ import Trans from '@/i18n/translation'
 export default {
   setup() {
     return {
-      Trans
+      Trans,
+      searchQuery: ''
     }
   },
   data() {
@@ -156,6 +165,18 @@ export default {
     LanguageSwitcher
   },
   methods: {
+    submitSearch() {
+      if (this.searchQuery.trim() !== '') {
+        this.$router.push(this.Trans.i18nRoute({ name: 'search', query: { q: this.searchQuery }}));
+      }
+    },
+    searchOnEnter(event) {
+        if (!event.shiftKey) {
+        event.preventDefault();
+        this.submitSearch();
+        this.isBurgerVisible = false;
+        }
+    },
     openModal() {
       this.modalOpen = true
     },

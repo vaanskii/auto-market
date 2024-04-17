@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Add from '../views/Add.vue'
 import Blogs from '../views/BlogsView.vue'
+import Search from '../views/SearchView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,7 +50,12 @@ const router = createRouter({
             window.scrollTo(0, 0);
             next();
           }
-        }
+        },
+        {
+          path: 'search',
+          name: 'search',
+          component: Search,
+          },
       ]
     }
   ],
