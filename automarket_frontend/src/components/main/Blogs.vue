@@ -9,8 +9,8 @@
         <h1 class="uppercase text-5xl font-bold mb-10">{{ $t('blogs.header') }}</h1>
         <img src="/mechanic.png" alt="" class="max-w-full lg:max-w-md rounded-lg">
         <div class="p-6 rounded-lg mt-4">
-          <h2 class="text-2xl font-semibold text-center">{{ $t('blogs.question') }}</h2>
-          <p class="mt-4 text-gray-700">{{ $t('blogs.answer') }}</p>
+          <h2 class="text-2xl font-semibold text-center">{{ $t('blogs.question1') }}</h2>
+          <p class="mt-4 text-gray-700">{{ $t('blogs.answer1') }}</p>
         </div>
         <router-link :to="Trans.i18nRoute({ name: 'blogs' })">
           <button class="bg-black text-white px-4 py-3 rounded-xl uppercase">{{ $t('blogs.seemore') }}</button>
@@ -24,7 +24,7 @@
           <form class="flex justify-around">
             <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
               <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" :placeholder="$t('vin.placeholder')">
-              <button class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%] hover:bg-gray-100">search</button>
+              <button type="submit" class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%] hover:bg-gray-100">search</button>
             </div>
           </form>
         </div>

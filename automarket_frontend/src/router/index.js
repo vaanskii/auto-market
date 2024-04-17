@@ -43,11 +43,16 @@ const router = createRouter({
         {
           path: 'blogs',
           name: 'blogs',
-          component: Blogs
+          component: Blogs,
+          beforeEnter: (to, from, next) => {
+            // Scroll to the top of the page
+            window.scrollTo(0, 0);
+            next();
+          }
         }
       ]
     }
-  ]
-})
+  ],
+});
 
 export default router
