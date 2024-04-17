@@ -31,19 +31,19 @@ export default {
       },
       {
         id: 2,
-        image: '/mechanic.png',
+        image: '/car-check.png',
         question: 'blogs.question2',
         answer: 'blogs.answer2'
       },
       {
         id: 3,
-        image: '/mechanic.png',
+        image: '/car-save.png',
         question: 'blogs.question3',
         answer: 'blogs.answer3'
       },
       {
         id: 4,
-        image: '/mechanic.png',
+        image: '/car-dollar.png',
         question: 'blogs.question4',
         answer: 'blogs.answer4'
       }
