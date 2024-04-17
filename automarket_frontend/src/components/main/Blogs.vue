@@ -12,7 +12,7 @@
           <h2 class="text-2xl font-semibold text-center">{{ $t('blogs.question') }}</h2>
           <p class="mt-4 text-gray-700">{{ $t('blogs.answer') }}</p>
         </div>
-        <router-link to="#">
+        <router-link :to="Trans.i18nRoute({ name: 'blogs' })">
           <button class="bg-black text-white px-4 py-3 rounded-xl uppercase">{{ $t('blogs.seemore') }}</button>
         </router-link>
       </div>
@@ -39,7 +39,14 @@
   
 <script>
 import { RouterLink } from 'vue-router'
+import Trans from '@/i18n/translation'
+
 export default {
+  setup() {
+    return {
+      Trans
+    }
+  },
   mounted() {
     this.revealItemsOnScroll();
   },

@@ -5,6 +5,7 @@ import CarView from '../views/CarsView.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Add from '../views/Add.vue'
+import Blogs from '../views/BlogsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
           path: 'add',
           name: 'add',
           component: Add
+        },
+        {
+          path: 'blogs',
+          name: 'blogs',
+          component: Blogs
         }
       ]
     }

@@ -54,8 +54,19 @@
 
   "blogs": {
     "header": "blogs",
-    "question": "What are some common signs that indicate a car needs maintenance?",
-    "answer": "Some common signs that indicate a car needs maintenance include strange noises (such as grinding or squealing), dashboard warning lights, decreased fuel efficiency, difficulty starting the engine, vibrations while driving, and unusual smells (like burning rubber or oil). Additionally, visible signs of wear and tear on tires, belts, or hoses, as well as fluid leaks under the vehicle, can also signal the need for maintenance. Regularly scheduled maintenance checks, as outlined in the owner's manual, can help catch issues early and prevent more serious problems down the road.",
+
+    "question1": "What are some common signs that indicate a car needs maintenance?",
+    "answer1": "Some common signs that indicate a car needs maintenance include strange noises (such as grinding or squealing), dashboard warning lights, decreased fuel efficiency, difficulty starting the engine, vibrations while driving, and unusual smells (like burning rubber or oil). Additionally, visible signs of wear and tear on tires, belts, or hoses, as well as fluid leaks under the vehicle, can also signal the need for maintenance. Regularly scheduled maintenance checks, as outlined in the owner's manual, can help catch issues early and prevent more serious problems down the road.",
+
+    "question2": "Top 10 DIY Car Maintenance Tips Every Driver Should Know",
+    "answer2": "In this blog post, you can cover essential car maintenance tasks that drivers can perform themselves to keep their vehicles running smoothly. This could include changing oil and filters, checking tire pressure, replacing wiper blades, and more. Include step-by-step instructions and helpful tips for each task to empower readers to take better care of their cars and save money on professional services.",
+
+    "question3": "The Future of Automotive Maintenance: Trends and Innovations",
+    "answer3": "Explore emerging trends and technologies shaping the automotive maintenance industry. Discuss advancements such as predictive maintenance algorithms, connected car systems that notify drivers of potential issues, and the rise of electric vehicles and their unique maintenance requirements. This blog can provide insights into how the automotive maintenance landscape is evolving and what drivers can expect in the years to come.",
+
+    "question4": "Maximizing Resale Value: How Proper Maintenance Can Boost Your Car's Worth",
+    "answer4": "Highlight the financial benefits of regular car maintenance by focusing on how it can increase the resale value of vehicles. Discuss how keeping up with maintenance tasks like regular oil changes, fluid checks, and scheduled inspections can preserve the condition of a car over time. Provide tips on creating a maintenance log and following manufacturer-recommended ",
+
     "seemore": "SEE MORE BLOGS"
   },
   "vin": {

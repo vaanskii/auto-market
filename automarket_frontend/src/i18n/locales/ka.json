@@ -54,8 +54,19 @@
 
   "blogs": {
     "header": "ბლოგები",
-    "question": "რა არის საერთო ნიშნები, რომლებიც მიუთითებს, რომ მანქანა საჭიროებს ტექნიკურ დათვალიერებას?",
-    "answer": "ზოგიერთი ჩვეულებრივი ნიშანი, რომელიც მიუთითებს, რომ მანქანას ტექნიკური მოვლა სჭირდება, მოიცავს უცნაურ ხმებს (როგორიცაა დაფქვა ან ჭრიალი), დაფის გამაფრთხილებელი შუქები, საწვავის ეფექტურობის დაქვეითება, ძრავის მუშაობის გაძნელება, ვიბრაცია მართვის დროს და უჩვეულო სუნი (როგორიცაა რეზინის ან ზეთის წვა). გარდა ამისა, საბურავებზე, ღვედებზე ან შლანგებზე ცვეთის ხილულმა ნიშნებმა, ისევე როგორც მანქანის ქვეშ სითხის გაჟონვამ, ასევე შეიძლება მიანიშნებდეს ტექნიკური დათვალიერების საჭიროების შესახებ. რეგულარულად დაგეგმილი ტექნიკური შემოწმებები, როგორც ეს აღწერილია მფლობელის სახელმძღვანელოში, დაგეხმარებათ პრობლემების ადრეულ დადგენაში და თავიდან აიცილოთ უფრო სერიოზული პრობლემები.",
+
+    "question1": "რა არის საერთო ნიშნები, რომლებიც მიუთითებს, რომ მანქანა საჭიროებს ტექნიკურ დათვალიერებას?",
+    "answer1": "ზოგიერთი ჩვეულებრივი ნიშანი, რომელიც მიუთითებს, რომ მანქანას ტექნიკური მოვლა სჭირდება, მოიცავს უცნაურ ხმებს (როგორიცაა დაფქვა ან ჭრიალი), დაფის გამაფრთხილებელი შუქები, საწვავის ეფექტურობის დაქვეითება, ძრავის მუშაობის გაძნელება, ვიბრაცია მართვის დროს და უჩვეულო სუნი (როგორიცაა რეზინის ან ზეთის წვა). გარდა ამისა, საბურავებზე, ღვედებზე ან შლანგებზე ცვეთის ხილულმა ნიშნებმა, ისევე როგორც მანქანის ქვეშ სითხის გაჟონვამ, ასევე შეიძლება მიანიშნებდეს ტექნიკური დათვალიერების საჭიროების შესახებ. რეგულარულად დაგეგმილი ტექნიკური შემოწმებები, როგორც ეს აღწერილია მფლობელის სახელმძღვანელოში, დაგეხმარებათ პრობლემების ადრეულ დადგენაში და თავიდან აიცილოთ უფრო სერიოზული პრობლემები.",
+
+    "question2": "Top 10 DIY Car Maintenance Tips Every Driver Should Know",
+    "answer2": "In this blog post, you can cover essential car maintenance tasks that drivers can perform themselves to keep their vehicles running smoothly. This could include changing oil and filters, checking tire pressure, replacing wiper blades, and more. Include step-by-step instructions and helpful tips for each task to empower readers to take better care of their cars and save money on professional services.",
+
+    "question3": "The Future of Automotive Maintenance: Trends and Innovations",
+    "answer3": "Explore emerging trends and technologies shaping the automotive maintenance industry. Discuss advancements such as predictive maintenance algorithms, connected car systems that notify drivers of potential issues, and the rise of electric vehicles and their unique maintenance requirements. This blog can provide insights into how the automotive maintenance landscape is evolving and what drivers can expect in the years to come.",
+
+    "question4": "Maximizing Resale Value: How Proper Maintenance Can Boost Your Car's Worth",
+    "answer4": "Highlight the financial benefits of regular car maintenance by focusing on how it can increase the resale value of vehicles. Discuss how keeping up with maintenance tasks like regular oil changes, fluid checks, and scheduled inspections can preserve the condition of a car over time. Provide tips on creating a maintenance log and following manufacturer-recommended ",
+
     "seemore": "ბლოგების ნახვა"
   },
 
