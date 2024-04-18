@@ -3,6 +3,20 @@ from .forms import SignupForm
 from django.http import JsonResponse
 from rest_framework import status
 
+@api_view(['GET'])
+def user(request):
+    if hasattr(request.user, 'mobile_number'):
+        mobile_number = str(request.user.mobile_number)
+    else:
+        mobile_number = None
+
+    return JsonResponse({
+        'id': request.user.id,
+        'name': request.user.name,
+        'email': getattr(request.user, 'email', None),
+        'mobile_number': mobile_number,
+    })
+
 @api_view(['POST'])
 def signup(request):
     data = request.data
