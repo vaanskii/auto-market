@@ -23,13 +23,14 @@
         </div>
         <div class="p-5 bg-[#E6E6E6] md:flex-1">
           <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Account Login</h3>
-          <form action="#" class="flex flex-col space-y-5">
+          <form v-on:submit.prevent="submitForm" action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
               <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
               <input
                 type="email"
                 id="email"
                 autofocus
+                v-model="form.email"
                 placeholder="Enter your mail"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="email"
@@ -43,6 +44,7 @@
               <input
                 type="password"
                 id="password"
+                v-model="form.password"
                 placeholder="*********"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="current-password"
@@ -85,6 +87,11 @@
                 </a>
               </div>
             </div>
+              <template v-if="errors.length > 0">
+                <div class="bg-red-300 text-white rounded-lg p-6">
+                    <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                </div>
+            </template>
           </form>
         </div>
       </div>
@@ -95,10 +102,60 @@
 <script>
 import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
+import { useUserStore } from '@/stores/user'
+import axios from 'axios'
 export default {
   setup() {
+    const userStore = useUserStore()
     return {
-      Trans
+      Trans,
+      userStore,
+    }
+  },
+  data() {
+    return {
+      form: {
+        email: '',
+        password: ''
+      },
+      errors: []
+    }
+  },
+  methods: {
+    async submitForm() {
+      this.errors = []
+
+      if (this.form.email === '') {
+        this.errors.push('Your email is missing!')
+      }
+      if (this.form.password === '') {
+        this.errors.push('Your password is missing')
+      }
+
+      if (this.errors.length === 0) {
+        await axios
+          .post('/api/login/', this.form)
+          .then(response => {
+            this.userStore.setToken(response.data)
+
+            axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access
+          })
+          .catch(error => {
+            console.log('error', error)
+            this.errors.push("The username or password is incorrect!")
+          })
+      }
+      if (this.errors.length === 0) {
+        await axios
+          .get('/api/user/')
+          .then(response => {
+            this.userStore.setUserInfo(response.data)
+            this.$router.push(this.Trans.i18nRoute({ name: 'home' }));
+          })
+          .catch(error => {
+            console.log('error',error)
+          })
+      }
     }
   }
 }

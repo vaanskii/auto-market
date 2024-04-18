@@ -13,7 +13,7 @@ def user(request):
     return JsonResponse({
         'id': request.user.id,
         'name': request.user.name,
-        'email': getattr(request.user),
+        'email': request.user.email,
         'mobile_number': mobile_number,
     })
 
