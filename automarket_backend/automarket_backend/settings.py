@@ -29,6 +29,22 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'account.User'
 
+WEBSITE_URL = 'http://127.0.0.1:8000'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://192.168.1.106:5173",
+    "http://192.168.1.107:5173",
+    "http://192.168.200.15:5173"
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://192.168.1.106:5173",
+    "http://192.168.1.107:5173",
+    "http://192.168.200.15:5173"
+]
+
 # Application definition
 
 INSTALLED_APPS = [

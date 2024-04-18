@@ -23,29 +23,52 @@
         </div>
         <div class="p-5 bg-[#E6E6E6] md:flex-1">
           <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Create account</h3>
-          <form action="#" class="flex flex-col space-y-5">
+          <form v-on:submit.prevent="submitForm" action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
               <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
               <input
                 type="email"
                 id="email"
                 autofocus
+                v-model="form.email"
                 placeholder="Enter your mail"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="email"
               />
             </div>
             <div class="flex flex-col space-y-1">
-              <label for="tel" class="text-sm font-semibold text-gray-500">Mobile number</label>
+              <label for="name" class="text-sm font-semibold text-gray-500">Name</label>
               <input
-                type="tel"
-                id="tel"
+                type="text"
+                id="name"
                 autofocus
-                placeholder="Mobile number"
+                v-model="form.name"
+                placeholder="Enter your name"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
-                autocomplete="tel"
+                autocomplete="email"
               />
             </div>
+            <!-- Mobile number and country code -->
+            <div class="group w-full">
+              <label for="tel" class="text-sm font-semibold text-gray-500">Mobile Number</label>
+              <div class="relative flex items-center">
+                <input
+                    type="tel"
+                    id="tel"
+                    autofocus
+                    v-model="form.mobile_number"
+                    placeholder="Mobile number"
+                    class="peer relative h-10 w-full rounded-md bg-gray-50 pl-32 pr-4 outline-none"
+                    autocomplete="tel"
+                    @input="restrictNumericInput"
+                />
+                <select v-model="form.country_code" id="country_code" class="absolute text-center h-10 w-28 rounded-l-sm text-sm bg-[#222] font-semibold text-white ">
+                    <option value="+995">Geo (+995)</option>
+                    <option value="+1">USA (+1)</option>
+                </select>
+              </div>
+            </div>
+
             <div class="flex flex-col space-y-1">
               <div class="flex items-center justify-between">
                 <label for="password" class="text-sm font-semibold text-gray-500">Password</label>
@@ -54,6 +77,7 @@
                 type="password"
                 id="password"
                 placeholder="*********"
+                v-model="form.password1"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="current-password"
               />
@@ -65,6 +89,7 @@
               <input
                 type="password"
                 id="password2"
+                v-model="form.password2"
                 placeholder="*********"
                 class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black"
                 autocomplete="current-password"
@@ -99,6 +124,11 @@
                 </a>
               </div>
             </div>
+            <template v-if="errors.length > 0">
+                <div class="bg-red-300 text-white rounded-lg p-6">
+                    <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                </div>
+            </template>
           </form>
         </div>
       </div>
@@ -109,10 +139,80 @@
 <script>
 import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
 export default {
   setup() {
+    const userStore = useUserStore()
     return {
-      Trans
+      Trans,
+      userStore
+    }
+  },
+  data() {
+    return {
+      form: {
+        email: '',
+        name: '',
+        mobile_number: '',
+        password1: '',
+        password2: '',
+        country_code: '+995'
+      },
+      errors: []
+    }
+  },
+  methods: {
+    submitForm() {
+      this.errors = []
+
+      this.form.country_code = this.form.country_code; 
+
+      if (this.form.email === '') {
+        this.errors.push('Your email is missing')
+      }
+      if (this.form.name === '') {
+        this.errors.push('Your name is missing')
+      }
+      if (this.form.mobile_number === '') {
+        this.errors.push('Your mobile number is missing')
+      }
+      if (this.form.password1 === '') {
+        this.errors.push('Password is missing')
+      }
+      if (this.form.password1 !== this.form.password2) {
+        this.errors.push('Passwords not matching!')
+      }
+
+      if (this.errors.length === 0) {
+        axios
+        .post('/api/signup/', this.form)
+        .then(response => {
+          if (response.data.message === 'success') {
+            
+            this.form.email = ''
+            this.form.name = ''
+            this.form.mobile_number = ''
+            this.form.password1 = ''
+            this.form.password2 = ''
+            this.form.mobile_number = ''
+          }else{
+            const errorMessage = JSON.parse(response.data.message);
+            for (const key in errorMessage) {
+              errorMessage[key].forEach(error => {
+                this.errors.push(error.message);
+              }); 
+            }
+          }
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    },
+    restrictNumericInput(event) {
+      this.form.mobile_number = this.form.mobile_number.replace(/\D/g, '');
     }
   }
 }

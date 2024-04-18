@@ -37,6 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     mobile_number = PhoneNumberField(blank=False, null=False, unique=True , default='')
     name = models.CharField(max_length=255, blank=True, default='')
+    country_code = models.CharField(max_length=10, default='')
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)

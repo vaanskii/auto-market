@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { M } from "vite/dist/node/types.d-aGj9QkWt";
 
 export const useUserStore = defineStore({
     id: "user",
@@ -12,6 +11,7 @@ export const useUserStore = defineStore({
             email: null,
             name: null,
             mobile_number: null,
+            country_code: null,
             access: null,
             refresh: null
         }
@@ -25,6 +25,7 @@ export const useUserStore = defineStore({
                 this.user.refresh = localStorage.getItem('user.refresh')
                 this.user.email = localStorage.getItem('user.email')
                 this.user.name = localStorage.getItem('user.name')
+                this.user.country_code = localStorage.getItem('user.country_code')
                 this.user.mobile_number = localStorage.getItem('user.mobile_number')
                 this.user.isAuthenticated = true
 
@@ -57,11 +58,13 @@ export const useUserStore = defineStore({
             this.user.name = user.name
             this.user.email = user.email
             this.user.mobile_number = user.mobile_number
+            this.user.country_code = user.country_code
 
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.username', this.user.username)
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.mobile_number', this.user.mobile_number)
+            localStorage.setItem('user.country_code', this.user.country_code)
 
         },
         removeToken() {
@@ -72,6 +75,7 @@ export const useUserStore = defineStore({
             this.user.email = null
             this.user.mobile_number = null
             this.user.isAuthenticated = false
+            this.user.country_code = null
 
             localStorage.setItem('user.access', '')
             localStorage.setItem('user.refresh', '')
@@ -79,6 +83,7 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.name', '')
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.mobile_number', '')
+            localStorage.setItem('user.country_code', '')
         },
     }
 })
