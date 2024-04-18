@@ -55,7 +55,7 @@
             </svg>
           <button class="py-2 px-3 block uppercase">{{ $t('nav.add') }}</button>
         </button>
-        <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userIsActivated"/>
+        <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userStore.user.isAuthenticated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
           <button type="button" @click="toggleDropdown" class="dropdown-toggle mr-4 ml-2 py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
@@ -91,20 +91,29 @@
             <LanguageSwitcher @click="menudropdownOpen = false"/>
             <hr class="h-[1.5px] my-8 bg-[#222] border-0">
           </div>
-        <router-link :to="Trans.i18nRoute({ name: 'login' })" class="py-2 px-3 md:block hidden uppercase w-[85px] hover:bg-gray-100 hover:text-black">{{ $t('nav.login') }}</router-link>
+        <div v-if="!userStore.user.isAuthenticated">
+          <router-link :to="Trans.i18nRoute({ name: 'login' })" class="py-2 px-3 md:block hidden uppercase w-[85px] hover:bg-gray-100 hover:text-black">
+            {{ $t('nav.login') }}
+          </router-link>
+        </div>
+        <div v-else>
+          <button @click="logout">
+            LOGOUT
+          </button>
+        </div>
       </div>
     </div>
   </nav>
       <!-- Bottom Navigation -->
   <nav class="bg-white text-black fixed bottom-0 w-full z-10">
-    <div :class="{'justify-evenly': !userIsActivated, 'justify-around ml-2': userIsActivated}" class="flex md:hidden items-center w-full p-2">
+    <div :class="{'justify-evenly': !userStore.user.isAuthenticated, 'justify-around ml-2': userStore.user.isAuthenticated}" class="flex md:hidden items-center w-full p-2">
       <router-link :to="Trans.i18nRoute({ name: 'home' })" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
         </svg>
         <p class="uppercase text-[10px]">home</p>
       </router-link>
-      <router-link to="#" v-if="userIsActivated" class="flex flex-col items-center">
+      <router-link to="#" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
@@ -117,18 +126,28 @@
           </svg>
         </router-link>
       </div>
-      <router-link to="#" v-if="userIsActivated" class="flex flex-col items-center">
+      <router-link to="#" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
         </svg>
         <p class="uppercase text-[10px]">settings</p>
       </router-link>
-      <router-link :to="Trans.i18nRoute({ name: 'login' })" class="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        </svg>
-        <p class="text-[10px] uppercase">login</p>
-      </router-link>
+      <div v-if="!userStore.user.isAuthenticated">
+        <router-link :to="Trans.i18nRoute({ name: 'login' })" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <p class="text-[10px] uppercase">login</p>
+        </router-link>
+      </div>
+      <div v-else>
+        <router-link to="#" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <p class="text-[10px] uppercase">Profile</p>
+        </router-link>
+      </div>
     </div>
   </nav>
 </template>
@@ -139,19 +158,21 @@ import { ChevronDownIcon, ChevronUpIcon, Bars3BottomRightIcon, XMarkIcon, Docume
 import { RouterLink } from 'vue-router'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Trans from '@/i18n/translation'
+import { useUserStore } from '@/stores/user'
 
 export default {
   setup() {
+    const userStore = useUserStore()
     return {
       Trans,
-      searchQuery: ''
+      searchQuery: '',
+      userStore
     }
   },
   data() {
     return {
       dropdownOpen: false,
       menudropdownOpen: false,
-      userIsActivated: true,
       modalOpen: false,
     };
   },
@@ -165,6 +186,10 @@ export default {
     LanguageSwitcher
   },
   methods: {
+    logout() {
+      this.userStore.removeToken()
+      this.$router.push(this.Trans.i18nRoute({ name: 'login' }));
+    },
     submitSearch() {
       if (this.searchQuery.trim() !== '') {
         this.$router.push(this.Trans.i18nRoute({ name: 'search', query: { q: this.searchQuery }}));
@@ -184,7 +209,7 @@ export default {
       this.modalOpen = false
     },
     handleAddClick() {
-      if(!this.userIsActivated) {
+      if(!this.userStore.user.isAuthenticated) {
         this.openModal()
       }else {
         this.$router.push(this.Trans.i18nRoute({ name: 'add' }));

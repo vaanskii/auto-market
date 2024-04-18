@@ -50,14 +50,6 @@
                 autocomplete="current-password"
               />
             </div>
-            <div class="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="remember"
-                class="w-4 h-4 transition duration-300 rounded  appearance-none border-[1px] border-black checked:bg-black"
-              />
-              <label for="remember" class="text-sm font-semibold text-gray-500 cursor-pointer">Remember me</label>
-            </div>
             <div>
                 <button 
                     class="btn2 w-full px-10 py-5 text-lg relative transition-colors border border-black rounded-md uppercase font-semibold tracking-wider leading-none overflow-hidden hover:text-white" 

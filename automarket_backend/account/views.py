@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .forms import SignupForm
 from django.http import JsonResponse
-from rest_framework import status
 
 @api_view(['GET'])
 def user(request):
@@ -15,6 +14,7 @@ def user(request):
         'name': request.user.name,
         'email': request.user.email,
         'mobile_number': mobile_number,
+        'country_code': request.user.country_code
     })
 
 
@@ -35,7 +35,8 @@ def signup(request):
         'name': data.get('name'),
         'mobile_number': mobile_number,
         'password1': data.get('password1'),
-        'password2': data.get('password2')
+        'password2': data.get('password2'),
+        'country_code': country_code
     })
 
     if form.is_valid():
