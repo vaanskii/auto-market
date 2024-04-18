@@ -62,7 +62,7 @@
                     autocomplete="tel"
                     @input="restrictNumericInput"
                 />
-                <select v-model="form.country_code" id="country_code" class="absolute text-center h-10 w-28 rounded-l-sm text-sm bg-[#222] font-semibold text-white ">
+                <select v-model="form.country_code" id="country_code" class="absolute text-center h-10 w-28 outline-none rounded-l-sm text-sm bg-[#222] font-semibold text-white ">
                     <option value="+995">Geo (+995)</option>
                     <option value="+1">USA (+1)</option>
                 </select>
