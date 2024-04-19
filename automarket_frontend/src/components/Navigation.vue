@@ -97,7 +97,10 @@
           </router-link>
         </div>
         <div v-else>
-          <button @click="logout">
+          <button 
+                @click="handleLogout" 
+                class="py-2 px-3 uppercase w-[85px] hover:bg-gray-100 hover:text-black"
+                >
             LOGOUT
           </button>
         </div>
@@ -189,6 +192,10 @@ export default {
     logout() {
       this.userStore.removeToken()
       this.$router.push(this.Trans.i18nRoute({ name: 'login' }));
+    },
+    handleLogout() {
+        this.logout();
+        this.menudropdownOpen = false;
     },
     submitSearch() {
       if (this.searchQuery.trim() !== '') {
