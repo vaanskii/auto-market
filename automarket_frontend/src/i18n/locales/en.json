@@ -8,7 +8,8 @@
     "language": "languages",
     "add": "add",
     "login": "login",
-    "search": "Search"
+    "search": "Search",
+    "logout": "logout"
   },
 
   "main-header": {

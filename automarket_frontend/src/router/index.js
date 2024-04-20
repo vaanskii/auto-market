@@ -7,6 +7,8 @@ import Signup from '../views/Signup.vue'
 import Add from '../views/Add.vue'
 import Blogs from '../views/BlogsView.vue'
 import Search from '../views/SearchView.vue'
+import Settings from '../views/SettingsView.vue'
+import Profile from '../views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +42,16 @@ const router = createRouter({
           path: 'add',
           name: 'add',
           component: Add
+        },
+        {
+          path: 'settings',
+          name: 'settings',
+          component: Settings
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: Profile
         },
         {
           path: 'blogs',

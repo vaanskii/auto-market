@@ -4,18 +4,18 @@
     <div class="container mx-auto px-4 md:flex items-center gap-6">
       <div class="flex justify-between w-full">
       <!-- logo-mobile-menu | navigation bar -->
-        <div class="flex items-center justify-evenly md:w-auto md:h-6 w-full">
-          <router-link :to="Trans.i18nRoute({ name: 'home' })" class="py-5 px-2 text-black hidden  md:block font-bold uppercase">
-            <img src="/car.png" alt="car" class="w-12 h-12">
+        <div class="flex items-center justify-evenly md:w-auto md:h-6 h-10 w-full">
+          <router-link :to="Trans.i18nRoute({ name: 'home' })" class="py-5 px-2 text-black font-bold uppercase">
+            <img src="/car.png" alt="car" class="md:w-16 md:h-12 w-12 h-10">
           </router-link>
         <!-- Search input -->
-        <div class="flex justify-center items-center lg:w-[500px] w-[300px]">
-          <form v-on:submit.prevent="submitSearch" class="md:mx-auto md:mt-[2px] md:ml-14 w-[90%]">   
+        <div class="flex justify-center items-center mr-12 w-full">
+          <form v-on:submit.prevent="submitSearch" class="md:mx-auto md:mt-[2px]">   
               <div class="relative">
                   <input 
                     type="search" 
                     id="default-search" 
-                    class="w-full p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" 
+                    class="w-full lg:w-[400px] p-4 outline-none h-10 ps-7 text-sm text-gray-900 border border-gray-300 hover:border-gray-400 rounded-lg hover:placeholder-gray-400" 
                     :placeholder="$t('nav.search')" 
                     required 
                     v-model="searchQuery"
@@ -31,7 +31,7 @@
 
         </div>
         <!--Mobile menu-->
-        <div class="md:hidden flex items-center">
+        <div class="md:hidden flex absolute right-5">
             <button type="button" @click="toggleMenuDropdown" class="mobile-menu-button">
               <div class="flex items-center">
                 <BurgerIcon 
@@ -49,7 +49,7 @@
       </div>
       <!-- Pages -->
       <div :class="{ 'hidden': !menudropdownOpen}" class="bg-white md:h-auto h-screen md:flex md:flex-row flex-col items-center justify-start md:space-x-1 md:mt-0 md:ml-0 ml-3 mt-10 md:pb-0 navigation-menu" :style="{ 'z-index': menudropdownOpen ? '10000' : 'auto' }">
-        <button @click="handleAddClick" type="button" class="bg-black md:flex hidden text-white items-center justify-evenly mr-6 rounded-lg w-[150px]">
+        <button @click="handleAddClick" type="button" class="bg-black md:flex hidden text-white items-center justify-evenly mr-8 rounded-lg w-[150px]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
@@ -58,7 +58,7 @@
         <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userStore.user.isAuthenticated"/>
         <!--Dropdown toggle-->
         <div class="relative md:block hidden">
-          <button type="button" @click="toggleDropdown" class="dropdown-toggle mr-4 ml-2 py-2 px-3 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
+          <button type="button" @click="toggleDropdown" class="dropdown-toggle mr-6 py-2 px-2 hover:bg-gray-100 hover:text-black flex items-center gap-2 rounded">
             <span class="pointer-events-none select-none uppercase w-[100px]">{{ $t('nav.language') }}</span>
             <div class="pointer-events-none select-none flex items-center">
               <ChevronDownIcon
@@ -90,20 +90,45 @@
             <h1 class="uppercase mb-5">languages</h1>
             <LanguageSwitcher @click="menudropdownOpen = false"/>
             <hr class="h-[1.5px] my-8 bg-[#222] border-0">
-          </div>
+            <button v-if="userStore.user.isAuthenticated" @click="handleLogout" class="uppercase bg-black text-white px-4 py-2 rounded-md">{{ $t('nav.logout') }}</button>
+        </div>
         <div v-if="!userStore.user.isAuthenticated">
           <router-link :to="Trans.i18nRoute({ name: 'login' })" class="py-2 px-3 md:block hidden uppercase w-[85px] hover:bg-gray-100 hover:text-black">
             {{ $t('nav.login') }}
           </router-link>
         </div>
-        <div v-else>
-          <button 
-                @click="handleLogout" 
-                class="py-2 px-3 uppercase w-[85px] hover:bg-gray-100 hover:text-black"
-                >
-            LOGOUT
-          </button>
+        <!-- Profile view dropdown -->
+        <div 
+            v-if="userStore.user.isAuthenticated" 
+            @click="handleUserDropDown"
+          >
+          <div class="w-10 h-10 md:flex hidden cursor-pointer justify-center items-center border border-black rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="relative">
+            <div v-if="userDropdown" class="w-80 h-52 bg-[#E6E6E6] shadow-2xl absolute -right-0 rounded-md mt-4" @click.stop>
+              <p class="text-center uppercase py-2 hover:border-black hover:border-b">{{ userStore.user.name }}</p>
+              <p class="text-center uppercase py-2 hover:border-black hover:border-b">{{ userStore.user.email }}</p>
+              <!-- Profile view -->
+              <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'profile' })" v-if="userStore.user.isAuthenticated" class="text-center">
+                <p class="uppercase py-2 hover:border-black hover:border-b">profile</p>
+              </router-link>
+              <!-- Settings view -->
+              <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'settings' })" v-if="userStore.user.isAuthenticated" class="text-center">
+                <p class="uppercase py-2 hover:border-black hover:border-b">settings</p>
+              </router-link>
+              <button 
+                    @click="handleLogout" 
+                    class="py-2 px-3 w-full absolute bottom-0 bg-[#222] rounded-t-lg text-white uppercase hover:bg-black"
+                    >
+                {{ $t('nav.logout') }}
+              </button>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </nav>
@@ -123,13 +148,15 @@
         <p class="uppercase text-[10px]">saved</p>
       </router-link>
       <div class="relative">
-        <router-link :to="Trans.i18nRoute({ name: 'add' })" class="absolute -top-10 left-1/2 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
+        <button @click="handleAddClick" class="absolute -top-10 left-1 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-        </router-link>
+
+        </button>
+        <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userStore.user.isAuthenticated"/>
       </div>
-      <router-link to="#" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
+      <router-link :to="Trans.i18nRoute({ name: 'settings' })" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
         </svg>
@@ -144,7 +171,7 @@
         </router-link>
       </div>
       <div v-else>
-        <router-link to="#" class="flex flex-col items-center">
+        <router-link :to="Trans.i18nRoute({ name: 'profile' })" class="flex flex-col items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
@@ -162,14 +189,29 @@ import { RouterLink } from 'vue-router'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Trans from '@/i18n/translation'
 import { useUserStore } from '@/stores/user'
+import { ref, onMounted } from 'vue';
 
 export default {
   setup() {
+    const userDropdown = ref(false);
+    const handleUserDropDown = () => {
+      userDropdown.value = !userDropdown.value;
+    };
+    const closeDropdown = (event) => {
+      if (!event.target.closest('.w-10') && !event.target.closest('.w-52')) {
+        userDropdown.value = false;
+      }
+    };
+    onMounted(() => {
+      window.addEventListener('click', closeDropdown);
+    });
     const userStore = useUserStore()
     return {
       Trans,
       searchQuery: '',
-      userStore
+      userStore,
+      userDropdown,
+      handleUserDropDown
     }
   },
   data() {
@@ -189,6 +231,9 @@ export default {
     LanguageSwitcher
   },
   methods: {
+    handleUserDropDown() {
+      this.userDropdown = !this.userDropdown
+    },
     logout() {
       this.userStore.removeToken()
       this.$router.push(this.Trans.i18nRoute({ name: 'login' }));
