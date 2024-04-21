@@ -19,7 +19,7 @@ class ImageModel(models.Model):
 
 class Car(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    manufacturer = models.CharField(max_length=100, choices=MANUFACTURER_CHOICES[0], blank=False, null=False)
+    manufacturer = models.CharField(max_length=100, choices=MANUFACTURER_CHOICES, blank=False, null=False)
     car_model = models.CharField(max_length=100, choices=CAR_MODELS, blank=False, null=False)
     types = models.CharField(max_length=20, default='', choices=TYPE, blank=False, null=False)
     categories = models.CharField(max_length=30, default='', choices=CATEGORIES, blank=False, null=False)

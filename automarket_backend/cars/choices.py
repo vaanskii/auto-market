@@ -95,7 +95,7 @@ MANUFACTURER_CHOICES = [
     (TOYOTA, 'Toyota'),
     (VOLKSWAGEN, 'Volkswagen'),
     (VOLVO, 'Volvo'),
-],
+]
 
 # CAR MODELS
 
