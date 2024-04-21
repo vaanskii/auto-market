@@ -538,11 +538,11 @@ TEN_CYLINDERS = 10
 TWELVE_CYLINDERS = 12
 
 CYLINDERS = [
-    (FOUR_CYLINDERS, 4),
-    (SIX_CYLINDERS, 6),
-    (EIGHT_CYLINDERS, 8),
-    (TEN_CYLINDERS, 10),
-    (TWELVE_CYLINDERS, 12),
+    (str(FOUR_CYLINDERS), '4'),
+    (str(SIX_CYLINDERS), '6'),
+    (str(EIGHT_CYLINDERS), '8'),
+    (str(TEN_CYLINDERS), '10'),
+    (str(TWELVE_CYLINDERS), '12'),
 ]
 
 #DOORS
@@ -553,10 +553,10 @@ FIVE_DOORS = 5
 MORE = 'More'
 
 DOORS = [
-    (TWO_DOORS, 2),
-    (FOUR_DOORS, 4),
-    (FIVE_DOORS, 5),
-    (MORE, 'More')
+    (str(TWO_DOORS), '2'),
+    (str(FOUR_DOORS), '4'),
+    (str(FIVE_DOORS), '5'),
+    (str(MORE), 'More')
 ]
 
 #DRIVE_WHEELS
@@ -598,19 +598,20 @@ ELEVEN_AIRBAGS = 11
 TWELVE_AIRBAGS = 12
 
 AIRBAG_OPTIONS = [
-    (ONE_AIRBAG, '1'),
-    (TWO_AIRBAGS, '2'),
-    (THREE_AIRBAGS, '3'),
-    (FOUR_AIRBAGS, '4'),
-    (FIVE_AIRBAGS, '5'),
-    (SIX_AIRBAGS, '6'),
-    (SEVEN_AIRBAGS, '7'),
-    (EIGHT_AIRBAGS, '8'),
-    (NINE_AIRBAGS, '9'),
-    (TEN_AIRBAGS, '10'),
-    (ELEVEN_AIRBAGS, '11'),
-    (TWELVE_AIRBAGS, '12'),
+    (str(ONE_AIRBAG), '1'),
+    (str(TWO_AIRBAGS), '2'),
+    (str(THREE_AIRBAGS), '3'),
+    (str(FOUR_AIRBAGS), '4'),
+    (str(FIVE_AIRBAGS), '5'),
+    (str(SIX_AIRBAGS), '6'),
+    (str(SEVEN_AIRBAGS), '7'),
+    (str(EIGHT_AIRBAGS), '8'),
+    (str(NINE_AIRBAGS), '9'),
+    (str(TEN_AIRBAGS), '10'),
+    (str(ELEVEN_AIRBAGS), '11'),
+    (str(TWELVE_AIRBAGS), '12'),
 ]
+
 
 #CAR COLORS
 BLACK = 'Black'
