@@ -16,10 +16,11 @@ from .serializers import ChoiceSerializer
 class ChoicesAPIView(APIView):
     authentication_classes = []
     permission_classes = [AllowAny]
+
     def get(self, request, *args, **kwargs):
         choices_data = {
             'manufacturer': [choice[0] for choice in MANUFACTURER_CHOICES],
-            'car_model': [model[0] for model in CAR_MODELS],
+            'car_model': {manufacturer: [model_name for model_name, _ in models] for manufacturer, models in CAR_MODELS},
             'types': [choice[0] for choice in TYPE],
             'categories': [choice[0] for choice in CATEGORIES],
             'location': [choice[0] for choice in LOCATION],
@@ -37,7 +38,7 @@ class ChoicesAPIView(APIView):
         serializer = ChoiceSerializer(data=choices_data)
         serializer.is_valid()
         return Response(serializer.data)
-    
+
 class CreateCarsAPIView(APIView):
     def post(self, request, format=None):
         form = CarForm(request.POST)
