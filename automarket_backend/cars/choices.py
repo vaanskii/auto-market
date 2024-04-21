@@ -309,6 +309,12 @@ CAR_MODELS = [
         ('720S', '720S'),
         ('GT', 'GT'),
     ]),
+    (MERCEDES_BENZ, [
+        ('A-CLASS', 'A-CLASS'),
+        ('C-CLASS', 'C-CLASS'),
+        ('CLA-COUPE', 'CLA-COUPE'),
+        ('E-CLASS', 'E-CLASS'),
+    ]),
     (MINI, [
         ('Clubman', 'Clubman'),
         ('Cooper', 'Cooper'),

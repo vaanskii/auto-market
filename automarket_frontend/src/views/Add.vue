@@ -1,7 +1,7 @@
 <template>
     <div class="md:pt-40 pt-14">
         <h1 class="text-center mb-12 mt-10 text-4xl uppercase">add car</h1>
-        <form action="#" class="flex md:flex-col flex-col space-y-5">
+        <form @submit.prevent="submitCarForm" action="#" class="flex md:flex-col flex-col space-y-5">
             <!-- Main specifications -->
             <div class="flex items-center justify-center">
                 <div class="p-4 md:mt-0 mt-20 w-[800px]">
@@ -71,12 +71,12 @@
                                 <!-- YEAR -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="year" class="text-sm font-semibold text-gray-500">Year</label>
-                                    <input placeholder="Enter year" type="number" id="year" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="year" placeholder="Enter year" type="number" id="year" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                                 <!-- PRICE -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="price" class="text-sm font-semibold text-gray-500">Price</label>
-                                    <input placeholder="Enter year" type="number" id="price" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="price" placeholder="Enter year" type="number" id="price" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                             </div>
                         </div>
@@ -108,12 +108,12 @@
                                 <!-- ENGINE VOLUME -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="enginev" class="text-sm font-semibold text-gray-500">Engine volume</label>
-                                    <input placeholder="Engine volume" type="number" id="enginev" class="placeholder-gray-500 border uppercase text-sm border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="engineVolume" placeholder="Engine volume" type="number" id="enginev" class="placeholder-gray-500 border uppercase text-sm border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                                 <!-- MILAGE -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="milage" class="text-sm font-semibold text-gray-500">Milage km</label>
-                                    <input placeholder="Enter milage" type="number" id="milage" class="placeholder-gray-500 border text-sm uppercase border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="milage" placeholder="Enter milage" type="number" id="milage" class="placeholder-gray-500 border text-sm uppercase border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                                 <!-- FUEL TYPE -->
                                 <div class="flex flex-col space-y-1">
@@ -236,7 +236,7 @@
                                 </div>
                             </div>
                             <div id="preview" v-if="url && url.length > 0" class="w-full h-auto grid md:grid-cols-3 grid-cols-2 lg:grid-cols-5 gap-x-6">
-                                <img v-for="(imageUrl, index) in url" :key="index" :src="imageUrl" class="w-full md:h-auto h-[80%] border-2 border-black" @click="handleImageClick(imageUrl)">
+                                <img v-for="(imageUrl, index) in url" :key="index" :src="imageUrl" class="w-full md:h-32 h-[80%] border-2 border-black" @click="handleImageClick(imageUrl)">
                             
                             </div>
 
@@ -284,7 +284,7 @@
                             <!-- Description -->
                             <div class="mt-8">
                                 <label for="description" class="text-gray-600 ml-2 mb-4 text-lg uppercase font-bold mt-10">DESCRIPTION</label>
-                                <textarea placeholder="Write description" type="text" id="description" class="placeholder-gray-500 mt-4 border min-h-52 w-full border-gray-300 cursor-pointer text-black bg-[#E6E6E6] shadow-2xl px-4 rounded-lg py-2 outline-none" style="resize: none;"></textarea>
+                                <textarea v-model="description" placeholder="Write description" type="text" id="description" class="placeholder-gray-500 mt-4 border min-h-52 w-full border-gray-300 cursor-pointer text-black bg-[#E6E6E6] shadow-2xl px-4 rounded-lg py-2 outline-none" style="resize: none;"></textarea>
                             </div>
                             <div>
                                 <button 
@@ -315,15 +315,8 @@ export default {
   },
   data() {
     return {
-      colors: ['black', 'blue', 'red', 'white', 'green', 'brown', 'yellow', 'purple', 'orange', 'gray'],
-      
-      materialColors: ['black', 'red', 'white', 'brown', 'gray'],
-      
-      materials: ['alcantara', 'artificial', 'combined', 'leather', 'fabric'],
-      
       url: null,
       selectedImage: null,
-
       selectedManufacturer: 'Choose manufacturer',
       selectedCarModel: 'Choose model',
       selectedCategories: 'Choose category',
@@ -339,6 +332,11 @@ export default {
       carColors: null,
       interior: null,
       interiorColor: null,
+      year: null,
+      price: null,
+      milage: null,
+      description: null,
+      engineVolume: null,
       choices: {
         manufacturer: [],
         car_model: {},
@@ -391,6 +389,40 @@ export default {
             this.carModels = this.choices.car_model[this.selectedManufacturer]
         }
     },
+    submitCarForm() {
+        let formData = new FormData()
+        formData.append('manufacturer', this.selectedManufacturer)
+        formData.append('car_model', this.selectedCarModel)
+        formData.append('types', this.selectedType)
+        formData.append('categories', this.selectedCategories)
+        formData.append('price', this.price)
+        formData.append('year', this.year)
+        formData.append('location', this.selectedLocation)
+        formData.append('engine_volume', this.engineVolume)
+        formData.append('milage', this.milage)
+        formData.append('fuel_type', this.selectedFuelTypes)
+        formData.append('transmission', this.selectedTransmission)
+        formData.append('cylinders', this.selectedCylinders)
+        formData.append('doors', this.selectedDoors)
+        formData.append('drive_wheels', this.selectedDriveWheels)
+        formData.append('wheel', this.selectedWheel)
+        formData.append('airbags', this.selectedAirbags)
+        formData.append('car_colors', this.carColors)
+        formData.append('interior', this.interior)
+        formData.append('interior_color', this.interiorColor)
+        formData.append('description', this.description)
+        formData.append('image', this.$refs.file.files[0])
+
+        axios
+            .post('/api/create/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => {
+                console.log(response.data)
+            })
+    },
     onFileChange(e) {
         const files = e.target.files;
         const urls = [];
@@ -402,7 +434,6 @@ export default {
         this.url = urls;
     },
     handleImageClick(imageUrl) {
-        // Set the clicked image as the selected image
         this.selectedImage = imageUrl;
     },
 
@@ -455,13 +486,16 @@ export default {
 
     handleMaterialClick(material) {
         this.interior = material;
+        console.log('selected material: ', material)
     },
 
     handleMaterialColorClick(color) {
         this.interiorColor = color;
+        console.log('selected interior color: ', color)
     },
     handleColorClick(color) {
         this.carColors = color;
+        console.log('selected car color: ', color)
     },
   }
 }

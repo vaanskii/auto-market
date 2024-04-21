@@ -42,6 +42,7 @@ class Car(models.Model):
     airbags = models.CharField(max_length=50, choices=AIRBAG_OPTIONS, default='1', blank=True, null=True)
 
     images = models.ManyToManyField(ImageModel, blank=True)
+    main_image = models.ForeignKey(ImageModel, on_delete=models.SET_NULL, null=True, blank=True, related_name='main_image_for_car')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name='cars', on_delete=models.CASCADE)
 
