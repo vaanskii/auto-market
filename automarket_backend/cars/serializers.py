@@ -34,4 +34,3 @@ class ChoiceSerializer(serializers.Serializer):
     car_colors = serializers.ChoiceField(choices=CAR_COLORS) 
     interior = serializers.ChoiceField(choices=INTERIOR_MATERIAL) 
     interior_color = serializers.ChoiceField(choices=INTERIOR_COLORS)
-    interior_color = serializers.ChoiceField(choices=INTERIOR_COLORS)

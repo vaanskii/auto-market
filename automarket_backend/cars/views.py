@@ -1,8 +1,39 @@
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from django.http import JsonResponse
 from .forms import ImageModelForm, CarForm
-from .serializers import CarSerializer
+from .serializers import CarSerializer, ChoiceSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from .serializers import ChoiceSerializer
+from .choices import (MANUFACTURER_CHOICES, CAR_MODELS, TYPE, CATEGORIES, LOCATION, FUEL_TYPES, TRANSMISSION_TYPES, CYLINDERS, DOORS, 
+                      DRIVE_WHEELS, WHEEL, AIRBAG_OPTIONS, CAR_COLORS, INTERIOR_MATERIAL, INTERIOR_COLORS)
 
+class ChoicesAPIView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    def get(self, request, *args, **kwargs):
+        choices_data = {
+            'manufacturer': [choice[0] for choice in MANUFACTURER_CHOICES],
+            'car_model': [model[0] for model in CAR_MODELS],
+            'types': [choice[0] for choice in TYPE],
+            'categories': [choice[0] for choice in CATEGORIES],
+            'location': [choice[0] for choice in LOCATION],
+            'fuel_type': [choice[0] for choice in FUEL_TYPES],
+            'transmission': [choice[0] for choice in TRANSMISSION_TYPES],
+            'cylinders': [choice[0] for choice in CYLINDERS],
+            'doors': [choice[0] for choice in DOORS],
+            'drive_wheels': [choice[0] for choice in DRIVE_WHEELS],
+            'wheel': [choice[0] for choice in WHEEL],
+            'airbags': [choice[0] for choice in AIRBAG_OPTIONS],
+            'car_colors': [choice[0] for choice in CAR_COLORS],
+            'interior': [choice[0] for choice in INTERIOR_MATERIAL],
+            'interior_color': [choice[0] for choice in INTERIOR_COLORS]
+        }
+        serializer = ChoiceSerializer(data=choices_data)
+        serializer.is_valid()
+        return Response(serializer.data)
 
 @api_view(['POST'])
 def create_cars(request):

@@ -11,9 +11,14 @@
                             <div class="grid md:grid-cols-3 gird-cols-1 gap-4">
                                 <div class="flex flex-col space-y-1">
                                     <label for="manufacturer" class="text-sm font-semibold text-gray-500">Manufacturer</label>
-                                    <select id="manufacturer" class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black">
-                                        <option value="">BMW</option>
-                                        <option value="">MERCEDES</option>
+                                    <select v-model="selectedManufacturer" id="manufacturer" class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black">
+                                        <option 
+                                        v-for="(manufacturerName, index) in choices.manufacturer"
+                                        :key="index"
+                                        :value="manufacturerName"
+                                        >
+                                            {{ manufacturerName }}
+                                        </option>
                                     </select>
                                 </div>
 
@@ -185,9 +190,9 @@
                                 </div>
                             <hr class="mt-[30px] text-black bg-black h-0.5" />
                             <!-- Description -->
-                            <div>
-                                <label for="description" class="text-sm font-semibold text-gray-500">DESCRIPTION</label>
-                                <textarea placeholder="Write description" type="text" id="description" class="placeholder-gray-500 border min-h-52 w-full border-gray-300 cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" style="resize: none;"></textarea>
+                            <div class="mt-8">
+                                <label for="description" class="text-gray-600 ml-2 mb-4 text-lg uppercase font-bold mt-10">DESCRIPTION</label>
+                                <textarea placeholder="Write description" type="text" id="description" class="placeholder-gray-500 mt-4 border min-h-52 w-full border-gray-300 cursor-pointer text-black bg-[#E6E6E6] shadow-2xl px-4 rounded-lg py-2 outline-none" style="resize: none;"></textarea>
                             </div>
                             <div>
                                 <button 
@@ -209,6 +214,7 @@
 <script>
 import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
+import axios from 'axios';
 export default {
   setup() {
     return {
@@ -225,7 +231,14 @@ export default {
       selectedMaterial: null,
       url: null,
       selectedImage: null,
+      selectedManufacturer: null,
+      choices: {
+        manufacturer: []
+      }
     };
+  },
+  created() {
+    this.fetchChoices()
   },
   computed: {
         mainImage() {
@@ -233,6 +246,17 @@ export default {
         }
     },
   methods: {
+    fetchChoices() {
+        axios
+            .get('/api/choices')
+            .then(response => {
+                console.log(response.data)
+                this.choices = response.data
+            })
+            .catch(error => {
+                console.log('error: ',error)
+            })
+    },
     onFileChange(e) {
         const files = e.target.files;
         const urls = [];
