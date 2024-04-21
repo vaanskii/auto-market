@@ -64,4 +64,7 @@ class CreateCarsAPIView(APIView):
 
             return Response(serializer.data)
         else:
-            return Response({'error': 'add something here later!...'}, status=status.HTTP_400_BAD_REQUEST)
+            errors = form.errors.as_json()
+            if image_form.errors:
+                errors += image_form.errors.as_json()
+            return Response({'error': 'Failed to create car entry.', 'details': errors})
