@@ -12,6 +12,8 @@
                                 <div class="flex flex-col space-y-1">
                                     <label for="manufacturer" class="text-sm font-semibold text-gray-500">Manufacturer</label>
                                     <select id="manufacturer" class="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:ring-1 focus:outline-none focus:ring-black">
+                                        <option value="">BMW</option>
+                                        <option value="">MERCEDES</option>
                                     </select>
                                 </div>
 
@@ -182,7 +184,11 @@
                                     </div>
                                 </div>
                             <hr class="mt-[30px] text-black bg-black h-0.5" />
-                                
+                            <!-- Description -->
+                            <div>
+                                <label for="description" class="text-sm font-semibold text-gray-500">DESCRIPTION</label>
+                                <textarea placeholder="Write description" type="text" id="description" class="placeholder-gray-500 border min-h-52 w-full border-gray-300 cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" style="resize: none;"></textarea>
+                            </div>
                             <div>
                                 <button 
                                     class="btn2 w-full mt-20 px-10 py-5 text-lg relative transition-colors border border-black rounded-md uppercase font-semibold tracking-wider leading-none overflow-hidden hover:text-white" 
