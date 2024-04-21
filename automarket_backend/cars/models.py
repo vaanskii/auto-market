@@ -1,10 +1,14 @@
-from django.db import models
 import uuid
-from .choices import (MANUFACTURER_CHOICES, CAR_MODELS, TYPE, CATEGORIES, LOCATION, FUEL_TYPES, TRANSMISSION_TYPES, CYLINDERS, DOORS, 
-                      DRIVE_WHEELS, WHEEL, AIRBAG_OPTIONS, CAR_COLORS, INTERIOR_MATERIAL, INTERIOR_COLORS)
-from account.models import User
+
+from .choices import (MANUFACTURER_CHOICES, CAR_MODELS, TYPE, CATEGORIES, LOCATION, FUEL_TYPES,
+TRANSMISSION_TYPES, CYLINDERS, DOORS, DRIVE_WHEELS, WHEEL, AIRBAG_OPTIONS, CAR_COLORS, INTERIOR_MATERIAL, INTERIOR_COLORS)
+
+from django.db import models
 from django.conf import settings
 from django.utils.timezone import now
+
+from account.models import User
+
 
 class ImageModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

@@ -1,14 +1,17 @@
-from rest_framework.decorators import api_view
+from .choices import (MANUFACTURER_CHOICES, CAR_MODELS, TYPE, CATEGORIES, LOCATION, 
+FUEL_TYPES, TRANSMISSION_TYPES, CYLINDERS, DOORS, DRIVE_WHEELS, WHEEL, 
+AIRBAG_OPTIONS, CAR_COLORS, INTERIOR_MATERIAL, INTERIOR_COLORS)
+
 from rest_framework.views import APIView
-from django.http import JsonResponse
-from .forms import ImageModelForm, CarForm
-from .serializers import CarSerializer, ChoiceSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework import status
+
+from .forms import ImageModelForm, CarForm
+from .serializers import CarSerializer, ChoiceSerializer
 from .serializers import ChoiceSerializer
-from .choices import (MANUFACTURER_CHOICES, CAR_MODELS, TYPE, CATEGORIES, LOCATION, FUEL_TYPES, TRANSMISSION_TYPES, CYLINDERS, DOORS, 
-                      DRIVE_WHEELS, WHEEL, AIRBAG_OPTIONS, CAR_COLORS, INTERIOR_MATERIAL, INTERIOR_COLORS)
+
 
 class ChoicesAPIView(APIView):
     authentication_classes = []
@@ -34,31 +37,31 @@ class ChoicesAPIView(APIView):
         serializer = ChoiceSerializer(data=choices_data)
         serializer.is_valid()
         return Response(serializer.data)
+    
+class CreateCarsAPIView(APIView):
+    def post(self, request, format=None):
+        form = CarForm(request.POST)
+        image = None
+        image_form = ImageModelForm(request.POST, request.FILES)
 
-@api_view(['POST'])
-def create_cars(request):
-    form = CarForm(request.POST)
-    image = None
-    image_form = ImageModelForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            image = image_form.save(commit=False)
+            image.created_by = request.user
+            image.save()
 
-    if image_form.is_valid():
-        image = image_form.save(commit=False)
-        image.created_by = request.user
-        image.save()
+        if form.is_valid():
+            cars = form.save(commit=False)
+            cars.created_by = request.user
+            cars.save()
 
-    if form.is_valid():
-        cars = form.save(commit=False)
-        cars.created_by = request.user
-        cars.save()
+            if image:
+                cars.images.add(image)
 
-        if image:
-            cars.images.add(image)
+            user = request.user
+            user.save()
 
-        user = request.user
-        user.save()
+            serializer = CarSerializer(cars)
 
-        serializer = CarSerializer(cars)
-
-        return JsonResponse(serializer.data, safe=False)
-    else:
-        return JsonResponse({'error': 'add something here later!...'})
+            return Response(serializer.data)
+        else:
+            return Response({'error': 'add something here later!...'}, status=status.HTTP_400_BAD_REQUEST)
