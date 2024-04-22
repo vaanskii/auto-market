@@ -411,10 +411,7 @@ export default {
         formData.append('interior', this.interior)
         formData.append('interior_color', this.interiorColor)
         formData.append('description', this.description)
-        const files = this.$refs.file.files;
-        for (let i = 0; i < files.length; i++) {
-            formData.append('images[]', files[i]);
-        }
+        formData.append('image', this.$refs.file.files[0])
 
         axios
             .post('/api/create/', formData, {
