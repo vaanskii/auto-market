@@ -63,7 +63,7 @@ class Car(models.Model):
             return f"{minutes}m"
 
     def __str__(self):
-        return self.description or str(self.images)
+        return self.description or ', '.join([img.get_image() for img in self.images.all()])
 
     car_colors = models.CharField(max_length=20, choices=CAR_COLORS, default='Black', blank=False, null=False)
     interior = models.CharField(max_length=20, choices=INTERIOR_MATERIAL, default='Alcantara', blank=False, null=False)

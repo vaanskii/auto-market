@@ -8,9 +8,8 @@ class ImageModelForm(ModelForm):
         fields = ('image',)
 
 class CarForm(ModelForm):
-    main_image = forms.ImageField(required=False)
     class Meta:
         model = Car
         fields = ('manufacturer', 'car_model', 'types', 'categories', 'price', 'year', 'location', 'engine_volume',
                 'milage', 'fuel_type', 'transmission', 'cylinders', 'doors', 'drive_wheels', 'wheel', 'airbags',
-                    'car_colors', 'interior', 'interior_color', 'description', 'main_image')
+                    'car_colors', 'interior', 'interior_color', 'description')

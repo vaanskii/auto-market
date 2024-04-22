@@ -231,8 +231,10 @@
                                         type="file" 
                                         ref="file" 
                                         multiple
+                                        name="images"
                                         @change="onFileChange"
-                                        class="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" />
+                                        class="w-full text-black text-sm bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2 file:px-4 file:mr-4 file:bg-gray-800 file:hover:bg-gray-700 file:text-white rounded" 
+                                    />
                                 </div>
                             </div>
                             <div id="preview" v-if="url && url.length > 0" class="w-full h-auto grid md:grid-cols-3 grid-cols-2 lg:grid-cols-5 gap-x-6">
@@ -317,6 +319,7 @@ export default {
     return {
       url: null,
       selectedImage: null,
+      selectedImages: [],
       selectedManufacturer: 'Choose manufacturer',
       selectedCarModel: 'Choose model',
       selectedCategories: 'Choose category',
@@ -390,7 +393,7 @@ export default {
         }
     },
     submitCarForm() {
-        let formData = new FormData()
+        let formData = new FormData();
         formData.append('manufacturer', this.selectedManufacturer)
         formData.append('car_model', this.selectedCarModel)
         formData.append('types', this.selectedType)
@@ -411,8 +414,15 @@ export default {
         formData.append('interior', this.interior)
         formData.append('interior_color', this.interiorColor)
         formData.append('description', this.description)
-        formData.append('image', this.$refs.file.files[0])
-
+        console.log('Selected images before appending:', this.selectedImages);
+        if (this.selectedImages && this.selectedImages.length > 0) {
+            for (let i = 0; i < this.selectedImages.length; i++) {
+                formData.append('images[]', this.selectedImages[i]);
+            }
+        } else {
+            console.log('No images selected or selectedImages is undefined.');
+            return; // Exit the function if no images are selected
+        }
         axios
             .post('/api/create/', formData, {
                 headers: {
@@ -424,14 +434,23 @@ export default {
             })
     },
     onFileChange(e) {
-        const files = e.target.files;
-        const urls = [];
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const url = URL.createObjectURL(file);
-            urls.push(url);
+        console.log('onFileChange triggered')
+        if (e.target.files.length > 0) {
+            console.log('Files selected:', e.target.files);
+            const files = e.target.files;
+            const urls = []
+            this.selectedImages = []
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                const url = URL.createObjectURL(file)
+                urls.push(url)
+                this.selectedImages.push(file)
+            }
+            this.url = urls;
+            console.log('File URLs:', this.url)
+        } else {
+            console.log('No files selected.')
         }
-        this.url = urls;
     },
     handleImageClick(imageUrl) {
         this.selectedImage = imageUrl;

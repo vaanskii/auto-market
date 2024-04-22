@@ -11,6 +11,7 @@ from rest_framework import status
 from .forms import ImageModelForm, CarForm
 from .serializers import CarSerializer, ChoiceSerializer
 from .serializers import ChoiceSerializer
+from .models import ImageModel
 
 
 class ChoicesAPIView(APIView):
@@ -42,30 +43,22 @@ class ChoicesAPIView(APIView):
 class CreateCarsAPIView(APIView):
     def post(self, request, format=None):
         form = CarForm(request.POST)
-        image = None
-        image_form = ImageModelForm(request.POST, request.FILES)
-
-        if image_form.is_valid():
-            image = image_form.save(commit=False)
-            image.created_by = request.user
-            image.save()
+        images = request.FILES.getlist('images[]')
+        car_instance = None
 
         if form.is_valid():
-            cars = form.save(commit=False)
-            cars.created_by = request.user
-            cars.save()
+            car_instance = form.save(commit=False)
+            car_instance.created_by = request.user
+            car_instance.save()
 
-            if image:
-                cars.images.add(image)
+            # Save each image separately and associate it with the car instance
+            for image in images:
+                image_instance = ImageModel.objects.create(image=image, created_by=request.user)
+                car_instance.images.add(image_instance)
 
-            user = request.user
-            user.save()
-
-            serializer = CarSerializer(cars)
-
+            # Serialize the car instance including all associated images
+            serializer = CarSerializer(car_instance)
             return Response(serializer.data)
         else:
             errors = form.errors.as_json()
-            if image_form.errors:
-                errors += image_form.errors.as_json()
             return Response({'error': 'Failed to create car entry.', 'details': errors})
