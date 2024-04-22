@@ -44,19 +44,24 @@ class CreateCarsAPIView(APIView):
     def post(self, request, format=None):
         form = CarForm(request.POST)
         images = request.FILES.getlist('images[]')
+        main_image_file = request.FILES.get('main_image') 
         car_instance = None
 
         if form.is_valid():
             car_instance = form.save(commit=False)
             car_instance.created_by = request.user
+
+            # Handle the main image
+            if main_image_file:
+                main_image_instance = ImageModel.objects.create(image=main_image_file, created_by=request.user)
+                car_instance.main_image = main_image_instance 
+
             car_instance.save()
 
-            # Save each image separately and associate it with the car instance
             for image in images:
                 image_instance = ImageModel.objects.create(image=image, created_by=request.user)
                 car_instance.images.add(image_instance)
 
-            # Serialize the car instance including all associated images
             serializer = CarSerializer(car_instance)
             return Response(serializer.data)
         else:

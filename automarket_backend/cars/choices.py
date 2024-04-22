@@ -394,13 +394,13 @@ FOR_RENT = 'For_rent'
 FOR_SELL = 'For_sell'
 
 TYPE = [
-    (FOR_RENT, 'For Rent'),
-    (FOR_SELL, 'For Sell')
+    (FOR_SELL, 'For Sell'),
+    (FOR_RENT, 'For Rent')
 ]
 
 #CATEGORIES
 SEDAN = 'Sedan'
-JEEP = 'Jeep'
+SUV = 'Suv'
 COUPE = 'Coupe'
 HATCHBACK = 'Hatchback'
 UNIVERSAL = 'Universal'
@@ -412,7 +412,7 @@ LIMOUSINE = 'Limousine'
 
 CATEGORIES = [
     (SEDAN, 'Sedan'),
-    (JEEP, 'Jeep'),
+    (SUV, 'Suv'),
     (COUPE, 'Coupe'),
     (HATCHBACK, 'Hatchback'),
     (UNIVERSAL, 'Universal'),

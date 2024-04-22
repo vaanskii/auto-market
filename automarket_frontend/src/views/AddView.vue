@@ -306,7 +306,6 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
 import axios from 'axios';
 export default {
@@ -318,7 +317,7 @@ export default {
   data() {
     return {
       url: null,
-      selectedImage: null,
+      selectedMainImage: null,
       selectedImages: [],
       selectedManufacturer: 'Choose manufacturer',
       selectedCarModel: 'Choose model',
@@ -371,11 +370,13 @@ export default {
     this.fetchChoices()
   },
   computed: {
+    // Choosing main image from uploaded images
         mainImage() {
-            return this.selectedImage || (this.url && this.url.length > 0 && this.url[0]) || null;
+            return this.selectedMainImage || (this.url && this.url.length > 0 && this.url[0]) || null;
         }
     },
   methods: {
+    // Fetching choices from server
     fetchChoices() {
         axios
             .get('/api/choices')
@@ -387,51 +388,70 @@ export default {
                 console.log('error: ',error)
             })
     },
+    // Updating car models based on manufacturers
     updateCarModels() {
         if (this.selectedManufacturer && this.choices.car_model[this.selectedManufacturer]){
             this.carModels = this.choices.car_model[this.selectedManufacturer]
         }
     },
     submitCarForm() {
-        let formData = new FormData();
-        formData.append('manufacturer', this.selectedManufacturer)
-        formData.append('car_model', this.selectedCarModel)
-        formData.append('types', this.selectedType)
-        formData.append('categories', this.selectedCategories)
-        formData.append('price', this.price)
-        formData.append('year', this.year)
-        formData.append('location', this.selectedLocation)
-        formData.append('engine_volume', this.engineVolume)
-        formData.append('milage', this.milage)
-        formData.append('fuel_type', this.selectedFuelTypes)
-        formData.append('transmission', this.selectedTransmission)
-        formData.append('cylinders', this.selectedCylinders)
-        formData.append('doors', this.selectedDoors)
-        formData.append('drive_wheels', this.selectedDriveWheels)
-        formData.append('wheel', this.selectedWheel)
-        formData.append('airbags', this.selectedAirbags)
-        formData.append('car_colors', this.carColors)
-        formData.append('interior', this.interior)
-        formData.append('interior_color', this.interiorColor)
-        formData.append('description', this.description)
-        console.log('Selected images before appending:', this.selectedImages);
-        if (this.selectedImages && this.selectedImages.length > 0) {
-            for (let i = 0; i < this.selectedImages.length; i++) {
-                formData.append('images[]', this.selectedImages[i]);
-            }
-        } else {
-            console.log('No images selected or selectedImages is undefined.');
-            return; // Exit the function if no images are selected
+    // Send forms to backend
+    let formData = new FormData();
+    formData.append('manufacturer', this.selectedManufacturer);
+    formData.append('car_model', this.selectedCarModel);
+    formData.append('types', this.selectedType);
+    formData.append('categories', this.selectedCategories);
+    formData.append('price', this.price);
+    formData.append('year', this.year);
+    formData.append('location', this.selectedLocation);
+    formData.append('engine_volume', this.engineVolume);
+    formData.append('milage', this.milage);
+    formData.append('fuel_type', this.selectedFuelTypes);
+    formData.append('transmission', this.selectedTransmission);
+    formData.append('cylinders', this.selectedCylinders);
+    formData.append('doors', this.selectedDoors);
+    formData.append('drive_wheels', this.selectedDriveWheels);
+    formData.append('wheel', this.selectedWheel);
+    formData.append('airbags', this.selectedAirbags);
+    formData.append('car_colors', this.carColors);
+    formData.append('interior', this.interior);
+    formData.append('interior_color', this.interiorColor);
+    formData.append('description', this.description);
+
+    // Send all images which is uploaded to backend
+    console.log('Selected images before appending:', this.selectedImages);
+    if (this.selectedImages && this.selectedImages.length > 0) {
+        for (let i = 0; i < this.selectedImages.length; i++) {
+            formData.append('images[]', this.selectedImages[i]);
         }
-        axios
-            .post('/api/create/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(response => {
-                console.log(response.data)
-            })
+    } else {
+        console.log('No images selected or selectedImages is undefined.');
+        return;
+    }
+    // Fetch blob to url and send backend
+    if (this.mainImage) {
+        fetch(this.mainImage)
+            .then(res => res.blob())
+            .then(blob => {
+                const mainImageFile = new File([blob], 'main_image.jpg', { type: 'image/jpeg' });
+                formData.append('main_image', mainImageFile);
+                console.log('Main image file appended:', mainImageFile);
+
+                axios.post('/api/create/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                });
+            });
+        } else {
+         console.log('Error: Main image is not sent');
+        }
     },
     onFileChange(e) {
         console.log('onFileChange triggered')
@@ -453,9 +473,9 @@ export default {
         }
     },
     handleImageClick(imageUrl) {
-        this.selectedImage = imageUrl;
+        this.selectedMainImage = imageUrl;
     },
-
+    // Adding styles based fetched car colors from backend
     getCarColor(color) {
         let baseClass = 'py-2 w-24 rounded-full uppercase';
         if (color === 'Black') {
@@ -480,6 +500,7 @@ export default {
             return `${baseClass} ${this.carColors === 'Gray' ? 'border-green-500 border-2 bg-gray-500 text-white' : 'bg-gray-500 text-white'}`;
         }
     },
+    // Adding styles based fetched car material colors from backend
     getMaterialColor(color) {
         let baseClass = 'py-2 w-24 rounded-full uppercase';
         if (color === 'Black') {
@@ -494,6 +515,7 @@ export default {
             return `${baseClass} ${this.interiorColor === 'Gray' ? 'border-green-500 border-2 bg-gray-500 text-white' : 'bg-gray-500 text-white'}`;
         }
     },
+    // Adding styles based fetched car materials from backend
     getMaterialInterior(material) {
     let baseClass = 'py-2 w-44 rounded-full uppercase';
     if (material === this.interior) {
@@ -505,16 +527,13 @@ export default {
 
     handleMaterialClick(material) {
         this.interior = material;
-        console.log('selected material: ', material)
     },
 
     handleMaterialColorClick(color) {
         this.interiorColor = color;
-        console.log('selected interior color: ', color)
     },
     handleColorClick(color) {
         this.carColors = color;
-        console.log('selected car color: ', color)
     },
   }
 }

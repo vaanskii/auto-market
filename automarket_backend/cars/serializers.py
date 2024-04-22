@@ -16,11 +16,12 @@ class ImageModelSerializer(serializers.ModelSerializer):
 class CarSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
     images = ImageModelSerializer(read_only=True, many=True)
+    main_image = ImageModelSerializer(read_only=True)
     class Meta:
         model = Car
         fields = ('id','manufacturer', 'car_model', 'types', 'categories', 'price', 'year', 'location', 'engine_volume',
                     'milage', 'fuel_type', 'transmission', 'cylinders', 'doors', 'drive_wheels', 'wheel', 'airbags',
-                    'car_colors', 'interior', 'interior_color', 'description', 'images', 'created_by',)
+                    'car_colors', 'interior', 'interior_color', 'description', 'images', 'created_by', 'main_image')
         
 class ChoiceSerializer(serializers.Serializer):
     manufacturer = serializers.ChoiceField(choices=MANUFACTURER_CHOICES)
