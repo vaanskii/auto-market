@@ -71,7 +71,7 @@
                                 <!-- YEAR -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="year" class="text-sm font-semibold text-gray-500">Year</label>
-                                    <input v-model="year" placeholder="Enter year" type="number" id="year" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="year" placeholder="Enter year" :max="getCurrentYear" type="number" id="year" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                                 <!-- PRICE -->
                                 <div class="flex flex-col space-y-1">
@@ -372,7 +372,10 @@ export default {
   computed: {
     // Choosing main image from uploaded images
         mainImage() {
-            return this.selectedMainImage || (this.url && this.url.length > 0 && this.url[0]) || null;
+            return this.selectedMainImage || (this.url && this.url.length > 0 && this.url[0]) || null
+        },
+        getCurrentYear() {
+            return new Date().getFullYear()
         }
     },
   methods: {
@@ -381,7 +384,6 @@ export default {
         axios
             .get('/api/choices')
             .then(response => {
-                console.log(response.data)
                 this.choices = response.data
             })
             .catch(error => {
@@ -395,6 +397,12 @@ export default {
         }
     },
     submitCarForm() {
+    // Show error message or take appropriate action
+    if (this.year > this.getCurrentYear) {
+        console.error("Year cannot be greater than the current year.");
+        return;
+    }
+
     // Send forms to backend
     let formData = new FormData();
     formData.append('manufacturer', this.selectedManufacturer);

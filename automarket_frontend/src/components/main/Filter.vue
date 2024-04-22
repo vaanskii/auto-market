@@ -2,39 +2,62 @@
     <div class="m-10 w-full max-w-[85%] -mt-[320px] sm:-mt-80 md:mt-44 lg:mt-60 xl:mt-60">
       <div class="flex flex-col">
         <div class="rounded-xl border h-[890px] md:h-[450px] lg:h-[360px] xl:h-[270px] border-gray-200 bg-[#E6E6E6] p-6 shadow-4xl">
-          <form id="opa" @submit.prevent="handleSubmit">
+          <form id="opa" @submit.prevent="searchCars">
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <!-- Manufacturer -->
               <div class="flex flex-col">
                 <label for="manufacturer" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.manufacturer') }}</label>
-                <select v-model="selectedBrand" id="manufacturer" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
-                  <option>BMW</option>
-                  <option>MERCEDES</option>
-                  <option>AUDI</option>
+                <select v-model="selectedManufacturer" id="manufacturer" class="mt-2 uppercase cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
+                  <option disabled>Choose manufacturer</option>
+                  <option 
+                      v-for="(manufacturerName, index) in choices.manufacturer"
+                      :key="index"
+                      :value="manufacturerName"
+                  >
+                      {{ manufacturerName }}
+                  </option>
                 </select>
               </div>
               <!-- Car -->
               <div class="flex flex-col">
                 <label for="car" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.model') }}</label>
-                <select v-model="selectedCar" id="car" class="mt-2 block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
-                  <option v-for="(car, index) in filteredCars" :key="index">{{ car }}</option>
+                <select v-model="selectedCarModel" id="car" class="mt-2 uppercase block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
+                  <option disabled>Choose model</option>
+                  <option
+                      v-for="model  in carModels"
+                      :key="model"
+                      :value="model"
+                  >
+                      {{ model }}
+                  </option>
                 </select>
               </div>
               <!-- Gasoline -->
               <div class="flex flex-col">
                 <label for="type" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.types') }}</label>
-                <select v-model="selectedType" id="type" class="mt-2 cursor-pointer text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
-                    <option>FOR SELL</option>
-                    <option>FOR RENT</option>
+                <select v-model="selectedType" id="type" class="mt-2 cursor-pointer uppercase text-black block w-full rounded-md border border-white bg-white px-2 py-2 shadow-sm outline-none">
+                  <option disabled>Choose type</option>
+                  <option 
+                      v-for="(type, index) in choices.types"
+                      :key="index"
+                      :value="type"
+                  >
+                      {{ type }}
+                  </option>
                 </select>
                 </div>
               <!-- Location -->
               <div class="flex flex-col">
                 <label for="location" class="text-sm font-medium text-stone-600 uppercase">{{ $t('filter.location') }}</label>
-                <select id="location" class="mt-2 block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
-                  <option value="">TBILISI</option>
-                  <option value="">BATUMI</option>
-                  <option value="">KUTAISI</option>
+                <select v-model="selectedLocation" id="location" class="mt-2 uppercase block w-full cursor-pointer rounded-md border text-black border-white bg-white px-2 py-2 shadow-sm outline-none">
+                  <option disabled>Choose location</option>
+                  <option
+                      v-for="(loc, index) in choices.location"
+                      :key="index"
+                      :value="loc"
+                  >
+                      {{ loc }}
+                  </option>
                 </select>
               </div>
               <!-- Year Range -->
@@ -70,39 +93,106 @@
 </template>
   
 <script>
+import axios from 'axios';
 export default {
 data() {
-    return {
-    selectedBrand: '',
-    selectedCar: '',
-    selectedType: '',
-    startYear: '',
-    endYear: '',
-    startPrice: '',
-    endPrice: '',
-    cars: {
-        BMW: ['BMW - 5 SERIES', 'BMW - 3 SERIES', 'BMW - X5'],
-        MERCEDES: ['MERCEDES - E CLASS', 'MERCEDES - C CLASS', 'MERCEDES - GLE'],
-        AUDI: ['AUDI - A4', 'AUDI - Q5', 'AUDI - TT']
-    }
-    };
+  return {
+    startYear: 0,
+    endYear: new Date().getFullYear(),
+    startPrice: 0,
+    endPrice: 0,
+    selectedManufacturer: 'Choose manufacturer',
+    selectedCarModel: 'Choose model',
+    selectedType: 'Choose type',
+    selectedLocation: 'Choose location',
+    choices: {
+        manufacturer: [],
+        car_model: {},
+        types: [],
+        location: [],
+    },
+    carModels: [],
+    filteredCars: [],
+  };
 },
-computed: {
-    filteredCars() {
-    return this.selectedBrand ? this.cars[this.selectedBrand] : [];
+watch: {
+  selectedManufacturer(newVal, oldVal) {
+    if (newVal !== oldVal) {
+      this.updateCarModels();
     }
+  }
 },
 methods: {
-    resetFields() {
-    this.selectedBrand = '',
-    this.selectedCar = '',
-    this.selectedType = '',
-    this.startYear = '',
-    this.endYear = '',
-    this.startPrice= '',
-    this.endPrice= ''
+fetchChoices() {
+  axios
+  .get('/api/choices')
+  .then(response => {
+      this.choices = response.data
+  })
+  .catch(error => {
+      console.log('error: ',error)
+  })
+},
+updateCarModels() {
+    if (this.selectedManufacturer && this.choices.car_model[this.selectedManufacturer]){
+        this.carModels = this.choices.car_model[this.selectedManufacturer]
     }
-}
+},
+searchCars() {
+  let params = {};
+  if (this.selectedManufacturer && this.selectedManufacturer !== 'Choose manufacturer') {
+    params.manufacturer = this.selectedManufacturer;
+  }
+  if (this.selectedCarModel && this.selectedCarModel !== 'Choose model') {
+    params.car_model = this.selectedCarModel;
+  }
+  if (this.selectedType && this.selectedType !== 'Choose type') {
+    params.car_type = this.selectedType;
+  }
+  if (this.selectedLocation && this.selectedLocation !== 'Choose location') {
+    params.location = this.selectedLocation;
+  }
+  if (this.startYear) {
+    params.start_year = this.startYear;
+  }
+  if (this.endYear) {
+    params.end_year = this.endYear;
+  }
+  if (this.startPrice) {
+    params.start_price = this.startPrice;
+  }
+  if (this.endPrice) {
+    params.end_price = this.endPrice;
+  }
+
+  axios.get('/api/filters/', { params })
+    .then(response => {
+      this.filteredCars = response.data;
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.error('Error searching cars:', error);
+  })
+},
+resetFields() {
+  this.selectedManufacturer = 'Choose manufacturer',
+  this.selectedCarModel = 'Choose model',
+  this.selectedType = 'Choose type',
+  this.selectedLocation = 'Choose location',
+  this.startYear = 0
+  this.endYear = new Date().getFullYear(),
+  this.startPrice= 0,
+  this.endPrice= 0
+  }
+},
+created() {
+  this.fetchChoices()
+},
+computed: {
+  filteredModels() {
+  return this.selectedBrand ? this.cars[this.selectedBrand] : [];
+  }
+},
 };
 </script>
 

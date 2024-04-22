@@ -28,6 +28,7 @@ export default {
         { title: 'Card 5',  image: '/peakpx.jpg', owner: 'Vaanskii', price: 5000+ '$'},
         { title: 'Card 6',  image: '/mercedes.jpg', owner: 'Zura', price: 5000+ '$'},
         { title: 'Card 6',  image: '/mercedes.jpg', owner: 'Zura', price: 5000+ '$'},
+        { title: 'Card 6',  image: '/mercedes.jpg', owner: 'Zura', price: 5000+ '$'},
       ],
     }
   },

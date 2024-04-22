@@ -10,6 +10,8 @@ import Search from '../views/SearchView.vue'
 import Settings from '../views/SettingsView.vue'
 import Profile from '../views/ProfileView.vue'
 
+import { useUserStore } from '@/stores/user'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,17 +33,41 @@ const router = createRouter({
         {
           path: 'login',
           name: 'login',
-          component: Login
+          component: Login,
+          beforeEnter: (to, from, next) => {
+            const userStore = useUserStore()
+            if (userStore.user.isAuthenticated) {
+              next({ name: 'home' });
+            } else {
+              next();
+            } 
+          }
         },
         {
           path: 'signup',
           name: 'signup',
-          component: Signup
+          component: Signup,
+          beforeEnter: (to, from, next) => {
+            const userStore = useUserStore()
+            if (userStore.user.isAuthenticated) {
+              next({ name: 'home' });
+            } else {
+              next();
+            } 
+          }
         },
         {
           path: 'add',
           name: 'add',
-          component: Add
+          component: Add,
+          beforeEnter: (to, from, next) => {
+            const userStore = useUserStore()
+            if (!userStore.user.isAuthenticated) {
+              next({ name: 'home' });
+            } else {
+              next();
+            } 
+          }
         },
         {
           path: 'settings',
@@ -58,7 +84,6 @@ const router = createRouter({
           name: 'blogs',
           component: Blogs,
           beforeEnter: (to, from, next) => {
-            // Scroll to the top of the page
             window.scrollTo(0, 0);
             next();
           }
@@ -67,7 +92,7 @@ const router = createRouter({
           path: 'search',
           name: 'search',
           component: Search,
-          },
+        },
       ]
     }
   ],
