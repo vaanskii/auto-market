@@ -20,6 +20,8 @@ class ImageModel(models.Model):
             return settings.WEBSITE_URL + self.image.url
         else:
             return ''
+    class Meta:
+        db_table = 'uploaded_images'
 
 class Car(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -48,6 +50,7 @@ class Car(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        db_table = 'created_cars'
 
     def created_at_formatted(self):
         time_difference = now() - self.created_at
