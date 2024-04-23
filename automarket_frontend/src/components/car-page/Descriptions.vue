@@ -1,5 +1,17 @@
 <template>
     <div class="md:w-[70%] w-[80%] bg-[#E6E6E6] shadow-xl rounded-xl mt-10 flex items-center flex-col py-10">
+      <h1 class="uppercase mb-4 text-lg font-bold">User info</h1>
+      <hr class="h-px  bg-black my-4 w-[80%] border-0">
+      <div class="flex flex-row py-4 uppercase bg-black text-white rounded-[1.2rem] justify-evenly items-center w-64">
+        <p>name: </p>
+        <p class="">{{ createdBy }}</p>
+      </div>
+      <div class="flex mt-4 py-4 flex-row uppercase bg-black text-white rounded-[1.2rem] justify-evenly items-center w-64">
+        <p>tel: </p>
+        <a :href="'tel:' + mobileNumber" class="cursor-pointer">{{ mobileNumber }}</a>
+      </div>
+    </div>
+    <div class="md:w-[70%] w-[80%] bg-[#E6E6E6] shadow-xl rounded-xl mt-10 flex items-center flex-col py-10">
         <h1 class="uppercase mb-4 text-lg font-bold">{{ $t('description.header') }}</h1>
         <hr class="h-px  bg-black my-4 w-[80%] border-0">
         <p class="px-10">{{ carDescription }}</p>
@@ -25,7 +37,9 @@ export default {
   data() {
     return {
       specifications: {},
-      carDescription: ''
+      carDescription: '',
+      createdBy: '',
+      mobileNumber: ''
     };
   },
   methods: {
@@ -53,6 +67,8 @@ export default {
             interiorcolor: carData.interior_color,
           },
           this.carDescription = carData.description
+          this.createdBy = carData.created_by.name
+          this.mobileNumber = carData.created_by.mobile_number
       })
       .catch(error => {
         console.log('error:', error)
