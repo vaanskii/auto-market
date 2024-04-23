@@ -23,7 +23,11 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          component: HomeView
+          component: HomeView,
+          beforeEnter: (to, from, next) => {
+            window.scrollTo(0, 0)
+            next()
+          }
         },
         {
           path: 'car/:id',
@@ -37,7 +41,7 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             const userStore = useUserStore()
             if (userStore.user.isAuthenticated) {
-              next({ name: 'home' });
+              next({ name: 'home' })
             } else {
               next();
             } 
@@ -50,7 +54,7 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             const userStore = useUserStore()
             if (userStore.user.isAuthenticated) {
-              next({ name: 'home' });
+              next({ name: 'home' })
             } else {
               next();
             } 
@@ -63,7 +67,7 @@ const router = createRouter({
           beforeEnter: (to, from, next) => {
             const userStore = useUserStore()
             if (!userStore.user.isAuthenticated) {
-              next({ name: 'home' });
+              next({ name: 'home' })
             } else {
               next();
             } 
@@ -84,7 +88,7 @@ const router = createRouter({
           name: 'blogs',
           component: Blogs,
           beforeEnter: (to, from, next) => {
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0)
             next();
           }
         },
@@ -92,6 +96,10 @@ const router = createRouter({
           path: 'search',
           name: 'search',
           component: Search,
+          beforeEnter: (to, from, next) => {
+            window.scrollTo(0, 0)
+            next();
+          }
         }
       ]
     }
