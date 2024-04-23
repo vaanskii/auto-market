@@ -9,9 +9,13 @@ from account.serializers import UserSerializer
 
 
 class ImageModelSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
     class Meta:
         model = ImageModel
-        fields = ('id', 'get_image',)
+        fields = ('id', 'image_url',)
+        
+    def get_image_url(self, obj):
+        return obj.get_image()   
 
 class CarSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
@@ -21,7 +25,7 @@ class CarSerializer(serializers.ModelSerializer):
         model = Car
         fields = ('id','manufacturer', 'car_model', 'types', 'categories', 'price', 'year', 'location', 'engine_volume',
                     'milage', 'fuel_type', 'transmission', 'cylinders', 'doors', 'drive_wheels', 'wheel', 'airbags',
-                    'car_colors', 'interior', 'interior_color', 'description', 'images', 'created_by', 'main_image')
+                    'car_colors', 'interior', 'interior_color', 'description', 'images', 'created_by', 'main_image',)
         
 class ChoiceSerializer(serializers.Serializer):
     manufacturer = serializers.ChoiceField(choices=MANUFACTURER_CHOICES)

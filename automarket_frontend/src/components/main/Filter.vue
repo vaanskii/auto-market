@@ -153,7 +153,7 @@ searchCars() {
     params.car_model = this.selectedCarModel;
   }
   if (this.selectedType && this.selectedType !== 'Choose type') {
-    params.car_type = this.selectedType;
+    params.types = this.selectedType;
   }
   if (this.selectedLocation && this.selectedLocation !== 'Choose location') {
     params.location = this.selectedLocation;
