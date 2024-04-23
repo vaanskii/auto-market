@@ -29,6 +29,8 @@ export const useUserStore = defineStore({
                 this.user.country_code = localStorage.getItem('user.country_code')
                 this.user.isAuthenticated = true
 
+                axios.defaults.headers.common["Authorization"] = "Bearer " + this.user.access;
+
                 this.refreshToken()
             }
         },

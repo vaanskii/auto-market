@@ -94,7 +94,14 @@
   
 <script>
 import axios from 'axios';
+import Trans from '@/i18n/translation'
 export default {
+setup() {
+  return {
+    Trans,
+    filteredCars: [],
+  }
+},
 data() {
   return {
     startYear: 0,
@@ -112,7 +119,6 @@ data() {
         location: [],
     },
     carModels: [],
-    filteredCars: [],
   };
 },
 watch: {
@@ -167,12 +173,14 @@ searchCars() {
 
   axios.get('/api/filters/', { params })
     .then(response => {
-      this.filteredCars = response.data;
-      console.log(response.data)
+      console.log('Sending results:', response.data);
+      if (Object.keys(params).length !== 0) {
+        this.$router.push(this.Trans.i18nRoute({ name: 'search', query: params }));
+      }
     })
     .catch(error => {
       console.error('Error searching cars:', error);
-  })
+  });
 },
 resetFields() {
   this.selectedManufacturer = 'Choose manufacturer',

@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
 import axios from 'axios'
-import { useUserStore } from '@/stores/user' // Import your user store
+import { useUserStore } from '@/stores/user'
 
 axios.defaults.baseURL = "http://127.0.0.1:8000"
 
@@ -16,7 +16,6 @@ app.use(pinia)
 app.use(router, axios)
 app.use(i18n)
 
-// Initialize the user store and load the user's authentication state
 const userStore = useUserStore()
 userStore.initStore()
 
