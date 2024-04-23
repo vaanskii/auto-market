@@ -84,7 +84,7 @@
     "model": "model",
     "year": "year",
     "category": "category",
-    "enginevolume": "engine volume",
+    "horsepower": "horse power",
     "mileage": "mileage",
     "fueltype": "fuel type",
     "gearbox": "transmission",

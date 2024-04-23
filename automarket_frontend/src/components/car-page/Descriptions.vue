@@ -53,7 +53,7 @@ export default {
             model: carData.car_model,
             year: carData.year,
             category: carData.categories,
-            enginevolume: carData.engine_volume,
+            horsepower: carData.engine_volume,
             mileage: carData.milage + ' km',
             fueltype: carData.fuel_type,
             gearbox: carData.transmission,
