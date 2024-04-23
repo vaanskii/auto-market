@@ -15,8 +15,8 @@
           <span class="uppercase font-light mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>
           <hr class="h-px mt-7 bg-black border-0">
           <div class="flex flex-row mt-2 ml-2">
-            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3">{{ car.types }}</span>
-            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3 ml-2">{{ car.fuel_type }}</span>
+            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3">{{ car.created_by.name }}</span>
+            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3 ml-2">{{ car.types }}</span>
           </div>
         </div>
       </div>
