@@ -1,8 +1,8 @@
 <template>
     <div class="flex justify-center items-center flex-col">
       <div class="w-[80%]">
-          <h1 class="uppercase pt-40 text-start text-4xl mb-10">bmw f90 - <span class="text-gray-600">2019</span> </h1> 
-          <p class="uppercase mb-10 ml-4">batumi</p>
+          <h1 class="uppercase pt-40 text-start text-4xl mb-10">{{ car.manufacturer }} {{ car.car_model }} - <span class="text-gray-600">{{ car.year }}</span> </h1> 
+          <p class="uppercase mb-10 ml-4">{{ car.location }}</p>
           
         <div class="flex justify-center">
           <!-- Large image container with navigation buttons -->
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      car: [],
       images: [],
       imageViewerOpen: false,
       currentImageIndex: 0
@@ -89,6 +90,8 @@ export default {
       axios
         .get(`/api/${this.$route.params.id}/`)
         .then(response => {
+          console.log(response.data.car)
+          this.car = response.data.car
           this.images = response.data.car.images.map(img => img.image_url);
         })
         .catch(error => {
