@@ -14,10 +14,8 @@ class CarList(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # Retrieve the search query parameter from the request
         search_query = self.request.query_params.get('q', None)
         if search_query:
-            # Modify queryset to filter based on search query
             queryset = queryset.filter(manufacturer__icontains=search_query) | \
                        queryset.filter(car_model__icontains=search_query)
         return queryset
