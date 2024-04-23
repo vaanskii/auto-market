@@ -107,8 +107,8 @@
                                 </div>
                                 <!-- ENGINE VOLUME -->
                                 <div class="flex flex-col space-y-1">
-                                    <label for="enginev" class="text-sm font-semibold text-gray-500">Engine volume</label>
-                                    <input v-model="engineVolume" placeholder="Engine volume" type="number" id="enginev" class="placeholder-gray-500 border uppercase text-sm border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <label for="enginev" class="text-sm font-semibold text-gray-500">Horse Power</label>
+                                    <input v-model="engineVolume" placeholder="Horse power" type="number" id="enginev" class="placeholder-gray-500 border uppercase text-sm border-gray-300  cursor-pointer text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                                 <!-- MILAGE -->
                                 <div class="flex flex-col space-y-1">
@@ -452,6 +452,7 @@ export default {
                 })
                 .then(response => {
                     console.log(response.data);
+                    this.$router.push(this.Trans.i18nRoute({ name: 'profile' }));
                 })
                 .catch(error => {
                     console.error('Error submitting form:', error);

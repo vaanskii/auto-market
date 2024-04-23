@@ -7,8 +7,8 @@
       <div class="flex justify-center">
         <!-- Large image container with navigation buttons -->
         <div class="relative w-[90%] flex justify-center">
-          <img :src="images[currentImageIndex]" @click="openImageViewer(currentImageIndex)" class="md:w-[80%] md:h-[550px] h-[270px] cursor-pointer rounded-xl reveal-card" />
-            <div class="absolute inset-y-0 left-4 sm:left-20 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
+          <img :src="images[currentImageIndex]" @click="openImageViewer(currentImageIndex)" class="md:w-[80%] lg:max-h-[600px] max-h-[450px] cursor-pointer rounded-xl reveal-card" />
+            <div class="absolute inset-y-0 left-4 sm:left-5 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
               <span>{{ currentImageIndex + 1 }}/{{ images.length }}</span>
             </div>
           <button @click="previousImage" class="absolute inset-y-0 -left-4 sm:left-2 md:left-12 lg:left-28 m-6 text-4xl">
@@ -23,7 +23,7 @@
           </button>
         </div>
         <!-- Small images container with vertical scrolling -->
-        <div class="flex-col items-center overflow-y-auto md:flex hidden" style="max-height: 550px;">
+        <div class="flex-col items-center overflow-y-auto md:flex hidden lg:max-h-[600px] max-h-[450px]">
           <div v-for="(image, index) in images.slice(1)" :key="index" class="cursor-pointer mb-4">
             <img :src="image" @click="makeImagePrimary(index + 1)" class="w-48 h-40 rounded-xl reveal-card" />
           </div>
