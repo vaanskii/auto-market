@@ -173,7 +173,6 @@ searchCars() {
 
   axios.get('/api/filters/', { params })
     .then(response => {
-      console.log('Sending results:', response.data);
       if (Object.keys(params).length !== 0) {
         this.$router.push(this.Trans.i18nRoute({ name: 'search', query: params }));
       }

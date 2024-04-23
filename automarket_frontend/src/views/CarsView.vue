@@ -89,7 +89,6 @@ export default {
       axios
         .get(`/api/${this.$route.params.id}/`)
         .then(response => {
-          console.log(response.data);
           this.images = response.data.car.images.map(img => img.image_url);
         })
         .catch(error => {

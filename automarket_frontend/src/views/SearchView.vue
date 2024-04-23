@@ -44,7 +44,6 @@ fetchSearchResults() {
   const params = this.$route.query
   axios.get('/api/filters/', { params })
     .then(response => {
-      console.log('Filtered results:', response.data);
       this.cars = response.data
     })
     .catch(error => {
