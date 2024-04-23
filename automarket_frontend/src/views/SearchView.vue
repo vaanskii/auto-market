@@ -9,8 +9,10 @@
           </router-link>
           <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
-          <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - {{ car.car_model }}</span>
-          <span class="uppercase font-bold mt-4 ml-2 text-gray-900">{{ car.price }} $</span>
+          <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })">
+            <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
+          </router-link>
+          <span class="uppercase font-light mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>
           <hr class="h-px mt-7 bg-black border-0">
           <div class="flex flex-row mt-2 ml-2">
             <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3">{{ car.types }}</span>
@@ -53,7 +55,6 @@ fetchSearchResults() {
   const params = this.$route.query
   axios.get('/api/filters/', { params })
     .then(response => {
-      console.log(response.data)
       this.cars = response.data
     })
     .catch(error => {
