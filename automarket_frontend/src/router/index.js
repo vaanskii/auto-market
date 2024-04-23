@@ -26,8 +26,8 @@ const router = createRouter({
           component: HomeView
         },
         {
-          path: 'about',
-          name: 'about',
+          path: 'car/:id',
+          name: 'cardetail',
           component: CarView
         },
         {
@@ -92,7 +92,7 @@ const router = createRouter({
           path: 'search',
           name: 'search',
           component: Search,
-        },
+        }
       ]
     }
   ],

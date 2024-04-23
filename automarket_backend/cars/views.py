@@ -6,13 +6,14 @@ from rest_framework.views import APIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
-from rest_framework import status
+from rest_framework.exceptions import NotFound
 
-from .forms import ImageModelForm, CarForm
-from .serializers import CarSerializer, ChoiceSerializer
+from django.db.models import Q
+
+from .forms import CarForm
+from .serializers import CarSerializer, ChoiceSerializer, CarDetailSerializer
 from .serializers import ChoiceSerializer
-from .models import ImageModel
-
+from .models import ImageModel, Car
 
 class ChoicesAPIView(APIView):
     authentication_classes = []
@@ -67,3 +68,12 @@ class CreateCarsAPIView(APIView):
         else:
             errors = form.errors.as_json()
             return Response({'error': 'Failed to create car entry.', 'details': errors})
+
+class CarsDetailsApiView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, pk):
+        try:
+            car = Car.objects.get(pk=pk)
+            return Response({'car': CarDetailSerializer(car).data})
+        except Car.DoesNotExist:
+            raise NotFound('Car not found.')

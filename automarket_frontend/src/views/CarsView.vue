@@ -3,6 +3,7 @@
       <div class="w-[80%]">
           <h1 class="uppercase pt-40 text-start text-4xl mb-10">bmw f90 - <span class="text-gray-600">2019</span> </h1> 
           <p class="uppercase mb-10 ml-4">batumi</p>
+          
         <div class="flex justify-center">
           <!-- Large image container with navigation buttons -->
           <div class="relative w-[90%] flex justify-center">
@@ -28,6 +29,7 @@
             </div>
           </div>
         </div>
+
         <div v-if="imageViewerOpen" class="fixed inset-0 bg-black bg-opacity-100 flex justify-center items-center p-4 z-50">
           <button @click="closeImageViewer" class="absolute top-0 right-0 m-6 px-12 text-white text-4xl">×</button>
           <button @click="previousImage" class="absolute inset-y-0 left-0 z-10 m-6 text-white text-4xl">‹</button>
@@ -44,102 +46,94 @@
       <h1 class="uppercase text-center text-3xl mb-8">{{ $t('similar') }}</h1>
       <Similar/>
     </div>
-  </template>
+</template>
   
-  <script>
-  import Similar from '../components/car-page/Similar.vue'
-  import Descriptions from '../components/car-page/Descriptions.vue'
-  import { ref } from 'vue';
-  
-  export default {
-    components: {
-      Similar,
-      Descriptions
+<script>
+import Similar from '../components/car-page/Similar.vue'
+import Descriptions from '../components/car-page/Descriptions.vue'
+import axios from 'axios';
+export default {
+  components: {
+    Similar,
+    Descriptions
+  },
+  data() {
+    return {
+      images: [],
+      imageViewerOpen: false,
+      currentImageIndex: 0
+    };
+  },
+  methods: {
+    openImageViewer(index) {
+      if (window.innerWidth >= 768) {
+        this.currentImageIndex = index;
+        this.imageViewerOpen = true;
+      }
     },
-    setup() {
-      const images = ref([
-        '/peakpx.jpg',
-        '/sales-desktop.jpg',
-        '/mercedes.jpg',
-        '/mechanic.jpeg',
-        '/car.png',
-        '/background.jpg'
-      ]);
-      const imageViewerOpen = ref(false);
-      const currentImageIndex = ref(0);
-  
-      function openImageViewer(index) {
-        if (window.innerWidth >= 768) {
-          currentImageIndex.value = index;
-          imageViewerOpen.value = true;
-        }
-      }
-  
-      function closeImageViewer() {
-        imageViewerOpen.value = false;
-      }
-  
-      function nextImage() {
-        currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length;
-      }
-  
-      function previousImage() {
-        currentImageIndex.value = (currentImageIndex.value - 1 + images.value.length) % images.value.length;
-      }
-  
-      function makeImagePrimary(index) {
-        const selectedImage = images.value.splice(index, 1)[0];
-        images.value.unshift(selectedImage);
-        currentImageIndex.value = 0;
-      }
-  
-      // Keyboard navigation
-      window.addEventListener('keydown', (event) => {
-        if (imageViewerOpen.value) {
-          if (event.key === 'ArrowRight') {
-            nextImage();
-          } else if (event.key === 'ArrowLeft') {
-            previousImage();
-          } else if (event.key === 'Escape') {
-            closeImageViewer();
-          }
-        }
-      });
-  
-      return {
-        images,
-        imageViewerOpen,
-        currentImageIndex,
-        openImageViewer,
-        closeImageViewer,
-        nextImage,
-        previousImage,
-        makeImagePrimary
-      };
+    closeImageViewer() {
+      this.imageViewerOpen = false;
     },
-    mounted() {
-      setTimeout(() => {
-        const cards = document.querySelectorAll('.reveal-card');
-        cards.forEach(card => {
-          card.classList.add('active');
+    nextImage() {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    },
+    previousImage() {
+      this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    },
+    makeImagePrimary(index) {
+      const selectedImage = this.images.splice(index, 1)[0];
+      this.images.unshift(selectedImage);
+      this.currentImageIndex = 0;
+    },
+    getCars() {
+      axios
+        .get(`/api/${this.$route.params.id}/`)
+        .then(response => {
+          console.log(response.data);
+          this.images = response.data.car.images.map(img => img.image_url);
+        })
+        .catch(error => {
+          console.log('error:', error);
         });
-      }, 300); // Delay can be adjusted
+    },
+    handleKeydown(event) {
+      if (this.imageViewerOpen) {
+        if (event.key === 'ArrowRight') {
+          this.nextImage();
+        } else if (event.key === 'ArrowLeft') {
+          this.previousImage();
+        } else if (event.key === 'Escape') {
+          this.closeImageViewer();
+        }
+      }
     }
-  };
-  </script>
-  
-  <style scoped>
-  /* Add TailwindCSS styles here */
-  
-  .reveal-card {
-    opacity: 0;
-    transform: translateY(80px);
-    transition: opacity 0.5s ease, transform 2s ease;
-  }
-  
-  .reveal-card.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  </style>
-  
+  },
+  mounted() {
+    this.getCars();
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.reveal-card');
+      cards.forEach(card => {
+        card.classList.add('active');
+      });
+    }, 300);
+  // Keyboard navigation
+  window.addEventListener('keydown', (event) => {
+    if (this.imageViewerOpen) {
+      if (event.key === 'ArrowRight') {
+        this.nextImage();
+      } else if (event.key === 'ArrowLeft') {
+        this.previousImage();
+      } else if (event.key === 'Escape') {
+        this.closeImageViewer();
+      }
+    }
+  })
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  },
+};
+</script>
