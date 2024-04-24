@@ -63,9 +63,7 @@ methods: {
       axios
         .get(`/api/profile/cars/${this.$route.params.id}/`)
         .then(response => {
-            console.log(response.data.cars)
             this.cars = response.data.cars
-            console.log(response.data.user)
             this.user = response.data.user
         })
         .catch(error => {

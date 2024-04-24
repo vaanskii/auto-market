@@ -116,7 +116,7 @@
                 <p class="uppercase py-2 hover:border-black hover:border-b">My listing</p>
               </router-link>
               <!-- Settings view -->
-              <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'settings', props: {'id': userStore.user.id} })" v-if="userStore.user.isAuthenticated" class="text-center">
+              <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'settings', params: {'id': userStore.user.id} })" v-if="userStore.user.isAuthenticated" class="text-center">
                 <p class="uppercase py-2 hover:border-black hover:border-b">settings</p>
               </router-link>
               <button 
