@@ -5,6 +5,7 @@
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20">
         <div v-for="(car, index) in cars" :key="index" class="max-w-[280px] h-[350px] z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
           <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-[50%] rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+          <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
           <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
           <span class="uppercase font-bold mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>

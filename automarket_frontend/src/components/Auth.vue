@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="flex flex-col justify-center items-center">
-          <p class="text-center text-xl uppercase">Create or use an account to add items on our website</p>
+          <p class="text-center text-xl uppercase">Create or use an account to an add items</p>
           <div class="flex flex-row gap-4">
             <router-link :to="Trans.i18nRoute({ name: 'login' })" @click="onCloseModal()">
               <button class="uppercase mt-5 bg-black text-white rounded-lg py-3 px-2">login</button>

@@ -113,7 +113,7 @@
               <p class="text-center uppercase py-2 hover:border-black hover:border-b">{{ userStore.user.email }}</p>
               <!-- Profile view -->
               <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id} })" v-if="userStore.user.isAuthenticated && userStore.user.id" class="text-center">
-                <p class="uppercase py-2 hover:border-black hover:border-b">profile</p>
+                <p class="uppercase py-2 hover:border-black hover:border-b">My listing</p>
               </router-link>
               <!-- Settings view -->
               <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'settings' })" v-if="userStore.user.isAuthenticated" class="text-center">
@@ -134,45 +134,32 @@
   </nav>
       <!-- Bottom Navigation -->
   <nav class="bg-white text-black fixed bottom-0 w-full z-10">
-    <div :class="{'justify-evenly': !userStore.user.isAuthenticated, 'justify-around ml-2': userStore.user.isAuthenticated}" class="flex md:hidden items-center w-full p-2">
-      <router-link :to="Trans.i18nRoute({ name: 'home' })" class="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+    <div  class="flex justify-evenly md:hidden items-center w-full p-2">
+      <router-link @click="menudropdownOpen = false" :to="Trans.i18nRoute({ name: 'home' })" class="flex flex-col items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9">
           <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
         </svg>
         <p class="uppercase text-[10px]">home</p>
       </router-link>
-      <router-link to="#" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-        </svg>
-        <p class="uppercase text-[10px]">saved</p>
-      </router-link>
       <div class="relative">
-        <button @click="handleAddClick" class="absolute -top-10 left-1 flex justify-center items-center transform -translate-x-1/2 w-12 h-12 rounded-full bg-[#222] text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+        <button @click="handleAddClick" class="absolute -top-10 left-1 flex justify-center items-center transform -translate-x-1/2 w-14 h-14 rounded-full bg-[#222] text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-14 h-14">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-
         </button>
         <Auth :isOpen="modalOpen" :onCloseModal="closeModal" v-if="!userStore.user.isAuthenticated"/>
       </div>
-      <router-link :to="Trans.i18nRoute({ name: 'settings' })" v-if="userStore.user.isAuthenticated" class="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-        </svg>
-        <p class="uppercase text-[10px]">settings</p>
-      </router-link>
       <div v-if="!userStore.user.isAuthenticated">
-        <router-link :to="Trans.i18nRoute({ name: 'login' })" class="flex flex-col items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+        <router-link @click="menudropdownOpen = false" :to="Trans.i18nRoute({ name: 'login' })" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
           <p class="text-[10px] uppercase">login</p>
         </router-link>
       </div>
       <div v-else>
-        <router-link v-if="userStore.user.id" :to="Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id} })" class="flex flex-col items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+        <router-link @click="menudropdownOpen = false" v-if="userStore.user.id" :to="Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id} })" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
           <p class="text-[10px] uppercase">Profile</p>
