@@ -4,10 +4,14 @@
     <div class="py-20 flex justify-evenly w-full">
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20">
         <div v-for="(car, index) in cars" :key="index" class="max-w-[280px] h-[350px] z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
-          <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-[50%] rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+          <router-link :to="getRoute(car.id)">
+            <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-36 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+          </router-link>
           <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
-          <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
+          <router-link :to="getRoute(car.id)">
+            <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
+          </router-link>
           <span class="uppercase font-bold mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>
           <hr class="h-px mt-7 bg-black border-0">
           <div class="flex flex-row mt-2 ml-2">
@@ -37,14 +41,15 @@
 
 <script>
 import axios from 'axios';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid'
-import { useI18n } from 'vue-i18n';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 import { ref, computed } from 'vue';
+import Trans from '@/i18n/translation';
+import { useI18n } from 'vue-i18n';
 
 export default {
   setup() {
-    const { t } = useI18n();
-    const isExtended = ref(false); 
+    const { t } = useI18n(); 
+    const isExtended = ref(false);
     const containerRef = ref(null);
 
     const buttonText = computed(() => {
@@ -61,7 +66,18 @@ export default {
       }
     };
 
-    return { buttonText, isExtended, toggleHeight, containerRef };
+    const getRoute = (carId) => {
+      return Trans.i18nRoute({ name: 'cardetail', params: { id: carId } });
+    };
+
+    return {
+      buttonText,
+      isExtended,
+      toggleHeight,
+      containerRef,
+      getRoute,
+      t
+    };
   },
   data() {
     return {
@@ -98,23 +114,23 @@ export default {
   methods: {
     getRecentlyAddedCars() {
       axios
-      .get('/api/recently/')
-      .then(response => {
-        this.cars = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
+        .get('/api/recently/')
+        .then(response => {
+          this.cars = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     revealContentOnScroll() {
       window.addEventListener('scroll', () => {
         const revealElements = document.querySelectorAll('.reveal-h1, .reveal-car');
         const windowHeight = window.innerHeight;
-        
+
         revealElements.forEach(el => {
           const elementTop = el.getBoundingClientRect().top;
           const revealPoint = 150;
-          
+
           if (elementTop < windowHeight - revealPoint) {
             el.classList.add('active');
           } else {
@@ -128,7 +144,7 @@ export default {
     }
   },
   components: {
-    ChevronDownIcon, 
+    ChevronDownIcon,
     ChevronUpIcon
   }
 }
