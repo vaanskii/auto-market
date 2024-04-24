@@ -8,9 +8,9 @@
     "language": "languages",
     "add": "add",
     "login": "login",
-    "search": "Search",
+    "search": "search",
     "logout": "logout"
-  },
+},
 
   "main-header": {
     "words": {

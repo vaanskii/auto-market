@@ -7,6 +7,14 @@ import i18n from './i18n'
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 
+const originalWarn = console.warn;
+console.warn = function (msg) {
+  if (msg.includes('[intlify]')) {
+    return;
+  }
+  originalWarn.apply(console, arguments);
+};
+
 axios.defaults.baseURL = "http://127.0.0.1:8000"
 
 const app = createApp(App)
