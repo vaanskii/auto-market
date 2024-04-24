@@ -96,7 +96,7 @@ class RecentlyAddedCars(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
     def get(self, request):
-        recent_car = Car.objects.all().order_by('-created_at')[:2]
+        recent_car = Car.objects.all().order_by('-created_at')[:10]
         serializer = CarSerializer(recent_car, many=True)
 
         return Response(serializer.data)

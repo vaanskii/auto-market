@@ -4,14 +4,14 @@
     <div class="py-20 flex justify-evenly w-full">
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20">
         <div v-for="(car, index) in cars" :key="index" class="max-w-[280px] h-[350px] z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
-          <img :src="car.image" class="w-full h-[50%] rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+          <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-[50%] rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
-          <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.title }} - {{ car.year }}</span>
-          <span class="uppercase font-bold mt-4 ml-2 text-gray-900">{{ car.price }}</span>
+          <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
+          <span class="uppercase font-bold mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>
           <hr class="h-px mt-7 bg-black border-0">
           <div class="flex flex-row mt-2 ml-2">
-            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3">{{ car.type }}</span>
-            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3 ml-2">{{ car.petrol }}</span>
+            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3">{{ car.created_by.name }}</span>
+            <span class="uppercase text-[10px] p-2 bg-black text-white rounded-full px-3 ml-2">{{ car.types }}</span>
           </div>
         </div>
       </div>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { useI18n } from 'vue-i18n';
 import { ref, computed } from 'vue';
@@ -42,8 +43,8 @@ import { ref, computed } from 'vue';
 export default {
   setup() {
     const { t } = useI18n();
-    const isExtended = ref(false); // Define isExtended as a reactive variable
-    const containerRef = ref(null); // Define a ref for the container element
+    const isExtended = ref(false); 
+    const containerRef = ref(null);
 
     const buttonText = computed(() => {
       return isExtended.value ? t('seeless') : t('seemore');
@@ -51,10 +52,9 @@ export default {
 
     const toggleHeight = () => {
       isExtended.value = !isExtended.value;
-      // Adjust height based on the toggle
       if (!isExtended.value && containerRef.value) {
         window.scrollTo({
-          top: containerRef.value.offsetTop, // Use the ref's value to access offsetTop
+          top: containerRef.value.offsetTop,
           behavior: 'smooth'
         });
       }
@@ -64,24 +64,15 @@ export default {
   },
   data() {
     return {
-      cars: [
-        { title: 'Bmw f90', year: 2015, location: 'Tbilisi',  image: '/peakpx.jpg', owner: 'Vaanskii', price: 5000+ ' $', type: 'SEDAN', petrol: 'Gasoline'},
-        { title: 'Card 1', year: 2024, image: '/peakpx.jpg', location: 'Tbilisi', owner: 'Toka', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
-        { title: 'Card 2', year: 2001, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Luka', price: 5000+ ' $', type: 'SEDAN', petrol: 'Diesel'},
-        { title: 'Card 4', year: 2015, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Nika', price: 5000+ ' $', type: 'SPORT', petrol: 'Gasoline'},
-        { title: 'Card 5', year: 2010, image: '/peakpx.jpg', location: 'Tbilisi', owner: 'Vaanskii', price: 5000+ ' $', type: 'SUV', petrol: 'Diesel'},
-        { title: 'Card 6', year: 2020, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Zura', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
-        { title: 'Card 5', year: 2019, image: '/peakpx.jpg', location: 'Tbilisi', owner: 'Vaanskii', price: 5000+ ' $', type: 'SEDAN', petrol: 'Diesel'},
-        { title: 'Card 6', year: 2000, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Zura', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
-        { title: 'Card 6', year: 2000, image: '/mercedes.jpg', location: 'Tbilisi', owner: 'Zura', price: 5000+ ' $', type: 'SUV', petrol: 'Gasoline'},
-      ],
+      cars: [],
       windowWidth: window.innerWidth
     };
   },
   mounted() {
+    this.getRecentlyAddedCars();
     this.revealContentOnScroll();
     window.addEventListener('resize', this.updateButtonVisibility);
-    this.updateButtonVisibility(); // Initial check on load
+    this.updateButtonVisibility();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.updateButtonVisibility);
@@ -96,7 +87,6 @@ export default {
       return false;
     },
     currentHeight() {
-      // Calculate the height based on the number of cars displayed
       if (this.isExtended || this.cars.length <= 4) {
         return 'auto';
       } else {
@@ -105,6 +95,17 @@ export default {
     }
   },
   methods: {
+    getRecentlyAddedCars() {
+      axios
+      .get('/api/recently/')
+      .then(response => {
+        console.log(response.data)
+        this.cars = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
     revealContentOnScroll() {
       window.addEventListener('scroll', () => {
         const revealElements = document.querySelectorAll('.reveal-h1, .reveal-car');
