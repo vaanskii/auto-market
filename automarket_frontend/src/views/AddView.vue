@@ -382,7 +382,7 @@ export default {
     // Fetching choices from server
     fetchChoices() {
         axios
-            .get('/api/choices')
+            .get('/api/choices/')
             .then(response => {
                 this.choices = response.data
             })

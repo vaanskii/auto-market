@@ -131,7 +131,7 @@ watch: {
 methods: {
 fetchChoices() {
   axios
-  .get('/api/choices')
+  .get('/api/choices/')
   .then(response => {
       this.choices = response.data
   })
