@@ -314,7 +314,7 @@ export default {
     const userStore = useUserStore()
     return {
       Trans,
-      useUserStore
+      userStore
     }
   },
   data() {
@@ -455,7 +455,7 @@ export default {
                 })
                 .then(response => {
                     console.log(response.data);
-                    this.$router.push(this.Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id } }));
+                    this.$router.push(this.Trans.i18nRoute({ name: 'profile', params: {'id': this.userStore.user.id } }));
                 })
                 .catch(error => {
                     console.error('Error submitting form:', error);
