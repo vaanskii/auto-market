@@ -99,7 +99,6 @@ export default {
       axios
       .get('/api/recently/')
       .then(response => {
-        console.log(response.data)
         this.cars = response.data
       })
       .catch(error => {
