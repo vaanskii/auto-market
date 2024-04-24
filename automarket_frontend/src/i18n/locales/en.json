@@ -102,6 +102,7 @@
   },
 
     "similar": "similar cars",
+    "no-similar": "similar cars not found!!!",
 
     "login": {
       "paragraph": "At AUTOHUB, we connect you to a world of automotive possibilities. Whether you're buying, selling, or renting a car, AUTOHUB simplifies the process for you.",

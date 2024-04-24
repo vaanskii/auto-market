@@ -42,9 +42,12 @@
   <div class="flex justify-center items-center flex-col mt-10">
     <Descriptions/>
   </div>
-  <div class="mt-20">
+  <div v-if="similarCarsData.length > 0" class="mt-20">
     <h1 class="uppercase text-center text-3xl mb-8">{{ $t('similar') }}</h1>
-    <Similar/>
+    <Similar :similar-cars="similarCarsData" />
+  </div>
+  <div class="mt-20" v-else>
+    <h1 class="uppercase text-center text-3xl mb-8">{{ $t('no-similar') }}</h1>
   </div>
 </template>
 
@@ -57,12 +60,23 @@ components: {
   Similar,
   Descriptions
 },
+watch: {
+  '$route': {
+    immediate: true,
+    handler(to, from) {
+      if (to && from && to.params && from.params && to.params.id !== from.params.id) {
+        this.getCars();
+      }
+    }
+  }
+},
 data() {
   return {
     car: [],
     images: [],
     imageViewerOpen: false,
-    currentImageIndex: 0
+    currentImageIndex: 0,
+    similarCarsData: []
   };
 },
 methods: {
@@ -92,10 +106,22 @@ methods: {
       .then(response => {
         this.car = response.data.car
         this.images = response.data.car.images.map(img => img.image_url);
+        this.fetchSimilarCars()
       })
       .catch(error => {
         console.log('error:', error);
       });
+  },
+  fetchSimilarCars() {
+    const currentCarId = this.car.id
+    axios
+        .get(`/api/similar/${this.car.manufacturer}/${currentCarId}/`)
+        .then(response => {
+          this.similarCarsData = response.data;
+        })
+        .catch(error => {
+          console.log(error)
+        })
   },
   handleKeydown(event) {
     if (this.imageViewerOpen) {
@@ -109,32 +135,32 @@ methods: {
     }
   }
 },
-mounted() {
-  this.getCars();
-  setTimeout(() => {
-    const cards = document.querySelectorAll('.reveal-card');
-    cards.forEach(card => {
-      card.classList.add('active');
-    });
-  }, 300);
-// Keyboard navigation
-window.addEventListener('keydown', (event) => {
-  if (this.imageViewerOpen) {
-    if (event.key === 'ArrowRight') {
-      this.nextImage();
-    } else if (event.key === 'ArrowLeft') {
-      this.previousImage();
-    } else if (event.key === 'Escape') {
-      this.closeImageViewer();
+  mounted() {
+    this.getCars();
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.reveal-card');
+      cards.forEach(card => {
+        card.classList.add('active');
+      });
+    }, 300);
+  // Keyboard navigation
+  window.addEventListener('keydown', (event) => {
+    if (this.imageViewerOpen) {
+      if (event.key === 'ArrowRight') {
+        this.nextImage();
+      } else if (event.key === 'ArrowLeft') {
+        this.previousImage();
+      } else if (event.key === 'Escape') {
+        this.closeImageViewer();
+      }
     }
-  }
-})
-},
-beforeDestroy() {
-  window.removeEventListener('keydown', this.handleKeydown);
-},
-beforeUnmount() {
-  window.removeEventListener('keydown', this.handleKeydown);
-},
+  })
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  },
 };
 </script>

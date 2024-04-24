@@ -71,9 +71,23 @@ class CreateCarsAPIView(APIView):
 
 class CarsDetailsApiView(APIView):
     permission_classes = [AllowAny]
+    authentication_classes = []
     def get(self, request, pk):
         try:
             car = Car.objects.get(pk=pk)
             return Response({'car': CarDetailSerializer(car).data})
         except Car.DoesNotExist:
             raise NotFound('Car not found.')
+        
+class SimilarCarsAPIView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    def get(self, request, *args, **kwargs):
+        manufacturer = kwargs.get('manufacturer', '').lower()
+        current_car_id = kwargs.get('pk', None)
+        similar_cars = Car.objects.filter(manufacturer__iexact=manufacturer)
+        if current_car_id:
+            similar_cars = similar_cars.exclude(id=current_car_id)
+        similar_cars = similar_cars[:5]
+        serializer = CarSerializer(similar_cars, many=True)
+        return Response(serializer.data)

@@ -11,6 +11,7 @@ class CarList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_class = CarFilter
     permission_classes = [AllowAny]
+    authentication_classes = []
 
     def get_queryset(self):
         queryset = super().get_queryset()
