@@ -308,10 +308,13 @@
 <script>
 import Trans from '@/i18n/translation'
 import axios from 'axios';
+import { useUserStore } from '@/stores/user';
 export default {
   setup() {
+    const userStore = useUserStore()
     return {
-      Trans
+      Trans,
+      useUserStore
     }
   },
   data() {
@@ -452,7 +455,7 @@ export default {
                 })
                 .then(response => {
                     console.log(response.data);
-                    this.$router.push(this.Trans.i18nRoute({ name: 'profile' }));
+                    this.$router.push(this.Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id } }));
                 })
                 .catch(error => {
                     console.error('Error submitting form:', error);
