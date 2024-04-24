@@ -43,7 +43,7 @@
     <Cards/>
   </div>
 
-  <section class="w-full h-[550px] bg-lights mt-10 mb-32 py-52 bg-start bg-cover my-20 border bg-no-repeat"></section>
+  <section class="w-full bg-lights mt-10 mb-32 py-52 bg-start bg-cover my-20 border bg-no-repeat"></section>
   <!-- Recently vue -->
   <Recently/>
   <!-- Blogs vue -->
@@ -140,14 +140,16 @@ export default {
 
 
 
-<style>
+<style scoped>
 .bg-lights {
-  background-image: url('sales-desktop.jpg');
+  background-image: url('sales-desktop.jpg?v=1');
+  background-position: start;
+  height: 500px;
 }
 
 @media (max-width: 1024px){
   .bg-lights {
-  background-image: url('sales-mobile.jpg');
+  background-image: url('sales-mobile.jpg?v=1');
   background-position: start;
   height: 400px;
   margin-top: 0;
