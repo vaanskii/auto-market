@@ -76,7 +76,7 @@
                                 <!-- PRICE -->
                                 <div class="flex flex-col space-y-1">
                                     <label for="price" class="text-sm font-semibold text-gray-500">Price</label>
-                                    <input v-model="price" placeholder="Enter year" type="number" id="price" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
+                                    <input v-model="price" placeholder="Enter price" type="number" id="price" class="placeholder-gray-500 uppercase text-sm border border-gray-300 text-black bg-white px-4 rounded py-2 outline-none" />
                                 </div>
                             </div>
                         </div>
