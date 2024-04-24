@@ -142,14 +142,14 @@ export default {
 
 <style scoped>
 .bg-lights {
-  background-image: url('sales-desktop.jpg?v=1');
+  background-image: url('/sales-desktop.jpg');
   background-position: start;
   height: 500px;
 }
 
 @media (max-width: 1024px){
   .bg-lights {
-  background-image: url('sales-mobile.jpg?v=1');
+  background-image: url('/sales-mobile.jpg');
   background-position: start;
   height: 400px;
   margin-top: 0;
