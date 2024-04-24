@@ -8,12 +8,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.exceptions import NotFound
 
-from django.db.models import Q
-
 from .forms import CarForm
 from .serializers import CarSerializer, ChoiceSerializer, CarDetailSerializer
-from .serializers import ChoiceSerializer
 from .models import ImageModel, Car
+from account.models import User
+from account.serializers import UserSerializer
 
 class ChoicesAPIView(APIView):
     authentication_classes = []
@@ -52,7 +51,6 @@ class CreateCarsAPIView(APIView):
             car_instance = form.save(commit=False)
             car_instance.created_by = request.user
 
-            # Handle the main image
             if main_image_file:
                 main_image_instance = ImageModel.objects.create(image=main_image_file, created_by=request.user)
                 car_instance.main_image = main_image_instance 
@@ -92,7 +90,7 @@ class SimilarCarsAPIView(APIView):
         serializer = CarSerializer(similar_cars, many=True)
         return Response(serializer.data)
     
-class RecentlyAddedCars(APIView):
+class RecentlyAddedCarsAPIView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = []
     def get(self, request):
@@ -100,3 +98,15 @@ class RecentlyAddedCars(APIView):
         serializer = CarSerializer(recent_car, many=True)
 
         return Response(serializer.data)
+    
+class UserCarsAPIView(APIView):
+    def get(self, request, id):
+        user = User.objects.get(id=id)
+        cars = Car.objects.filter(created_by__id=id)
+        cars_serializer = CarSerializer(cars, many=True)
+        user_serializer = UserSerializer(user)
+
+        return Response({
+            'user': user_serializer.data,
+            "cars": cars_serializer.data
+        })
