@@ -91,3 +91,12 @@ class SimilarCarsAPIView(APIView):
         similar_cars = similar_cars[:5]
         serializer = CarSerializer(similar_cars, many=True)
         return Response(serializer.data)
+    
+class RecentlyAddedCars(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    def get(self, request):
+        recent_car = Car.objects.all().order_by('-created_at')[:2]
+        serializer = CarSerializer(recent_car, many=True)
+
+        return Response(serializer.data)
