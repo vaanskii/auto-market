@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
+from .models import User
 
 class UserAPIView(APIView):
     def get(self, request):
@@ -47,3 +48,26 @@ class SignupAPIView(APIView):
             message = form.errors.as_json()
         
         return Response({'message': message}, status=status.HTTP_200_OK)
+    
+from rest_framework.permissions import AllowAny
+
+class EditProfileAPIView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        user = request.user
+        name = request.data.get('name')
+        email = request.data.get('email')
+        mobile_number = request.data.get('mobile_number')
+
+        if User.objects.exclude(id=user.id).filter(email=email).exists():
+            return Response({'message': 'email already exists'})
+        elif User.objects.exclude(id=user.id).filter(mobile_number=mobile_number).exists():
+            return Response({'message': 'mobile number already exists'})
+        else:
+            form = ProfileForm(request.POST, instance=user)
+
+            if form.is_valid():
+                form.save()
+                return Response({'message': 'profile uploaded successfully'})
+            else:
+                return Response( form.errors, status=400)
