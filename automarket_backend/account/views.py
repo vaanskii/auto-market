@@ -58,13 +58,14 @@ class EditProfileAPIView(APIView):
         name = request.data.get('name')
         email = request.data.get('email')
         mobile_number = request.data.get('mobile_number')
+        country_code = request.data.get('country_code')
 
         if User.objects.exclude(id=user.id).filter(email=email).exists():
             return Response({'message': 'email already exists'})
         elif User.objects.exclude(id=user.id).filter(mobile_number=mobile_number).exists():
             return Response({'message': 'mobile number already exists'})
         else:
-            form = ProfileForm(request.POST, instance=user)
+            form = ProfileForm(request.data, instance=user)
 
             if form.is_valid():
                 form.save()
