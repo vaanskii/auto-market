@@ -135,7 +135,6 @@ if(this.errors.length === 0){
   axios.post('/api/editprofile/', payload)
       .then(response => {
         if(response.data.message === 'profile uploaded successfully'){
-          console.log('Profile updated successfully', response.data)
           this.userStore.setUserInfo({
             id: this.userStore.user.id,
             name: this.form.name,
