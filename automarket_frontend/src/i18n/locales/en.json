@@ -76,7 +76,9 @@
     "search": "SEARCH WITH VIN DECODE",
     "placeholder": "TYPE VIN CODE",
     "understanding": "UNDERSTANDING VIN DECODING",
-    "explanation": "VIN decoding is the process of analyzing the Vehicle Identification Number (VIN) to retrieve information about a vehicle's make, model, year, and more. It's useful for understanding a vehicle's history, features, and specifications before making a purchase."
+    "explanation": "VIN decoding is the process of analyzing the Vehicle Identification Number (VIN) to retrieve information about a vehicle's make, model, year, and more. It's useful for understanding a vehicle's history, features, and specifications before making a purchase.",
+    "loading": "Loading VIN data...",
+    "information": "Vehicle information"
   },
 
   "description": {
