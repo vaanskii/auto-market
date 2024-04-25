@@ -64,10 +64,12 @@ export const useUserStore = defineStore({
         },
 
         setUserInfo(user) {
+            const mobileNumberWithoutCountryCode = this.removeCountryCode(user.mobile_number, user.country_code);
+
             this.user.id = user.id
             this.user.name = user.name
             this.user.email = user.email
-            this.user.mobile_number = user.mobile_number
+            this.user.mobile_number = mobileNumberWithoutCountryCode
             this.user.country_code = user.country_code
 
             localStorage.setItem('user.id', this.user.id)
@@ -75,6 +77,13 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.mobile_number', this.user.mobile_number)
             localStorage.setItem('user.country_code', this.user.country_code)
+        },
+
+        removeCountryCode(mobileNumber, countryCode) {
+            if (mobileNumber.startsWith(countryCode)) {
+                return mobileNumber.slice(countryCode.length);
+            }
+            return mobileNumber;
         },
 
         refreshToken() {
