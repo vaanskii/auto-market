@@ -21,7 +21,7 @@
         <h1 class="uppercase text-3xl font-bold mb-10 text-center">{{ $t('vin.search') }}</h1>
         <div class="w-[90%] max-h-[400px] bg-[#222] rounded-xl">
           <!-- INPUT FIELD -->
-          <form v-on:submit.prevent="submitVin" class="flex justify-around">
+          <form v-on:submit.prevent="submitVin" class="flex justify-around relative">
             <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
               <input 
                 v-model="vinQuery" 
@@ -29,14 +29,20 @@
                 type="text" 
                 class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" 
                 :placeholder="$t('vin.placeholder')"
+                @keydown.enter.prevent="searchOnEnter"
               >
               <button type="submit" class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%] hover:bg-gray-100">search</button>
+              <div v-if="errors.length > 0" class="absolute bottom-[5rem] md:text-lg text-center text-xs">
+                  <div>
+                      <p class="uppercase text-red-300" v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                  </div>
+              </div>
             </div>
           </form>
         </div>
         <div class="p-6 rounded-lg mt-4">
-          <h2 class="text-2xl font-semibold text-center">{{ $t('vin.understanding') }}</h2>
-          <p class="mt-4 text-gray-700">{{ $t('vin.explanation') }}</p>
+            <h2 class="text-2xl font-semibold text-center">{{ $t('vin.understanding') }}</h2>
+            <p class="mt-4 text-gray-700">{{ $t('vin.explanation') }}</p>
         </div>
       </div>
     </div>
@@ -51,7 +57,13 @@ export default {
   setup() {
     return {
       Trans,
-      vinQuery: ''
+      vinQuery: '',
+
+    }
+  },
+  data() {
+    return {
+      errors: []
     }
   },
   mounted() {
@@ -59,9 +71,19 @@ export default {
   },
   methods: {
     submitVin() {
-      if (this.vinQuery.trim() !== '') {
+      if (this.vinQuery.trim() === '') {
+        this.errors = ["VIN cannot be empty"];
+      } else if (/[IQO]/.test(this.vinQuery)) {
+        this.errors = ["You can't use I, Q, and O in VIN decoder"];
+      } else {
         this.$router.push(this.Trans.i18nRoute({ name: 'vin', query: { q: this.vinQuery }}));
       }
+    },
+    searchOnEnter(event) {
+        if (!event.shiftKey) {
+        event.preventDefault();
+        this.submitVin();
+        }
     },
     revealItemsOnScroll() {
       window.addEventListener('scroll', () => {
