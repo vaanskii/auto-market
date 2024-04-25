@@ -9,7 +9,9 @@
     "add": "add",
     "login": "login",
     "search": "Search",
-    "logout": "logout"
+    "logout": "logout",
+    "listing": "my listings",
+    "settings": "settings"
 },
 
   "main-header": {
@@ -107,17 +109,36 @@
     "login": {
       "paragraph": "At AUTOHUB, we connect you to a world of automotive possibilities. Whether you're buying, selling, or renting a car, AUTOHUB simplifies the process for you.",
       "log-in": "log in",
-      "account": "Don't have an account?"
+      "account": "Don't have an account?",
+      "password": "password",
+      "getstart": "get start!",
+      "forgotpassword": "Forgor Password?"
     },
 
     "signup": {
       "sign-up": "Create new account",
-      "account": "Already have an account?"
+      "account": "Already have an account?",
+      "createacc": "create account",
+      "password1": "password",
+      "password2": "repeat password"
     },
 
     "changeinfo": {
+      "header": "change user info",
       "paragraph": "Update your user information with ease at AUTOHUB. Whether it's your email address, name, or mobile number, AUTOHUB ensures a seamless process for you.",
       "password": "Do u want to change password?",
-      "getstart": "Change it now!"
+      "getstart": "Change it now!",
+      "save": "save",
+      "name": "name",
+      "email": "Email address",
+      "mobile_number": "mobile number"
+  },
+  "changepassword": {
+    "header": "change password",
+    "info": "Do u want to change user info?",
+    "paragraph": "Securely change your password at AUTOHUB. Keep your account protected with our seamless password updating process.",
+    "old_password": "old password",
+    "new_password1": "new password",
+    "new_password2": "repeat new password"
   }
 }

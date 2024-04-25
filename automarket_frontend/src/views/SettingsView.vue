@@ -22,10 +22,10 @@
         </p>
       </div>
       <div class="p-5 bg-[#E6E6E6] md:flex-1">
-        <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Change user info</h3>
+        <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">{{  $t('changeinfo.header')  }}</h3>
         <form v-on:submit.prevent="submitForm" action="#" class="flex flex-col space-y-5">
           <div class="flex flex-col space-y-1">
-            <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
+            <label for="email" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.email') }}</label>
             <input
               type="email"
               id="email"
@@ -37,7 +37,7 @@
             />
           </div>
           <div class="flex flex-col space-y-1">
-            <label for="name" class="text-sm font-semibold text-gray-500">Name</label>
+            <label for="name" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.name') }}</label>
             <input
               type="text"
               id="name"
@@ -50,7 +50,7 @@
           </div>
           <!-- Mobile number and country code -->
           <div class="group w-full">
-            <label for="tel" class="text-sm font-semibold text-gray-500">Mobile Number</label>
+            <label for="tel" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.mobile_number') }}</label>
             <div class="relative flex items-center">
               <input
                   type="tel"
@@ -73,7 +73,7 @@
                   type="submit"
                   >
                   <span class="absolute inset-0 bg-[#222]"></span>
-                  <span class="absolute inset-0 flex justify-center items-center font-bold">save</span>
+                  <span class="absolute inset-0 flex justify-center items-center font-bold">{{ $t('changeinfo.save') }}</span>
               </button>
           </div>
           <template v-if="errors.length > 0">

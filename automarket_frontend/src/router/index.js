@@ -8,6 +8,7 @@ import Add from '../views/AddView.vue'
 import Blogs from '../views/BlogsView.vue'
 import Search from '../views/SearchView.vue'
 import Settings from '../views/SettingsView.vue'
+import Password from '../views/ChangePasswordView.vue'
 import Profile from '../views/ProfileView.vue'
 
 import { useUserStore } from '@/stores/user'
@@ -82,6 +83,11 @@ const router = createRouter({
           path: 'settings/:id',
           name: 'settings',
           component: Settings
+        },
+        {
+          path: 'password/:id',
+          name: 'password',
+          component: Password
         },
         {
           path: 'profile/:id',

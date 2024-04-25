@@ -22,10 +22,10 @@
           </p>
         </div>
         <div class="p-5 bg-[#E6E6E6] md:flex-1">
-          <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Create account</h3>
+          <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">{{ $t('signup.createacc') }}</h3>
           <form v-on:submit.prevent="submitForm" action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
-              <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
+              <label for="email" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.email') }}</label>
               <input
                 type="email"
                 id="email"
@@ -37,7 +37,7 @@
               />
             </div>
             <div class="flex flex-col space-y-1">
-              <label for="name" class="text-sm font-semibold text-gray-500">Name</label>
+              <label for="name" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.name') }}</label>
               <input
                 type="text"
                 id="name"
@@ -50,7 +50,7 @@
             </div>
             <!-- Mobile number and country code -->
             <div class="group w-full">
-              <label for="tel" class="text-sm font-semibold text-gray-500">Mobile Number</label>
+              <label for="tel" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.mobile_number') }}</label>
               <div class="relative flex items-center">
                 <input
                     type="tel"
@@ -71,7 +71,7 @@
 
             <div class="flex flex-col space-y-1">
               <div class="flex items-center justify-between">
-                <label for="password" class="text-sm font-semibold text-gray-500">Password</label>
+                <label for="password" class="text-sm font-semibold text-gray-500">{{ $t('signup.password1') }}</label>
               </div>
               <input
                 type="password"
@@ -84,7 +84,7 @@
             </div>
             <div class="flex flex-col space-y-1">
               <div class="flex items-center justify-between">
-                <label for="password2" class="text-sm font-semibold text-gray-500">Repeat password</label>
+                <label for="password2" class="text-sm font-semibold text-gray-500">{{ $t('signup.password2') }}</label>
               </div>
               <input
                 type="password"

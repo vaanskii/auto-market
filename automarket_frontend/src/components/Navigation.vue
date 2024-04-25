@@ -113,11 +113,11 @@
               <p class="text-center uppercase py-2 hover:border-black hover:border-b">{{ userStore.user.email }}</p>
               <!-- Profile view -->
               <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'profile', params: {'id': userStore.user.id} })" v-if="userStore.user.isAuthenticated && userStore.user.id" class="text-center">
-                <p class="uppercase py-2 hover:border-black hover:border-b">My listing</p>
+                <p class="uppercase py-2 hover:border-black hover:border-b">{{ $t('nav.listing') }}</p>
               </router-link>
               <!-- Settings view -->
               <router-link @click="userDropdown = false" :to="Trans.i18nRoute({ name: 'settings', params: {'id': userStore.user.id} })" v-if="userStore.user.isAuthenticated" class="text-center">
-                <p class="uppercase py-2 hover:border-black hover:border-b">settings</p>
+                <p class="uppercase py-2 hover:border-black hover:border-b">{{ $t('nav.settings') }}</p>
               </router-link>
               <button 
                     @click="handleLogout" 

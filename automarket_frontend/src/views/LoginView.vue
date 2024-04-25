@@ -15,7 +15,7 @@
           </p>
           <p class="flex flex-col items-center justify-center mt-10 text-center">
             <span>{{ $t('login.account') }}</span>
-            <router-link :to="Trans.i18nRoute({ name: 'signup' })" class="underline mt-px">Get Started!</router-link>
+            <router-link :to="Trans.i18nRoute({ name: 'signup' })" class="underline mt-px">{{ $t('login.getstart') }}</router-link>
           </p>
           <p class="mt-6 text-sm text-center text-gray-300">
             Read our <a href="#" class="underline">terms</a> and <a href="#" class="underline">conditions</a>
@@ -25,7 +25,7 @@
           <h3 class="my-4 text-2xl font-semibold text-gray-700 uppercase">Account Login</h3>
           <form v-on:submit.prevent="submitForm" action="#" class="flex flex-col space-y-5">
             <div class="flex flex-col space-y-1">
-              <label for="email" class="text-sm font-semibold text-gray-500">Email address</label>
+              <label for="email" class="text-sm font-semibold text-gray-500">{{ $t('changeinfo.email') }}</label>
               <input
                 type="email"
                 id="email"
@@ -38,8 +38,8 @@
             </div>
             <div class="flex flex-col space-y-1">
               <div class="flex items-center justify-between">
-                <label for="password" class="text-sm font-semibold text-gray-500">Password</label>
-                <a href="#" class="text-sm text-black hover:underline">Forgot Password?</a>
+                <label for="password" class="text-sm font-semibold text-gray-500">{{ $t('login.password') }}</label>
+                <a href="#" class="text-sm text-black hover:underline">{{ $t('login.forgotpassword') }}</a>
               </div>
               <input
                 type="password"
