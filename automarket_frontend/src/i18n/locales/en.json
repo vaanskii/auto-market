@@ -113,5 +113,11 @@
     "signup": {
       "sign-up": "Create new account",
       "account": "Already have an account?"
-    }
+    },
+
+    "changeinfo": {
+      "paragraph": "Update your user information with ease at AUTOHUB. Whether it's your email address, name, or mobile number, AUTOHUB ensures a seamless process for you.",
+      "password": "Do u want to change password?",
+      "getstart": "Change it now!"
+  }
 }
