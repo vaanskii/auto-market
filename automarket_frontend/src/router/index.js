@@ -10,6 +10,7 @@ import Search from '../views/SearchView.vue'
 import Settings from '../views/SettingsView.vue'
 import Password from '../views/ChangePasswordView.vue'
 import Profile from '../views/ProfileView.vue'
+import Vin from '../views/VinResultsView.vue'
 
 import { useUserStore } from '@/stores/user'
 
@@ -103,6 +104,11 @@ const router = createRouter({
           path: 'search',
           name: 'search',
           component: Search,
+        },
+        {
+          path: 'vin',
+          name: 'vin',
+          component: Vin,
         }
       ]
     }

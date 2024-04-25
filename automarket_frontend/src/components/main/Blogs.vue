@@ -21,9 +21,15 @@
         <h1 class="uppercase text-3xl font-bold mb-10 text-center">{{ $t('vin.search') }}</h1>
         <div class="w-[90%] max-h-[400px] bg-[#222] rounded-xl">
           <!-- INPUT FIELD -->
-          <form class="flex justify-around">
+          <form v-on:submit.prevent="submitVin" class="flex justify-around">
             <div class="w-[90%] h-[400px] flex md:flex-row flex-col items-center md:justify-around justify-center gap-2">
-              <input id="vin" type="text" class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" :placeholder="$t('vin.placeholder')">
+              <input 
+                v-model="vinQuery" 
+                id="vin" 
+                type="text" 
+                class="w-[90%] bg-[#E6E6E6] py-3 text-xl pl-4 rounded-lg" 
+                :placeholder="$t('vin.placeholder')"
+              >
               <button type="submit" class="uppercase bg-[#E6E6E6] text-black px-4 py-3.5 rounded-lg w-[90%] md:w-[25%] hover:bg-gray-100">search</button>
             </div>
           </form>
@@ -44,13 +50,19 @@ import Trans from '@/i18n/translation'
 export default {
   setup() {
     return {
-      Trans
+      Trans,
+      vinQuery: ''
     }
   },
   mounted() {
     this.revealItemsOnScroll();
   },
   methods: {
+    submitVin() {
+      if (this.vinQuery.trim() !== '') {
+        this.$router.push(this.Trans.i18nRoute({ name: 'vin', query: { q: this.vinQuery }}));
+      }
+    },
     revealItemsOnScroll() {
       window.addEventListener('scroll', () => {
         const revealItems = document.querySelectorAll('.reveal-item');
