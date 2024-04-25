@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from django.contrib.auth.forms import PasswordChangeForm
+
 from .forms import SignupForm, ProfileForm
 from .models import User
 
@@ -52,7 +54,6 @@ class SignupAPIView(APIView):
 from rest_framework.permissions import AllowAny
 
 class EditProfileAPIView(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         user = request.user
         name = request.data.get('name')
@@ -72,3 +73,14 @@ class EditProfileAPIView(APIView):
                 return Response({'message': 'profile uploaded successfully'})
             else:
                 return Response( form.errors, status=400)
+            
+class PasswordChangeAPIView(APIView):
+    def post(self, request):
+        user = request.user
+        form = PasswordChangeForm(data=request.data, user=user)
+
+        if form.is_valid():
+            form.save()
+            return Response({'message': 'success'})
+        else:
+            return Response({'message': form.errors}, status=404)
