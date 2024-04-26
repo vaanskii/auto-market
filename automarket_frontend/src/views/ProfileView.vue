@@ -14,7 +14,7 @@
                 </div>
                 <div class="flex justify-center items-center">
                     <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
-                        <div v-for="car in cars" :key="car.id" class="max-w-[280px] h-[350px] shadow-2xl z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
+                        <div v-for="car in cars" :key="car.id" class="w-[250px] h-[350px] shadow-2xl z-1 flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
                             <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })">
                                 <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-44 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
                             </router-link>
@@ -32,10 +32,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center items-center mt-16" v-else-if="!cars.length && loading">
+            <div class="flex flex-col justify-center items-center mt-16" v-else-if="!cars.length && loading">
                 <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Loading...</h1>
                 <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
-                    <div v-for="index in 8" :key="index" class="border w-[280px] border-gray-200 p-4">
+                    <div v-for="index in 8" :key="index" class="border w-[250px] border-gray-200 p-4">
                         <div class="animate-pulse space-y-2">
                             <div class="bg-[#222] rounded-lg h-48"></div>
                             <div class="flex-1 space-y-2">
@@ -131,7 +131,6 @@ methods: {
         .get(`/api/profile/cars/${this.$route.params.id}/`)
         .then(response => {
             this.cars = response.data.cars
-            console.log(response.data.cars)
             this.user = response.data.user
         })
         .catch(error => {
