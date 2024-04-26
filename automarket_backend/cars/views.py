@@ -110,3 +110,13 @@ class UserCarsAPIView(APIView):
             'user': user_serializer.data,
             "cars": cars_serializer.data
         })
+    
+class DeleteCarAPIView(APIView):
+    def delete(self, request, id):
+        try:
+            car = Car.objects.get(created_by=request.user, id=id)
+            car.delete()
+
+            return Response({'message': 'deleted'})
+        except Car.DoesNotExist:
+            return Response({'error': 'Car not found'}, status=404)

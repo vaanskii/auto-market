@@ -430,7 +430,6 @@ export default {
     formData.append('description', this.description);
 
     // Send all images which is uploaded to backend
-    console.log('Selected images before appending:', this.selectedImages);
     if (this.selectedImages && this.selectedImages.length > 0) {
         for (let i = 0; i < this.selectedImages.length; i++) {
             formData.append('images[]', this.selectedImages[i]);
@@ -446,7 +445,6 @@ export default {
             .then(blob => {
                 const mainImageFile = new File([blob], 'main_image.jpg', { type: 'image/jpeg' });
                 formData.append('main_image', mainImageFile);
-                console.log('Main image file appended:', mainImageFile);
 
                 axios.post('/api/create/', formData, {
                     headers: {
@@ -454,7 +452,6 @@ export default {
                     }
                 })
                 .then(response => {
-                    console.log(response.data);
                     this.$router.push(this.Trans.i18nRoute({ name: 'profile', params: {'id': this.userStore.user.id } }));
                 })
                 .catch(error => {
@@ -466,9 +463,7 @@ export default {
         }
     },
     onFileChange(e) {
-        console.log('onFileChange triggered')
         if (e.target.files.length > 0) {
-            console.log('Files selected:', e.target.files);
             const files = e.target.files;
             const urls = []
             this.selectedImages = []
@@ -479,7 +474,6 @@ export default {
                 this.selectedImages.push(file)
             }
             this.url = urls;
-            console.log('File URLs:', this.url)
         } else {
             console.log('No files selected.')
         }
