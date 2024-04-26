@@ -1,11 +1,11 @@
 <template>
   <div class="pt-14 flex justify-evenly w-full">
-    <div v-if="cars.length">
-      <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">search results</h1>
+    <div v-if="cars.length && !loading">
+      <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Search results</h1>
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
         <div v-for="car in cars" :key="car.id" class="max-w-[280px] h-[350px] shadow-2xl z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
           <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })">
-            <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-44 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+            <img v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-44 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
           </router-link>
           <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
@@ -21,8 +21,25 @@
         </div>
       </div>
     </div>
+    <div v-else-if="!cars.length && loading">
+      <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Loading...</h1>
+      <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
+        <div v-for="index in 8" :key="index" class="border w-[300px] border-gray-200 p-4">
+          <div class="animate-pulse space-y-2">
+            <div class="bg-[#222] rounded-lg h-48"></div>
+            <div class="flex-1 space-y-2">
+              <div class="h-16 bg-[#222] rounded-lg w-full"></div>
+              <div class="space-x-2 flex">
+                <div class="h-8 bg-[#222] rounded-lg w-full"></div>
+                <div class="h-8 bg-[#222] rounded-lg w-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-else class="flex justify-center items-center flex-col">
-      <h1 class="uppercase font-sans font-extralight  lg:text-4xl md:text-4xl text-2xl mt-10">results not found!!!</h1>
+      <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-10">Results not found!!!</h1>
       <img src="/not-found.png" alt="not-found" class="w-[800px]">
     </div>
   </div>
@@ -41,6 +58,7 @@ setup() {
 data() {
   return {
     query: this.$route.query.q || '',
+    loading: false,
     cars: []
   }
 },
@@ -53,13 +71,17 @@ $route(to, from) {
 methods: {
 fetchSearchResults() {
   const params = this.$route.query
+  this.loading = true
   axios.get('/api/filters/', { params })
     .then(response => {
       this.cars = response.data
     })
     .catch(error => {
       console.error('Error fetching search results:', error);
-    });
+    })
+    .finally(() => {
+      this.loading = false
+    })
   }
 },
 mounted() {
