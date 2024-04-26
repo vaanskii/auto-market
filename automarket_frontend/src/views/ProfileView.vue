@@ -8,7 +8,7 @@
                     <button class="uppercase bg-black text-white px-3 py-2 rounded-md mt-2">settings</button>
                 </router-link>
             </div>
-            <div v-if="cars.length">
+            <div v-if="cars.length && !loading">
                 <div class="flex items-center justify-center">
                     <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16">My Cars</h1>
                 </div>
@@ -32,9 +32,32 @@
                     </div>
                 </div>
             </div>
+            <div class="flex justify-center items-center mt-16" v-else-if="!cars.length && loading">
+                <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Loading...</h1>
+                <div class="grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
+                    <div v-for="index in 8" :key="index" class="border w-[280px] border-gray-200 p-4">
+                        <div class="animate-pulse space-y-2">
+                            <div class="bg-[#222] rounded-lg h-48"></div>
+                            <div class="flex-1 space-y-2">
+                            <div class="h-16 bg-[#222] rounded-lg w-full"></div>
+                                <div class="space-x-2 flex">
+                                    <div class="h-8 bg-[#222] rounded-lg w-full"></div>
+                                    <div class="h-8 bg-[#222] rounded-lg w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else class="h-screen">
+                <h1 class="text-center uppercase text-4xl mt-60">no listing found</h1>
+                <router-link :to="Trans.i18nRoute({ name: 'add'})">
+                    <h1 class="text-center uppercase mt-20 underline text-2xl">CLICK HERE TO ADD LISTING CARS</h1>
+                </router-link>
+            </div>
         </div>
-        <div v-else class="flex flex-col justify-center items-center">
-            <img src="/warning.png" class="w-64 mt-20" alt="warning">
+        <div v-else class="flex h-screen flex-col justify-center items-center">
+            <img src="/warning.png" class="w-40 -mt-48" alt="warning">
             <h1 class="uppercase md:text-4xl text-xl mt-8">something went wrong!!!</h1>
         </div>
     </div>
@@ -55,11 +78,13 @@ setup() {
 data() {
     return{
         cars: [],
-        user: []
+        user: [],
+        loading: false
     }
 },
 methods: {
     getUserAndCars() {
+      this.loading = true
       axios
         .get(`/api/profile/cars/${this.$route.params.id}/`)
         .then(response => {
@@ -68,6 +93,9 @@ methods: {
         })
         .catch(error => {
             console.log(error)
+        })
+        .finally(() => {
+            this.loading = false
         })
     }
 },
