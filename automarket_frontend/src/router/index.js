@@ -11,6 +11,8 @@ import Settings from '../views/SettingsView.vue'
 import Password from '../views/ChangePasswordView.vue'
 import Profile from '../views/ProfileView.vue'
 import Vin from '../views/VinResultsView.vue'
+import Forgot from '../views/ForgotPasswordView.vue'
+import Reset from '../views/ResetPasswordView.vue'
 
 import { useUserStore } from '@/stores/user'
 
@@ -109,6 +111,16 @@ const router = createRouter({
           path: 'vin',
           name: 'vin',
           component: Vin,
+        },
+        {
+          path: 'forgot',
+          name: 'forgot',
+          component: Forgot,
+        },
+        {
+          path: 'reset/:token',
+          name: 'reset',
+          component: Reset,
         }
       ]
     }

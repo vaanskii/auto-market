@@ -6,11 +6,15 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
 from django.conf import settings
+from django.urls import reverse
 from django.shortcuts import render
 
+from rest_framework import exceptions
+
+import random, string
 
 from .forms import SignupForm, ProfileForm
-from .models import User
+from .models import User, PasswordReset
 
 class UserAPIView(APIView):
     def get(self, request):
@@ -120,3 +124,52 @@ class PasswordChangeAPIView(APIView):
             return Response({'message': 'success'})
         else:
             return Response({'message': form.errors}, status=404)
+        
+class ForgotPasswordAPIView(APIView):
+    permission_classes = [~IsAuthenticatedOrReadOnly]
+    def post(self, request):
+        
+        email = request.data['email']
+        token = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))
+
+        PasswordReset.objects.create(email=email, token=token)
+
+        send_mail(
+            subject="Reset your password",
+            message='',
+            html_message='Click <a href="http://localhost:5173/en/reset/' + token + '">here</a> to reset your password!',
+            from_email='autohub.market@gmail.com', 
+            recipient_list=[email]
+        )
+
+        return Response ({
+            "message": "please check your email!"
+        })
+
+class ResetPasswordAPIView(APIView):
+    permission_classes = []
+
+    def post(self, request):
+        data = request.data
+
+        if data['password'] != data['password_confirm']:
+            raise exceptions.APIException('Passwords do not match')
+
+        password_reset = PasswordReset.objects.filter(token=data['token']).first()
+
+        if not password_reset:
+            raise exceptions.NotFound('Password reset token not found')
+
+        user = User.objects.filter(email=password_reset.email).first()
+
+        if not user:
+            raise exceptions.NotFound('User not found')
+
+        user.set_password(data['password'])
+        user.save()
+
+        password_reset.delete()
+
+        return Response({
+            'message': 'Password reset successful'
+        })
