@@ -1,8 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from django.contrib.auth.forms import PasswordChangeForm
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render
+
 
 from .forms import SignupForm, ProfileForm
 from .models import User
@@ -25,7 +30,21 @@ class UserAPIView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
+def activateEmail(request):
+    email = request.GET.get('email', '')
+    id = request.GET.get('id', '')
+
+    if email and id:
+        user = User.objects.get(id=id, email=email)
+        user.is_active = True
+        user.save()
+
+        return render(request, 'account_activate.html', {'login_url': 'http://localhost:5173/en/login'})
+    else:
+        return render(request, 'account_failed.html')
+
 class SignupAPIView(APIView):
+    permission_classes = [~IsAuthenticatedOrReadOnly]
     def post(self, request):
         data = request.data
         message = 'success'
@@ -43,15 +62,32 @@ class SignupAPIView(APIView):
         })
 
         if form.is_valid():
-            user = form.save(commit=False)
-            user.country_code = country_code
+            user = form.save()
+            user.is_active = False
             user.save()
+
+            activation_url = f'{settings.WEBSITE_URL}/activateEmail/?email={user.email}&id={user.id}'
+            email_content = f"""
+                    <div style="text-align: center;">
+                        <p style="font-size: 16px;">Thank you for signing up! Please click the button below to activate your account:</p>
+                        <a href="{activation_url}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 14px;">Activate Account</a>
+                    </div>
+                """
+
+
+            send_mail(
+                "Please verify your email",
+                "",
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                html_message=email_content,
+                fail_silently=False,
+            )
         else:
             message = form.errors.as_json()
-        
+
         return Response({'message': message}, status=status.HTTP_200_OK)
     
-from rest_framework.permissions import AllowAny
 
 class EditProfileAPIView(APIView):
     def post(self, request):
