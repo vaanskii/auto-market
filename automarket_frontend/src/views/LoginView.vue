@@ -39,7 +39,7 @@
             <div class="flex flex-col space-y-1">
               <div class="flex items-center justify-between">
                 <label for="password" class="text-sm font-semibold text-gray-500">{{ $t('login.password') }}</label>
-                <a href="#" class="text-sm text-black hover:underline">{{ $t('login.forgotpassword') }}</a>
+                <router-link :to="Trans.i18nRoute({ name: 'forgot' })" class="text-sm text-black hover:underline">{{ $t('login.forgotpassword') }}</router-link>
               </div>
               <input
                 type="password"

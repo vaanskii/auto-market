@@ -13,6 +13,7 @@ import Profile from '../views/ProfileView.vue'
 import Vin from '../views/VinResultsView.vue'
 import Forgot from '../views/ForgotPasswordView.vue'
 import Reset from '../views/ResetPasswordView.vue'
+import NotFound from '@/components/NotFound.vue'
 
 import { useUserStore } from '@/stores/user'
 
@@ -116,14 +117,35 @@ const router = createRouter({
           path: 'forgot',
           name: 'forgot',
           component: Forgot,
+          beforeEnter: (to, from, next) => {
+            const userStore = useUserStore()
+            if (userStore.user.isAuthenticated) {
+              next({ name: 'home' })
+            } else {
+              next();
+            } 
+          }
         },
         {
           path: 'reset/:token',
           name: 'reset',
           component: Reset,
-        }
+          beforeEnter: (to, from, next) => {
+            const userStore = useUserStore()
+            if (userStore.user.isAuthenticated) {
+              next({ name: 'home' })
+            } else {
+              next();
+            } 
+          }
+        },
       ]
-    }
+    },
+    {
+      path: '/:locale?/:pathMatch(.*)*',
+      component: NotFound,
+      beforeEnter: Trans.routeMiddleware,
+      },
   ],
 });
 
