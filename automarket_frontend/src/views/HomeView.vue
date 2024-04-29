@@ -36,11 +36,8 @@
     </div>
   </section>
   <hr class="h-[1.5px] my-8 bg-[#222] -mt-[-0px] border-0">
-  <div class="flex items-center justify-center mt-20 reveal-heading">
-    <h1 class="md:text-6xl text-3xl font-[700] uppercase smaller text-[#222]">{{ $t('vipcars') }}</h1>
-  </div>
   <div class="my-20 flex justify-center items-center">
-    <Cards/>
+    <Vin class="w-[70%]"/>
   </div>
 
   <section class="w-full bg-lights mt-10 mb-32 py-52 bg-start bg-cover my-20 border bg-no-repeat"></section>
@@ -56,6 +53,7 @@ import Filter from '../components/main/Filter.vue'
 import Cards from '../components/main/Cards.vue'
 import Recently from '../components/main/Recently.vue'
 import Blogs from '../components/main/Blogs.vue'
+import Vin from '../components/main/Vin.vue'
 import { useI18n } from 'vue-i18n'
 
 export default {
@@ -63,7 +61,8 @@ export default {
     Filter,
     Cards,
     Recently,
-    Blogs
+    Blogs,
+    Vin
   },
   setup() {
     const { t } = useI18n()
