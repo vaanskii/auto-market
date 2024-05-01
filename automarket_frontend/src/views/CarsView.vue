@@ -10,15 +10,15 @@
             <div  @click="openImageViewer(currentImageIndex)" class="w-[80%] cursor-pointer rounded-xl flex justify-center bg-black items-center h-[400px] overflow-hidden">
               <img :src="images[currentImageIndex]" class=" rounded-xl reveal-card" />
             </div>
-            <div class="absolute inset-y-0 left-4 sm:left-5 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
+            <div class="absolute inset-y-0 left-10 sm:left-16 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
               <span>{{ currentImageIndex + 1 }}/{{ images.length }}</span>
             </div>
-          <button @click="previousImage" class="absolute inset-y-0 -left-4 sm:left-2 md:left-12 lg:left-28 m-6 text-4xl">
+          <button @click="previousImage" class="absolute inset-y-0 -left-12 sm:left-10 md:left-12 lg:left-28 m-6 text-4xl">
             <span class="px-4 pb-1 flex justify-center items-center bg-white rounded-full text-black">
               ‹
             </span>
           </button>
-          <button @click="nextImage" class="absolute inset-y-0 -right-4 sm:right-2 md:right-12 lg:right-28 m-6 text-white text-4xl">
+          <button @click="nextImage" class="absolute inset-y-0 -right-12 sm:right-10 md:right-12 lg:right-28 m-6 text-white text-4xl">
             <span class="px-4 pb-1 flex justify-center items-center bg-white rounded-full text-black">
               ›
             </span>
