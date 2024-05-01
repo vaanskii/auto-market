@@ -15,7 +15,7 @@ console.warn = function (msg) {
   originalWarn.apply(console, arguments);
 };
 
-axios.defaults.baseURL = "http://127.0.0.1:8000"
+axios.defaults.baseURL = "https://vaanskii2.pythonanywhere.com"
 
 const app = createApp(App)
 const pinia = createPinia()
