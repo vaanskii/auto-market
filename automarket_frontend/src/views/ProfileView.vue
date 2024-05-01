@@ -20,7 +20,7 @@
                             </router-link>
                             <hr class="h-px bg-black border-0">
                             <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
-                            <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })">
+                            <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })" class="truncate">
                                 <span class="whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer ml-2 uppercase text-lg text-gray-900 hover:text-red-900 font-semibold">{{ car.manufacturer }} - <span class="font-light text-black">{{ car.car_model }}</span></span>
                             </router-link>
                             <span class="uppercase font-light mt-4 ml-2 text-gray-900">{{ car.price }} <span class="font-semibold">$</span></span>
