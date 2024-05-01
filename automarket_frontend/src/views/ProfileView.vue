@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-14 h-screen">
+    <div class="pt-14">
         <div v-if="userStore.user.isAuthenticated">
             <div class="flex md:hidden mt-8 uppercase flex-col justify-center items-center">
                 <h1 class="text-lg">{{ user.name }}</h1>
@@ -8,7 +8,7 @@
                     <button class="uppercase bg-black text-white px-3 py-2 rounded-md mt-2">settings</button>
                 </router-link>
             </div>
-            <div v-if="cars.length && !loading">
+            <div v-if="cars.length && !loading" class="md:mb-96 mb-0">
                 <div class="flex items-center justify-center">
                     <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16">My Cars</h1>
                 </div>
