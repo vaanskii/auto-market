@@ -93,10 +93,17 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
+import { computed, watch, onMounted } from 'vue';
 export default{
 setup() {
   const userStore = useUserStore()
+  const pageTitle = computed(() => `Settings of ${userStore.user.name}`);
+
+  watch(pageTitle, (newTitle) => {
+    document.title = newTitle;
+  }, { immediate: true });
   return {
+      pageTitle,
       userStore,
       Trans
   }

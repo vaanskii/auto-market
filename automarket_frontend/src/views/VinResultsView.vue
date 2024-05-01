@@ -58,7 +58,13 @@ export default {
       } else {
         this.error = 'No VIN provided.';
       }
+    },
+    setPageTitle(title) {
+      document.title = title
     }
+  },
+  mounted() {
+    this.setPageTitle('Vin results');
   }
 };
 </script>

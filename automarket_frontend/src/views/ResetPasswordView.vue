@@ -53,7 +53,7 @@
 </template>
   
   <script>
-  import {reactive, ref} from 'vue';
+  import {reactive, ref, onMounted} from 'vue';
   import { useRoute } from 'vue-router';
   import axios from 'axios'
   export default {
@@ -73,13 +73,15 @@
           await axios.post('/api/reset/', data);
           submitSuccessfully.value = true
           setTimeout(() => {
-            submitSuccessfully.value = false;
-          }, 5000);
-        } catch (error) {
-          console.error('Error sending password reset email:', error.message);
-        }
-      };
-
+              submitSuccessfully.value = false;
+            }, 5000);
+          } catch (error) {
+            console.error('Error sending password reset email:', error.message);
+          }
+        };
+        onMounted(() => {
+          document.title = 'Reset Password';
+        });
         return {
             data,
             submit,

@@ -106,11 +106,18 @@
 <script>
 import Trans from '@/i18n/translation'
 import axios from 'axios'
+import { computed, watch, onMounted } from 'vue';
 import { useUserStore } from '@/stores/user'
 export default{
 setup() {
     const userStore = useUserStore()
+    const pageTitle = computed(() => `Profile of ${userStore.user.name}`);
+
+    watch(pageTitle, (newTitle) => {
+      document.title = newTitle;
+    }, { immediate: true });
     return {
+        pageTitle,
         Trans,
         userStore
     }

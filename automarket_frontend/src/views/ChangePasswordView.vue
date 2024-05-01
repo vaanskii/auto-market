@@ -120,7 +120,13 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    setPageTitle(title) {
+      document.title = title
     }
+  },
+  mounted() {
+    this.setPageTitle('Change password');
   }
 }
 </script>

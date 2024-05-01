@@ -56,6 +56,7 @@
 <script>
 import Similar from '../components/car-page/Similar.vue'
 import Descriptions from '../components/car-page/Descriptions.vue'
+import { computed, watch } from 'vue';
 import axios from 'axios';
 export default {
 components: {
@@ -63,6 +64,12 @@ components: {
   Descriptions
 },
 watch: {
+  car: {
+    deep: true,
+    handler() {
+      this.updateTitle();
+    }
+  },
   '$route': {
     immediate: true,
     handler(to, from) {
@@ -81,7 +88,15 @@ data() {
     similarCarsData: []
   };
 },
+computed: {
+  pageTitle() {
+    return this.car.description ? `${this.car.description}` : 'Loading Car Details...';
+  }
+},
 methods: {
+  updateTitle() {
+    document.title = this.pageTitle;
+  },
   openImageViewer(index) {
     if (window.innerWidth >= 768) {
       this.currentImageIndex = index;

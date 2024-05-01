@@ -1,7 +1,10 @@
 <template>
   <div class="pt-14 flex justify-evenly w-full">
     <div v-if="cars.length && !loading">
-      <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Search results</h1>
+      <div class="flex justify-center items-center flex-col">
+        <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-16 text-center">Search results</h1>
+        <span class="mt-4">Found {{ this.cars.length }} result</span>
+      </div>
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
         <div v-for="car in cars" :key="car.id" class="max-w-[280px] h-[350px] shadow-2xl z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
           <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })" class="w-full bg-black rounded-t-xl flex justify-center overflow-hidden">
@@ -40,6 +43,7 @@
     </div>
     <div v-else class="flex justify-center items-center flex-col">
       <h1 class="uppercase font-sans font-extralight lg:text-4xl md:text-4xl text-2xl mt-10">Results not found!!!</h1>
+      <span class="mt-4">Found {{ this.cars.length }} result</span>
       <img src="/not-found.png" alt="not-found" class="w-[800px]">
     </div>
   </div>
@@ -82,10 +86,14 @@ fetchSearchResults() {
     .finally(() => {
       this.loading = false
     })
+  },
+  setPageTitle(title) {
+      document.title = title
   }
 },
 mounted() {
-  this.fetchSearchResults()
+  this.fetchSearchResults(),
+  this.setPageTitle('Search Results');
 }
 }
 </script>

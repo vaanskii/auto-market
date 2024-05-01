@@ -19,6 +19,7 @@
 <script>
 import { RouterLink } from 'vue-router'
 import Trans from '@/i18n/translation'
+import { onMounted } from 'vue';
 
 export default {
   setup() {
@@ -48,6 +49,10 @@ export default {
         answer: 'blogs.answer4'
       }
     ];
+
+    onMounted(() => {
+      document.title = 'Blogs';
+    });
 
     return {
       Trans,

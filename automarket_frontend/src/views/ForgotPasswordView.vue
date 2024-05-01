@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import axios from 'axios';
 
 export default {
@@ -72,6 +72,10 @@ export default {
         console.error('Error sending password reset email:', error.message);
       }
     };
+
+    onMounted(() => {
+      document.title = 'Forgot Password';
+    });
 
     return {
       data,

@@ -221,7 +221,13 @@ export default {
     },
     restrictNumericInput(event) {
       this.form.mobile_number = this.form.mobile_number.replace(/\D/g, '');
+    },
+    setPageTitle(title) {
+      document.title = title
     }
+  },
+  mounted() {
+    this.setPageTitle('Sign Up');
   }
 }
 </script>

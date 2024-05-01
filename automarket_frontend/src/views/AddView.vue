@@ -541,6 +541,12 @@ export default {
     handleColorClick(color) {
         this.carColors = color;
     },
+    setPageTitle(title) {
+      document.title = title
+    }
+  },
+  mounted() {
+    this.setPageTitle('Add Car');
   }
 }
 </script>

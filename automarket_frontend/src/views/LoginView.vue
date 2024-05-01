@@ -128,7 +128,13 @@ export default {
             console.log('error',error)
           })
       }
+    },
+    setPageTitle(title) {
+      document.title = title
     }
+  },
+  mounted() {
+    this.setPageTitle('Log in');
   }
 }
 </script>
