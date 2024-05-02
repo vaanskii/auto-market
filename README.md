@@ -158,7 +158,9 @@ cd automarket_frontend
 npm install
 ```
 
-3. In a new terminal, start the Vue.js frontend:
+3. In main.js change import.meta.env.VITE_AXIOS_DEFAULT_URL to your backend url. default http://127.0.0.1:8000
+
+4. In a new terminal, start the Vue.js frontend:
 
 ```
 npm run serve
