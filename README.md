@@ -133,6 +133,7 @@ cd automarket_backend
 
 6. Change settings copy.py name to settings.py
 
+7. In settings.py change EMAIL_HOST_USER and EMAIL_HOST_PASSWORD to your real gmail app password and email.
 
 7. Apply migrations:
 ```
