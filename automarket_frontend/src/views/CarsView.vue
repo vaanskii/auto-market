@@ -7,7 +7,7 @@
       <div class="flex justify-center">
         <!-- Large image container with navigation buttons -->
         <div class="relative w-full flex justify-center">
-            <div  @click="openImageViewer(currentImageIndex)" class="w-[80%] cursor-pointer rounded-xl flex justify-center bg-black items-center h-[400px] overflow-hidden">
+            <div  @click="openImageViewer(currentImageIndex)" class="w-[80%] max-h-[600px] min-h-[500px] cursor-pointer rounded-xl flex justify-center bg-black items-center overflow-hidden">
               <img :src="images[currentImageIndex]" class=" rounded-xl reveal-card object-contain" />
             </div>
             <div class="absolute inset-y-0 left-10 sm:left-16 md:left-20 lg:left-28 xl:left-36 p-3 mt-5 text-black flex justify-center items-center  bg-white rounded-full h-10 text-lg">
@@ -25,7 +25,7 @@
           </button>
         </div>
         <!-- Small images container with vertical scrolling -->
-        <div class="flex-col items-center overflow-y-auto md:flex hidden lg:max-h-[600px] max-h-[450px]">
+        <div class="flex-col items-center overflow-y-auto md:flex hidden max-h-[600px]">
           <div v-for="(image, index) in images.slice(1)" :key="index" class="cursor-pointer mb-4">
             <img :src="image" @click="makeImagePrimary(index + 1)" class="w-48 h-40 rounded-xl reveal-card" />
           </div>
