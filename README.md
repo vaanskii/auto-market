@@ -2,6 +2,10 @@
 
 Welcome to **AutoHub**, the comprehensive car marketplace platform. This repository, **automarket**, contains the full-stack codebase for the AutoHub application, which is built using Django REST framework for the backend and Vue.js 3 for the frontend.
 
+## Deployed project url
+
+https://autohub-one.vercel.app/
+
 ## Internationalization (i18n)
 
 AutoHub supports internationalization (i18n), allowing users to select their preferred language for the best user experience. This feature is implemented in the Vue.js frontend using the `i18n` plugin, which provides a seamless way to handle translations and locale changes.
