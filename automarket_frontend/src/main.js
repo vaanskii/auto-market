@@ -15,7 +15,7 @@ console.warn = function (msg) {
   originalWarn.apply(console, arguments);
 };
 
-axios.defaults.baseURL = "https://vaanskii2.pythonanywhere.com"
+axios.defaults.baseURL = import.meta.env.VITE_AXIOS_DEFAULT_URL
 
 const app = createApp(App)
 const pinia = createPinia()
