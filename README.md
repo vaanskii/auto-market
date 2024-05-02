@@ -15,19 +15,13 @@ Users can easily switch languages using the Language Switcher component in the n
 
 We are constantly working to expand the range of languages supported by AutoHub to cater to our global user base.
 
-## Project Structure
-
-The AutoHub project is structured as follows:
-
-auto-market/ ├── LICENSE - The project license ├── README - The README file ├── automarket_backend/ - Django REST framework backend │ ├── account/ - User account management │ │ ├── models.py - Database models │ │ ├── serializers.py - Data serializers │ │ ├── views.py - View functions │ │ └── … │ ├── automarket_backend/ - Main backend directory │ │ ├── settings.py - Configuration settings │ │ ├── urls.py - URL declarations │ │ └── … │ ├── cars/ - Car management module │ │ ├── models.py - Car database models │ │ ├── serializers.py - Car data serializers │ │ └── … │ ├── filters/ - Search and filtering functionality │ │ └── … │ ├── manage.py - Django command-line utility │ └── vin/ - VIN decoding module │ └── … ├── automarket_frontend/ - Vue.js 3 frontend │ ├── src/ - Source files │ │ ├── App.vue - Main app component │ │ ├── components/ - Reusable components │ │ ├── views/ - Vue views │ │ └── … │ ├── package.json - Frontend dependencies │ └── … └── requirements.txt - Backend dependencies list
-
-This structure provides a high-level overview of your project, making it easier for others to navigate and understand the purpose of each directory and file.
 
 ## Backend Dependencies
 
 The backend of AutoHub is powered by Django and Django REST framework. Here is a list of the key dependencies:
 
 For a complete list, see `requirements.txt`.
+
 
 ## Features
 
@@ -42,17 +36,27 @@ AutoHub allows users to:
 
 AutoHub includes a VIN (Vehicle Identification Number) decode feature that allows users to retrieve detailed information about a vehicle by entering its unique VIN. This feature enhances the user experience by providing valuable insights into the car's specifications, history, and authenticity.
 
-### How It Works
+## How It Works
 
 - Users can enter a car's VIN into the designated search field.
 - The system decodes the VIN and displays a comprehensive report about the vehicle.
 - This report includes information such as the make, model, year, engine type, and more.
+
 
 ### API Endpoint for VIN Decode
 
 - `api/vin/` - Decode VIN (GET)
 
 By utilizing this feature, users can make informed decisions when searching for cars on AutoHub.
+
+## Email Sender Feature
+
+AutoHub incorporates an email sender feature to enhance communication with users. This feature is utilized for:
+
+- Sending activation emails to verify user accounts.
+- Providing password reset links for users who have forgotten their passwords.
+- Notifying users about important updates or personalized car recommendations.
+
 
 ## Frontend Interaction with Backend
 
