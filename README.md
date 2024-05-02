@@ -36,12 +36,28 @@ AutoHub allows users to:
 - Create an account and log in.
 - Add and search for cars.
 - Use advanced filtering options to find the perfect car.
-- Search for cars using VIN codes.
 - Manage their profile, including changing passwords, emails, names, and phone numbers.
+
+## VIN Decode Feature
+
+AutoHub includes a VIN (Vehicle Identification Number) decode feature that allows users to retrieve detailed information about a vehicle by entering its unique VIN. This feature enhances the user experience by providing valuable insights into the car's specifications, history, and authenticity.
+
+### How It Works
+
+- Users can enter a car's VIN into the designated search field.
+- The system decodes the VIN and displays a comprehensive report about the vehicle.
+- This report includes information such as the make, model, year, engine type, and more.
+
+### API Endpoint for VIN Decode
+
+- `api/vin/` - Decode VIN (GET)
+
+By utilizing this feature, users can make informed decisions when searching for cars on AutoHub.
 
 ## Frontend Interaction with Backend
 
 The frontend interacts with the backend through various API endpoints, utilizing Axios for HTTP requests. Here are some of the key API endpoints:
+
 
 ## API Endpoints
 
@@ -68,7 +84,6 @@ Below are the API endpoints available in AutoHub:
 ### Search & Filtering
 - `api/choices/` - Get choices for car filters (GET)
 - `api/filters/` - Filtered search (GET)
-- `api/vin/` - Decode VIN (GET)
 
 
 ## Getting Started
