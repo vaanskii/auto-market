@@ -4,8 +4,8 @@
     <div class="py-20 flex justify-evenly w-full">
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20">
         <div v-for="(car, index) in cars" :key="index" class="max-w-[280px] h-[350px] z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
-          <router-link :to="getRoute(car.id)">
-            <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full h-36 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+          <router-link :to="getRoute(car.id)" class="">
+            <img :v-if="car.main_image" :src="car.main_image.image_url" class="w-full object-contain h-36 rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
           </router-link>
           <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>

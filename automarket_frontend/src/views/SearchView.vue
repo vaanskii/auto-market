@@ -8,7 +8,7 @@
       <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-x-16 gap-y-20 mt-16">
         <div v-for="car in cars" :key="car.id" class="max-w-[280px] h-[350px] shadow-2xl z-1 w-full flex flex-col justify-start bg-[#E6E6E6] rounded-xl reveal-car">
           <router-link :to="Trans.i18nRoute({ name: 'cardetail', params: {'id': car.id} })" class="w-full bg-black rounded-t-xl flex justify-center overflow-hidden">
-            <img v-if="car.main_image" :src="car.main_image.image_url" class="h-44 w-[99%] rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
+            <img v-if="car.main_image" :src="car.main_image.image_url" class="h-44 w-[99%] object-contain rounded-t-xl transition-transform transform hover:scale-105 cursor-pointer" alt="">
           </router-link>
           <hr class="h-px bg-black border-0">
           <span class="uppercase text-[10px] mt-2 ml-2 mb-2">{{ car.location }}</span>
