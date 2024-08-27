@@ -6,10 +6,10 @@
       </div>
       <div>
         <div class="flex items-center justify-center w-full">
-          <h1 class="typed-text absolute md:top-40 font-[700] w-[90%] top-32 text-center uppercase text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
+          <h1 class="typed-text absolute lg:top-40 font-[700] w-[90%] top-32 text-center uppercase text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl">
             <span v-for="(word, index) in words" :key="index" :class="'word-' + index">{{ $t(`main-header.words.${word}`) }}</span>
           </h1>
-          <h1 class="typed-text absolute top-[21rem] font-[600] w-[90%] text-center uppercase text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
+          <h1 class="typed-text absolute 2xl:top-[19rem] xl:top-[17rem] lg:top-[17rem] md:top-[17rem] font-[600] w-[90%] text-center uppercase text-xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl">
             <span v-for="(word, index) in words2" :key="index" :class="'word2-' + index">{{ $t(`main-header.words2.${word}`) }}</span>
           </h1>
         </div>
